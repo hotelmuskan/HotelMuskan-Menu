@@ -3,162 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Muskan Menu Bhagwanpur | Official 24/7</title>
-    
-    <meta name="description" content="Official 24/7 digital menu of Hotel Muskan Bhagwanpur. Best Veg & Non-Veg food in Vaishali, Bihar.">
-    <meta name="keywords" content="hotelmuskanmenu Bhagwanpur, Hotel Muskan, 24/7 Dhaba, Bihar Food, Mutton Special">
-
+    <title>Hotel Muskan Bhagwanpur | Official 24/7 Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
     <style>
         :root { 
             --gold: #d4af37; 
             --gold-grad: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             --black: #0a0a0a; 
-            --card-bg: #161616; 
+            --surface: #161616; 
+            --insta: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
         }
-        
-        * { box-sizing: border-box; scroll-behavior: smooth; transition: 0.3s ease; }
-        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--black); color: white; line-height: 1.6; }
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--black); color: white; overflow-x: hidden; }
 
-        /* FEATURE: TOP PROGRESS BAR */
-        .progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: var(--gold-grad); width: 0%; z-index: 6000; }
+        /* FEATURE 1: TOP PROGRESS SCROLL */
+        .scroll-indicator { position: fixed; top: 0; left: 0; height: 4px; background: var(--gold-grad); width: 0%; z-index: 6000; }
 
         /* HERO SECTION */
         header {
-            height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            height: 55vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://img.sanishtech.com/u/65f7c171e917d9e0ac64dc19499c6e4b.webp'); 
-            background-size: cover; background-attachment: fixed; background-position: center; border-bottom: 5px solid var(--gold);
+            background-size: cover; border-bottom: 5px solid var(--gold);
         }
-        header h1 { font-family: 'Playfair Display', serif; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: clamp(3rem, 10vw, 6.5rem); margin: 0; }
-        .slogan { font-size: 1.1rem; letter-spacing: 5px; text-transform: uppercase; margin-top: 10px; color: #fff; }
+        header h1 { font-family: 'Playfair Display', serif; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 3.5rem; }
 
-        /* STICKY SEARCH & NAV */
-        .sticky-controls { position: sticky; top: 0; z-index: 3000; background: #000; border-bottom: 1px solid #333; padding: 15px; }
-        #menuSearch { width: 95%; max-width: 600px; padding: 12px 25px; border-radius: 50px; border: 1px solid var(--gold); background: #111; color: white; display: block; margin: 0 auto; outline: none; }
+        /* FEATURE 2: SEARCH & QUICK NAV */
+        .sticky-nav { position: sticky; top: 0; z-index: 5000; background: #000; padding: 15px; border-bottom: 1px solid #333; }
+        #search { width: 100%; max-width: 500px; padding: 12px 25px; border-radius: 50px; border: 1px solid var(--gold); background: #111; color: white; display: block; margin: 0 auto 10px; outline: none; }
+        .tabs { display: flex; gap: 10px; overflow-x: auto; justify-content: center; }
+        .tabs a { background: #222; color: var(--gold); padding: 6px 15px; border-radius: 20px; text-decoration: none; font-size: 0.7rem; font-weight: bold; white-space: nowrap; border: 1px solid #444; }
 
-        .container { max-width: 1200px; margin: auto; padding: 40px 20px; }
-        .section-header { text-align: center; margin: 60px 0 30px; }
-        .section-header h2 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.3rem; margin: 0; text-transform: uppercase; }
+        .container { max-width: 900px; margin: auto; padding: 20px; }
+        .section-title { font-family: 'Playfair Display'; color: var(--gold); font-size: 1.8rem; margin: 40px 0 15px; text-align: center; border-bottom: 1px solid #222; padding-bottom: 5px; scroll-margin-top: 130px; }
 
-        /* RESTAURANT GALLERY */
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 60px; }
-        .gallery-img { width: 100%; height: 260px; object-fit: cover; border-radius: 15px; border: 1px solid #222; }
-        .gallery-img:hover { border-color: var(--gold); transform: scale(1.02); }
-
-        /* FULL MENU LIST */
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 15px; }
+        /* FEATURE 3: TAP FEEDBACK MENU ITEMS */
         .menu-item { 
-            background: var(--card-bg); padding: 22px 25px; border-radius: 12px; border-left: 5px solid var(--gold);
-            display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+            background: var(--surface); padding: 18px; border-radius: 12px; margin-bottom: 10px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            border-left: 5px solid var(--gold); transition: 0.2s; cursor: pointer;
         }
-        .menu-item:hover { transform: translateX(10px); background: #1f1f1f; }
-        .price-f { color: var(--gold); font-weight: bold; font-size: 1.2rem; }
-        .price-h { color: #888; font-size: 0.85rem; display: block; }
+        .menu-item:active { background: #252525; transform: scale(0.98); }
+        .price { color: var(--gold); font-weight: bold; font-size: 1.1rem; }
+        .qty { width: 55px; padding: 8px; border-radius: 8px; border: 1px solid var(--gold); background: #000; color: white; text-align: center; font-weight: bold; }
 
-        /* BILLING FLOAT */
-        .bill-floater { position: fixed; bottom: 100px; left: 20px; background: var(--gold-grad); color: black; padding: 15px 25px; border-radius: 50px; font-weight: bold; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 4000; }
+        /* FEATURE 4: CONSTANT INSTAGRAM SECTION */
+        .insta-branding { background: #0a0a0a; padding: 40px 20px; text-align: center; border-top: 1px solid #222; margin-top: 40px; }
+        .insta-btn { display: inline-block; background: var(--insta); color: white; padding: 12px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: 2px solid white; box-shadow: 0 5px 20px rgba(0,0,0,0.6); }
 
-        /* ACTION BAR */
-        .action-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 5000; width: 95%; max-width: 600px; }
-        .btn { flex: 1; text-align: center; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 0.8rem; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-        .call { background: var(--gold-grad); color: black; }
-        .wa { background: #25d366; color: white; }
+        /* FEATURE 5: SMART BILLING FOOTER */
+        .bill-footer { 
+            position: fixed; bottom: 0; left: 0; width: 100%; 
+            background: #111; border-top: 3px solid var(--gold); padding: 15px 25px; 
+            display: flex; justify-content: space-between; align-items: center; z-index: 6000;
+        }
+        .order-btn { background: #25d366; color: white; border: none; padding: 14px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
 
-        footer { text-align: center; padding: 80px 20px; background: #050505; color: #555; }
+        footer { text-align: center; padding: 50px 20px 180px; color: #555; font-size: 0.8rem; }
     </style>
 </head>
-<body onscroll="onScroll()">
+<body onscroll="moveIndicator()">
 
-<div class="progress-bar" id="myBar"></div>
+<div class="scroll-indicator" id="progBar"></div>
 
 <header>
     <h1>Hotel Muskan</h1>
-    <div class="slogan">"A Taste You'll Remember"</div>
-    <div style="color: #2ecc71; border: 1px solid #2ecc71; padding: 6px 25px; border-radius: 50px; font-weight: bold; margin-top: 15px; font-size: 0.8rem;">● OPEN 24/7 | BHAGWANPUR</div>
+    <p style="letter-spacing: 5px; font-size: 0.7rem;">A TASTE YOU'LL REMEMBER</p>
 </header>
 
-<div class="sticky-controls">
-    <input type="text" id="menuSearch" placeholder="Search dish (Roti, Chicken, Dal...)" onkeyup="search()">
+<div class="sticky-nav">
+    <input type="text" id="search" placeholder="Search dish (Chicken, Paneer, Tea...)" onkeyup="searchDish()">
+    <div class="tabs">
+        <a href="#nonveg">🍗 NON-VEG</a>
+        <a href="#veg">🥦 VEG MAIN</a>
+        <a href="#rice">🍚 RICE</a>
+        <a href="#breads">🫓 BREADS/TEA</a>
+    </div>
 </div>
 
 <div class="container">
-    <div class="section-header"><h2>Our Restaurant Gallery</h2></div>
-    <div class="gallery-grid">
-        <img src="https://img.sanishtech.com/u/65f7c171e917d9e0ac64dc19499c6e4b.webp" class="gallery-img">
-        <img src="https://img.sanishtech.com/u/bc78890c29f5ac2d9de4dd9e6cd5bb72.webp" class="gallery-img">
-        <img src="https://img.sanishtech.com/u/65f7c171e917d9e0ac64dc19499c6e4b.webp" class="gallery-img">
-    </div>
+    <h2 class="section-title" id="nonveg">Non-Veg Specials</h2>
+    <div class="menu-item dish" data-name="chicken curry" onclick="this.querySelector('.qty').focus()"><span>Chicken Curry</span><div><span class="price">₹180</span><input type="number" value="0" min="0" class="qty" data-price="180" data-name="Chicken Curry" onchange="calc()"></div></div>
+    <div class="menu-item dish" data-name="chicken biryani" onclick="this.querySelector('.qty').focus()"><span>Chicken Biryani</span><div><span class="price">₹160</span><input type="number" value="0" min="0" class="qty" data-price="160" data-name="Chicken Biryani" onchange="calc()"></div></div>
+    <div class="menu-item dish" data-name="chicken chilli" onclick="this.querySelector('.qty').focus()"><span>Chicken Chilli</span><div><span class="price">₹240</span><input type="number" value="0" min="0" class="qty" data-price="240" data-name="Chicken Chilli" onchange="calc()"></div></div>
 
-    <div class="section-header"><h2>🍟 Starters</h2></div>
-    <div class="menu-grid">
-        <div class="menu-item dish" data-name="chicken chilli" onclick="add(240)"><span>Chicken Chilli</span><div style="text-align:right;"><span class="price-f">₹240</span><span class="price-h">Half ₹120</span></div></div>
-    </div>
+    <h2 class="section-title" id="veg">Veg Main Course</h2>
+    <div class="menu-item dish" data-name="paneer butter" onclick="this.querySelector('.qty').focus()"><span>Paneer Butter</span><div><span class="price">₹240</span><input type="number" value="0" min="0" class="qty" data-price="240" data-name="Paneer Butter" onchange="calc()"></div></div>
+    <div class="menu-item dish" data-name="dal tadka" onclick="this.querySelector('.qty').focus()"><span>Dal Tadka</span><div><span class="price">₹140</span><input type="number" value="0" min="0" class="qty" data-price="140" data-name="Dal Tadka" onchange="calc()"></div></div>
+    <div class="menu-item dish" data-name="mix veg" onclick="this.querySelector('.qty').focus()"><span>Mix Veg</span><div><span class="price">₹160</span><input type="number" value="0" min="0" class="qty" data-price="160" data-name="Mix Veg" onchange="calc()"></div></div>
 
-    <div class="section-header"><h2>🥦 Veg Main Course</h2></div>
-    <div class="menu-grid">
-        <div class="menu-item dish" data-name="dal tadka" onclick="add(140)"><span>Dal Tadka</span><div style="text-align:right;"><span class="price-f">₹140</span><span class="price-h">Half ₹70</span></div></div>
-        <div class="menu-item dish" data-name="paneer butter" onclick="add(240)"><span>Paneer Butter</span><div style="text-align:right;"><span class="price-f">₹240</span><span class="price-h">Half ₹120</span></div></div>
-        <div class="menu-item dish" data-name="shahi paneer" onclick="add(240)"><span>Shahi Paneer</span><div style="text-align:right;"><span class="price-f">₹240</span><span class="price-h">Half ₹120</span></div></div>
-        <div class="menu-item dish" data-name="mix veg" onclick="add(160)"><span>Mix Veg</span><div style="text-align:right;"><span class="price-f">₹160</span><span class="price-h">Half ₹80</span></div></div>
-        <div class="menu-item dish" data-name="paneer masala" onclick="add(240)"><span>Paneer Masala</span><div style="text-align:right;"><span class="price-f">₹240</span><span class="price-h">Half ₹120</span></div></div>
-    </div>
+    <h2 class="section-title" id="rice">Rice & Biryani</h2>
+    <div class="menu-item dish" data-name="jeera rice" onclick="this.querySelector('.qty').focus()"><span>Jeera Rice</span><div><span class="price">₹70</span><input type="number" value="0" min="0" class="qty" data-price="70" data-name="Jeera Rice" onchange="calc()"></div></div>
+    <div class="menu-item dish" data-name="plain rice" onclick="this.querySelector('.qty').focus()"><span>Plain Rice</span><div><span class="price">₹70</span><input type="number" value="0" min="0" class="qty" data-price="70" data-name="Plain Rice" onchange="calc()"></div></div>
 
-    <div class="section-header"><h2>🍗 Non-Veg Special</h2></div>
-    <div class="menu-grid">
-        <div class="menu-item dish" data-name="chicken curry" onclick="add(180)"><span>Chicken Curry</span><div style="text-align:right;"><span class="price-f">₹180</span><span class="price-h">Half ₹90</span></div></div>
-        <div class="menu-item dish" data-name="chicken butter" onclick="add(240)"><span>Chicken Butter</span><div style="text-align:right;"><span class="price-f">₹240</span><span class="price-h">Half ₹120</span></div></div>
-        <div class="menu-item dish" data-name="mutton curry" onclick="add(240)"><span>Mutton Curry</span><div style="text-align:right;"><span class="price-f">₹240</span><span class="price-h">Half ₹120</span></div></div>
-    </div>
-
-    <div class="section-header"><h2>🍚 Rice & Biryani</h2></div>
-    <div class="menu-grid">
-        <div class="menu-item dish" data-name="plain rice" onclick="add(70)"><span>Plain Rice</span><div style="text-align:right;"><span class="price-f">₹70</span><span class="price-h">Half ₹40</span></div></div>
-        <div class="menu-item dish" data-name="jeera rice" onclick="add(70)"><span>Jeera Rice</span><div style="text-align:right;"><span class="price-f">₹70</span><span class="price-h">Half ₹40</span></div></div>
-    </div>
-
-    <div class="section-header"><h2>🫓 Fresh Breads</h2></div>
-    <div class="menu-grid">
-        <div class="menu-item dish" data-name="plain roti" onclick="add(7)"><span>Plain Roti</span><span class="price-f">₹7</span></div>
-        <div class="menu-item dish" data-name="butter roti" onclick="add(10)"><span>Butter Roti</span><span class="price-f">₹10</span></div>
-    </div>
-
-    <div class="section-header"><h2>🥤 Drinks</h2></div>
-    <div class="menu-grid">
-        <div class="item-card menu-item dish" data-name="mineral water" onclick="add(20)"><span>Mineral Water</span><span class="price-f">₹20</span></div>
-        <div class="item-card menu-item dish" data-name="tea" onclick="add(10)"><span>Tea</span><span class="price-f">₹10</span></div>
-        <div class="item-card menu-item dish" data-name="cold drink" onclick="add(40)"><span>Cold Drink</span><span class="price-f">₹40</span></div>
-    </div>
+    <h2 class="section-title" id="breads">Breads & Special Tea</h2>
+    <div class="menu-item dish" data-name="plain roti" onclick="this.querySelector('.qty').focus()"><span>Plain Roti</span><div><span class="price">₹7</span><input type="number" value="0" min="0" class="qty" data-price="7" data-name="Plain Roti" onchange="calc()"></div></div>
+    <div class="menu-item dish" data-name="butter roti" onclick="this.querySelector('.qty').focus()"><span>Butter Roti</span><div><span class="price">₹10</span><input type="number" value="0" min="0" class="qty" data-price="10" data-name="Butter Roti" onchange="calc()"></div></div>
+    <div class="menu-item dish" data-name="tea chai" onclick="this.querySelector('.qty').focus()"><span>Special Tea (Chai)</span><div><span class="price">₹10</span><input type="number" value="0" min="0" class="qty" data-price="10" data-name="Special Tea" onchange="calc()"></div></div>
 </div>
 
-<div class="bill-floater">💰 TOTAL ESTIMATE: ₹<span id="billVal">0</span></div>
+<div class="insta-branding">
+    <h3 style="color:var(--gold); font-family:'Playfair Display';">Join @hotel_muskan_official</h3>
+    <p style="margin: 8px 0; font-size: 0.75rem;">Follow us for daily deals & delicious reels!</p>
+    <a href="https://instagram.com/hotel_muskan_official" target="_blank" class="insta-btn">📸 Follow Us on Instagram</a>
+</div>
 
-<div class="action-bar">
-    <a href="tel:+919608635670" class="btn call">📞 CALL NOW</a>
-    <a href="https://wa.me/919608635670" class="btn wa">💬 WHATSAPP ORDER</a>
+<div class="bill-footer">
+    <div style="display:flex; flex-direction:column;">
+        <span style="font-size: 0.6rem; color: var(--gold); text-transform: uppercase;">Total Bill Amount</span>
+        <span style="font-size: 1.4rem; font-weight: bold;">₹<span id="finalBill">0</span></span>
+    </div>
+    <button class="order-btn" onclick="sendToWA()">💬 SEND ORDER</button>
 </div>
 
 <footer>
-    <p>Hotel Muskan - Bhagwanpur, Vaishali, Bihar</p>
-    <a href="https://instagram.com/hotel_muskan_official" style="color:var(--gold); text-decoration:none; font-weight:bold;">📸 Instagram Official</a>
-    <p style="margin-top:20px; font-size:0.7rem;">Digital Menu Created for Nitin Kumar</p>
+    <p>Hotel Muskan - NH-22 Bhagwanpur, Vaishali</p>
+    <p style="margin-top:10px;">Digital Portal Managed by Nitin Kumar | 24/7 Service</p>
 </footer>
 
 <script>
-    let bill = 0;
-    function add(p) { bill += p; document.getElementById('billVal').innerText = bill; }
-
-    function search() {
-        let q = document.getElementById('menuSearch').value.toLowerCase();
-        let items = document.getElementsByClassName('dish');
-        for (let i of items) { i.style.display = i.getAttribute('data-name').includes(q) ? "flex" : "none"; }
+    function calc() {
+        let qtys = document.querySelectorAll('.qty');
+        let total = 0;
+        qtys.forEach(q => { total += (parseInt(q.value) * parseInt(q.getAttribute('data-price'))); });
+        document.getElementById('finalBill').innerText = total;
     }
 
-    function onScroll() {
+    function searchDish() {
+        let q = document.getElementById('search').value.toLowerCase();
+        let items = document.querySelectorAll('.dish');
+        items.forEach(i => { i.style.display = i.getAttribute('data-name').includes(q) ? "flex" : "none"; });
+    }
+
+    function sendToWA() {
+        let qtys = document.querySelectorAll('.qty');
+        let msg = "🍱 *NEW ORDER: HOTEL MUSKAN*%0A%0A";
+        let hasOrder = false;
+        qtys.forEach(q => {
+            if(parseInt(q.value) > 0) {
+                msg += "✅ " + q.getAttribute('data-name') + " x " + q.value + " (₹" + (q.value * q.getAttribute('data-price')) + ")%0A";
+                hasOrder = true;
+            }
+        });
+        if(!hasOrder) { alert("Please select items!"); return; }
+        msg += "%0A💰 *Total Bill: ₹" + document.getElementById('finalBill').innerText + "*%0A🕒 Please confirm order!";
+        window.open("https://wa.me/91XXXXXXXXXX?text=" + msg, "_blank");
+    }
+
+    function moveIndicator() {
         let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         let scrolled = (winScroll / height) * 100;
-        document.getElementById("myBar").style.width = scrolled + "%";
+        document.getElementById("progBar").style.width = scrolled + "%";
     }
 </script>
 
