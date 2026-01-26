@@ -2,134 +2,160 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hotel Muskan | Complete 24/7 Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Muskan | A Taste You'll Remember</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { 
-            --gold: #d4af37; 
-            --gold-grad: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --black: #0a0a0a; 
-            --surface: #161616; 
-            --insta: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--black); color: white; overflow-x: hidden; touch-action: manipulation; }
+        :root { --gold: #c5a059; --bg: #050505; --card-glass: rgba(255, 255, 255, 0.03); }
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Montserrat', sans-serif; }
+        body { background: var(--bg); color:#fff; overflow-x:hidden; scroll-behavior: smooth; }
 
+        /* HERO SECTION */
         header {
-            height: 40vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://img.sanishtech.com/u/65f7c171e917d9e0ac64dc19499c6e4b.webp'); 
-            background-size: cover; background-position: center; border-bottom: 4px solid var(--gold);
+            height: 85vh; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://img.sanishtech.com/u/9e177dca5458a79c0ebe41d9bdc0d314.webp');
+            background-size: cover; background-position: center; background-attachment: fixed; border-bottom: 5px solid var(--gold);
         }
-        header h1 { font-family: 'Playfair Display', serif; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.8rem; }
+        header h1 { font-family: 'Cinzel', serif; font-size: clamp(3rem, 10vw, 6rem); color: var(--gold); letter-spacing: 5px; }
+        header .slogan { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; margin-top: 20px; color: #fff; letter-spacing: 3px; }
 
-        .gallery-wrapper { display: flex; overflow-x: auto; gap: 12px; padding: 20px 15px; scroll-snap-type: x mandatory; scrollbar-width: none; }
-        .gallery-wrapper::-webkit-scrollbar { display: none; }
-        .gallery-item { flex: 0 0 85%; scroll-snap-align: center; border-radius: 12px; overflow: hidden; border: 1px solid #333; height: 180px; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        /* TRUST BAR - INSTA, GOOGLE, MAPS */
+        .trust-bar { display: flex; justify-content: center; gap: 15px; padding: 25px; background: #000; border-bottom: 1px solid #222; flex-wrap: wrap; }
+        .t-btn { padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 0.75rem; display: flex; align-items: center; gap: 10px; transition: 0.4s; }
+        .insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+        .review-google { background: #fff; color: #000; }
+        .map-link { background: #4285F4; color: white; }
 
-        .sticky-nav { position: sticky; top: 0; z-index: 5000; background: rgba(0,0,0,0.95); padding: 12px; border-bottom: 1px solid #333; backdrop-filter: blur(10px); }
-        .tabs { display: flex; gap: 10px; overflow-x: auto; padding: 5px 0; scrollbar-width: none; }
-        .tab-btn { background: #222; color: var(--gold); padding: 8px 16px; border-radius: 50px; text-decoration: none; font-size: 0.7rem; font-weight: bold; border: 1px solid #444; white-space: nowrap; }
+        /* GALLERY */
+        .gallery-sec { padding: 40px 8%; text-align: center; }
+        .gal-flex { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; scrollbar-width: none; }
+        .gal-item { flex: 0 0 400px; height: 280px; border: 2px solid var(--gold); border-radius: 20px; overflow: hidden; }
+        .gal-item img { width: 100%; height: 100%; object-fit: cover; }
 
-        .container { padding: 15px; }
-        .section-title { font-family: 'Playfair Display'; color: var(--gold); font-size: 1.6rem; margin: 30px 0 15px; border-left: 4px solid var(--gold); padding-left: 10px; scroll-margin-top: 100px; }
+        /* STICKY NAV */
+        .sticky-nav { position: sticky; top: 0; z-index: 1000; background: rgba(5,5,5,0.98); backdrop-filter: blur(20px); border-bottom: 1px solid #222; }
+        .nav-inner { display: flex; justify-content: center; gap: 15px; padding: 15px; overflow-x: auto; scrollbar-width: none; }
+        .nav-pill { color: #888; text-decoration: none; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; padding: 10px 18px; border-radius: 50px; border: 1px solid #222; white-space: nowrap; }
+        .nav-pill:hover, .nav-pill.active { color: var(--gold); border-color: var(--gold); background: rgba(197, 160, 89, 0.1); }
 
-        .menu-item { background: var(--surface); padding: 18px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .price-label { color: var(--gold); font-weight: bold; font-size: 1rem; margin-top: 4px; display: block; }
-        .qty-box { width: 55px; padding: 10px 5px; border-radius: 8px; border: 1px solid var(--gold); background: #000; color: white; text-align: center; font-weight: bold; outline: none; }
+        /* MENU GRID */
+        .container { padding: 40px 8%; max-width: 1400px; margin: auto; }
+        .section-title { color:var(--gold); margin:40px 0 30px; font-family:'Cinzel'; font-size: 2rem; border-left: 5px solid var(--gold); padding-left: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        .food-card { background: var(--card-glass); border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 0; transition: 0.4s; }
+        .food-card:hover { border-color: var(--gold); transform: translateY(-8px); background: rgba(197, 160, 89, 0.05); }
+        .card-info { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+        .food-name { font-family: 'Cinzel', serif; font-size: 1.3rem; color: #fff; }
+        .food-price { font-size: 1.6rem; font-weight: 900; color: var(--gold); }
+        .half-price { font-size: 0.8rem; color: #666; margin-top: 5px; font-weight: 700; }
+        
+        .add-btn { width: 100%; background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s; letter-spacing: 1px; }
+        .add-btn:hover { background: var(--gold); color: #000; }
 
-        .bill-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #111; border-top: 3px solid var(--gold); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 6000; }
-        .order-btn { background: #25d366; color: white; border: none; padding: 14px 28px; border-radius: 50px; font-weight: bold; font-size: 0.9rem; }
+        /* CHECKOUT */
+        .checkout-bar { position: fixed; bottom: 25px; right: 25px; width: 320px; background: #fff; color: #000; padding: 25px; border-top: 4px solid var(--gold); box-shadow: 0 30px 60px rgba(0,0,0,0.6); display: none; z-index: 5000; }
+        .btn-wa { background: #000; color: #fff; border: none; padding: 12px; width: 100%; margin-top: 15px; font-weight: 900; cursor: pointer; }
 
-        footer { text-align: center; padding: 40px 20px 180px; background: #0a0a0a; border-top: 1px solid #222; color: #555; font-size: 0.75rem; }
-        .insta-link { display: inline-block; background: var(--insta); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 0.8rem; border: 2px solid white; margin-bottom: 10px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .checkout-bar { left: 5%; width: 90%; } }
     </style>
 </head>
-<body onscroll="calculate()">
+<body>
 
 <header>
     <h1>Hotel Muskan</h1>
-    <p style="font-size: 0.75rem; letter-spacing: 3px;">A TASTE YOU'LL REMEMBER</p>
+    <p class="slogan">A TASTE YOU'LL REMEMBER</p>
 </header>
 
-<div class="gallery-wrapper">
-    <div class="gallery-item"><img src="https://img.sanishtech.com/u/65f7c171e917d9e0ac64dc19499c6e4b.webp" alt="Interior"></div>
-    <div class="gallery-item"><img src="https://img.sanishtech.com/u/bc78890c29f5ac2d9de4dd9e6cd5bb72.webp" alt="Dining"></div>
+<div class="trust-bar">
+    <a href="https://www.instagram.com/hotel_muskan_official/" class="t-btn insta" target="_blank"><i class="fab fa-instagram"></i> hotel_muskan_official</a>
+    <a href="https://share.google/qCXkweNjUrFmrluDp" class="t-btn map-link" target="_blank"><i class="fas fa-map-marked-alt"></i> Get Directions</a>
+    <a href="https://share.google/FZ0rhBqwWkeRtneOV" class="t-btn review-google" target="_blank"><i class="fab fa-google"></i> Give 5-Star Review</a>
 </div>
 
+<section class="gallery-sec">
+    <div class="gal-flex">
+        <div class="gal-item"><img src="https://img.sanishtech.com/u/03de217228d0c9c4f83ad4b20ed4c689.webp"></div>
+        <div class="gal-item"><img src="https://img.sanishtech.com/u/f338b0f253a5b1efa573f3563f6882df.webp"></div>
+        <div class="gal-item"><img src="https://img.sanishtech.com/u/9e177dca5458a79c0ebe41d9bdc0d314.webp"></div>
+    </div>
+</section>
+
 <div class="sticky-nav">
-    <div class="tabs">
-        <a href="#paneer" class="tab-btn">🥦 PANEER HUB</a>
-        <a href="#nonveg" class="tab-btn">🍗 NON-VEG & EGG</a>
-        <a href="#veg" class="tab-btn">🥗 VEG & RICE</a>
-        <a href="#drinks" class="tab-btn">🥤 DRINKS & TEA</a>
+    <div class="nav-inner">
+        <a href="#paneer" class="nav-pill active"> Paneer</a>
+        <a href="#nonveg" class="nav-pill">Non-Veg</a>
+        <a href="#biryani" class="nav-pill">Rice & Biryani</a>
+        <a href="#breads" class="nav-pill">Breads</a>
+        <a href="#starters" class="nav-pill">Starters</a>
     </div>
 </div>
 
 <div class="container">
-    <h2 class="section-title" id="paneer">Paneer Hub</h2>
-    <div class="menu-item"><div><span>Paneer Masala</span><span class="price-label">₹220</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Paneer Masala" data-price="220"></div>
-    <div class="menu-item"><div><span>Paneer Chilli</span><span class="price-label">₹240</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Paneer Chilli" data-price="240"></div>
-    <div class="menu-item"><div><span>Shahi Paneer</span><span class="price-label">₹240</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Shahi Paneer" data-price="240"></div>
-    <div class="menu-item"><div><span>Kadai Paneer</span><span class="price-label">₹260</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Kadai Paneer" data-price="260"></div>
-    <div class="menu-item"><div><span>Paneer Bhurji</span><span class="price-label">₹200</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Paneer Bhurji" data-price="200"></div>
-    <div class="menu-item"><div><span>Paneer Tikka Masala</span><span class="price-label">₹280</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Paneer Tikka Masala" data-price="280"></div>
-    <div class="menu-item"><div><span>Paneer Lababdar</span><span class="price-label">₹270</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Paneer Lababdar" data-price="270"></div>
-
-    <h2 class="section-title" id="nonveg">Non-Veg & Egg</h2>
-    <div class="menu-item"><div><span>Chicken Curry</span><span class="price-label">₹180</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Chicken Curry" data-price="180"></div>
-    <div class="menu-item"><div><span>Egg Curry (2 Eggs)</span><span class="price-label">₹120</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Egg Curry" data-price="120"></div>
-    <div class="menu-item"><div><span>Omelette Curry</span><span class="price-label">₹130</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Omelette Curry" data-price="130"></div>
-
-    <h2 class="section-title" id="veg">Veg Main & Rice</h2>
-    <div class="menu-item"><div><span>Dal Tadka</span><span class="price-label">₹140</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Dal Tadka" data-price="140"></div>
-    <div class="menu-item"><div><span>Mix Veg</span><span class="price-label">₹160</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Mix Veg" data-price="160"></div>
-    <div class="menu-item"><div><span>Jeera Rice</span><span class="price-label">₹70</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Jeera Rice" data-price="70"></div>
-    <div class="menu-item"><div><span>Butter Roti</span><span class="price-label">₹10</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Butter Roti" data-price="10"></div>
-
-    <h2 class="section-title" id="drinks">Drinks & Tea</h2>
-    <div class="menu-item"><div><span>Special Tea (Chai)</span><span class="price-label">₹10</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Special Tea" data-price="10"></div>
-    <div class="menu-item"><div><span>Cold Drink</span><span class="price-label">₹40</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Cold Drink" data-price="40"></div>
-    <div class="menu-item"><div><span>Mineral Water</span><span class="price-label">₹20</span></div><input type="number" value="0" min="0" class="qty-box dish" data-name="Mineral Water" data-price="20"></div>
-</div>
-
-<div class="bill-footer">
-    <div style="display:flex; flex-direction:column;">
-        <span style="font-size: 0.65rem; color: var(--gold);">FINAL BILL</span>
-        <span style="font-size: 1.4rem; font-weight: bold;">₹<span id="finalBill">0</span></span>
+    <h2 id="paneer" class="section-title">Royal Paneer & Veg Main</h2>
+    <div class="grid">
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Paneer Do Pyaza</h3><p class="half-price">Full: ₹250</p></div><span class="food-price">₹250</span></div><button class="add-btn" onclick="add('Paneer Do Pyaza', 250)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Paneer Butter</h3><p class="half-price">Full: ₹240 | Half: ₹120</p></div><span class="food-price">₹240</span></div><button class="add-btn" onclick="add('Paneer Butter', 240)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Shahi Paneer</h3><p class="half-price">Full: ₹240 | Half: ₹120</p></div><span class="food-price">₹240</span></div><button class="add-btn" onclick="add('Shahi Paneer', 240)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Dal Tadka</h3><p class="half-price">Full: ₹140 | Half: ₹70</p></div><span class="food-price">₹140</span></div><button class="add-btn" onclick="add('Dal Tadka', 140)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Mix Veg</h3><p class="half-price">Full: ₹160 | Half: ₹80</p></div><span class="food-price">₹160</span></div><button class="add-btn" onclick="add('Mix Veg', 160)">Add Order</button></div>
     </div>
-    <button class="order-btn" onclick="send()">💬 SEND ORDER</button>
+
+    <h2 id="nonveg" class="section-title">Non-Veg Signature</h2>
+    <div class="grid">
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Chicken Do Pyaza</h3><p class="half-price">Full: ₹240 | Half: ₹120</p></div><span class="food-price">₹240</span></div><button class="add-btn" onclick="add('Chicken Do Pyaza', 240)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Chicken Curry</h3><p class="half-price">Full: ₹180 | Half: ₹90</p></div><span class="food-price">₹180</span></div><button class="add-btn" onclick="add('Chicken Curry', 180)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Chicken Butter</h3><p class="half-price">Full: ₹240 | Half: ₹120</p></div><span class="food-price">₹240</span></div><button class="add-btn" onclick="add('Chicken Butter', 240)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Fish Curry</h3><p class="half-price">Full: ₹180</p></div><span class="food-price">₹180</span></div><button class="add-btn" onclick="add('Fish Curry', 180)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Egg Curry</h3><p class="half-price">Full: ₹120</p></div><span class="food-price">₹120</span></div><button class="add-btn" onclick="add('Egg Curry', 120)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Omlate Curry</h3><p class="half-price">Full: ₹130</p></div><span class="food-price">₹130</span></div><button class="add-btn" onclick="add('Omlate Curry', 130)">Add Order</button></div>
+    </div>
+
+    <h2 id="biryani" class="section-title">Rice & Biryani Hub</h2>
+    <div class="grid">
+        
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Plain Rice</h3><p class="half-price">Full: ₹70 | Half: ₹40</p></div><span class="food-price">₹70</span></div><button class="add-btn" onclick="add('Plain Rice', 70)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Jeera Rice</h3><p class="half-price">Full: ₹70 | Half: ₹40</p></div><span class="food-price">₹70</span></div><button class="add-btn" onclick="add('Jeera Rice', 70)">Add Order</button></div>
+    </div>
+
+    <h2 id="breads" class="section-title">Fresh Breads</h2>
+    <div class="grid">
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Plain Roti</h3><p class="half-price">Hot Tawa</p></div><span class="food-price">₹5</span></div><button class="add-btn" onclick="add('Plain Roti', 5)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Butter Roti</h3><p class="half-price">Royal Butter</p></div><span class="food-price">₹10</span></div><button class="add-btn" onclick="add('Butter Roti', 10)">Add Order</button></div>
+    </div>
+
+    <h2 id="starters" class="section-title">Starters & Extras</h2>
+    <div class="grid">
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Chicken Chilli</h3><p class="half-price">Full: ₹240 | Half: ₹120</p></div><span class="food-price">₹240</span></div><button class="add-btn" onclick="add('Chicken Chilli', 240)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Mineral Water</h3><p class="half-price">1 Litre</p></div><span class="food-price">₹20</span></div><button class="add-btn" onclick="add('Mineral Water', 20)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Tea</h3><p class="half-price">Special Chai</p></div><span class="food-price">₹10</span></div><button class="add-btn" onclick="add('Tea', 10)">Add Order</button></div>
+        <div class="food-card"><div class="card-info"><div><h3 class="food-name">Cold Drink</h3><p class="half-price">250ml</p></div><span class="food-price">₹40</span></div><button class="add-btn" onclick="add('Cold Drink', 40)">Add Order</button></div>
+    </div>
 </div>
 
-<footer>
-    <a href="https://instagram.com/hotel_muskan_official" target="_blank" class="insta-link">📸 @hotel_muskan_official</a>
+<div class="checkout-bar" id="cart">
+    <div style="font-size:1.6rem; font-weight:900;">Total: ₹<span id="bill">0</span></div>
+    <button class="btn-wa" onclick="send()">Confirm Order on WhatsApp ➔</button>
+</div>
+
+<footer style="text-align:center; padding:60px; color:#444; background:#000;">
     <p>NH-22 Bhagwanpur, Vaishali, Bihar</p>
-    <p style="margin-top:10px;">Managed by Nitin Kumar | 9608635670</p>
+    <p style="margin-top:15px; color:var(--gold);">Digined by Nitin Kumar | 9608635670</p>
 </footer>
 
 <script>
-    function calculate() {
-        let qtys = document.querySelectorAll('.dish');
-        let total = 0;
-        qtys.forEach(q => { total += (parseInt(q.value) * parseInt(q.getAttribute('data-price'))); });
-        document.getElementById('finalBill').innerText = total;
+    let bill = 0; let orders = {};
+    function add(n, p) {
+        bill += p; orders[n] = (orders[n] || 0) + 1;
+        document.getElementById('bill').innerText = bill;
+        document.getElementById('cart').style.display = 'flex';
+        if(navigator.vibrate) navigator.vibrate(25);
     }
-    document.addEventListener('input', calculate);
-
     function send() {
-        let qtys = document.querySelectorAll('.dish');
-        let msg = "🍱 *NEW ORDER: HOTEL MUSKAN*%0A%0A";
-        let hasItem = false;
-        qtys.forEach(q => {
-            if(parseInt(q.value) > 0) {
-                msg += "✅ " + q.getAttribute('data-name') + " x " + q.value + " (₹" + (q.value * q.getAttribute('data-price')) + ")%0A";
-                hasItem = true;
-            }
-        });
-        if(!hasItem) { alert("Please select a dish!"); return; }
-        msg += "%0A💰 *Total Bill: ₹" + document.getElementById('finalBill').innerText + "*%0A🕒 Please confirm order!";
-        window.open("https://wa.me/919608635670?text=" + msg, "_blank");
+        let m = "🍱 *ORDER: HOTEL MUSKAN*%0A%0A";
+        for(let k in orders) m += `👑 ${k} x ${orders[k]}%0A`;
+        m += `%0A💰 *Grand Total: ₹${bill}*%0A📍 Bhagwanpur, Vaishali%0A%0A_A Taste You'll Remember_`;
+        window.open(`https://wa.me/919608635670?text=${m}`, '_blank');
     }
 </script>
 
