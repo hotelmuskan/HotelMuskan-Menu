@@ -11,7 +11,7 @@
         * { margin:0; padding:0; box-sizing:border-box; font-family: 'Montserrat', sans-serif; }
         body { background: var(--bg); color:#fff; overflow-x:hidden; scroll-behavior: smooth; }
 
-        /* HERO SECTION */
+        /* HERO SECTION WITH CUSTOM BACKGROUND */
         header {
             height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('https://img.sanishtech.com/u/2cc752957680715b28014785956091e8.webp');
@@ -20,14 +20,13 @@
         header h1 { font-family: 'Cinzel', serif; font-size: clamp(3rem, 10vw, 5.5rem); color: var(--gold); letter-spacing: 5px; text-transform: uppercase; }
         .slogan { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; margin-top: 15px; color: #fff; letter-spacing: 3px; }
 
-        /* TRUST BAR */
         .trust-bar { display: flex; justify-content: center; gap: 15px; padding: 25px; background: #000; border-bottom: 1px solid #222; flex-wrap: wrap; }
         .t-btn { padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 0.75rem; display: flex; align-items: center; gap: 10px; transition: 0.4s; }
         .insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
         .map-link { background: #4285F4; color: white; }
         .review-btn { background: #fff; color: #000; }
 
-        /* GALLERY */
+        /* UPDATED GALLERY SECTION */
         .gallery-sec { padding: 60px 8%; text-align: center; }
         .gal-title { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2rem; margin-bottom: 30px; }
         .gal-flex { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; scrollbar-width: none; }
@@ -35,13 +34,11 @@
         .gal-item { flex: 0 0 350px; height: 250px; border: 2px solid var(--gold); border-radius: 15px; overflow: hidden; }
         .gal-item img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* STICKY NAV */
         .sticky-nav { position: sticky; top: 0; z-index: 1000; background: rgba(5,5,5,0.98); backdrop-filter: blur(20px); border-bottom: 1px solid #222; }
         .nav-inner { display: flex; justify-content: center; gap: 10px; padding: 15px; overflow-x: auto; scrollbar-width: none; }
         .nav-pill { color: #888; text-decoration: none; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; padding: 10px 18px; border-radius: 50px; border: 1px solid #222; white-space: nowrap; }
         .nav-pill.active { color: var(--gold); border-color: var(--gold); background: rgba(197, 160, 89, 0.1); }
 
-        /* MENU CONTENT */
         .container { padding: 40px 8%; max-width: 1400px; margin: auto; }
         .section-title { color:var(--gold); margin:40px 0 25px; font-family:'Cinzel'; font-size: 2rem; border-left: 5px solid var(--gold); padding-left: 15px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 25px; }
@@ -55,7 +52,6 @@
         .add-btn { flex: 1; background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
         .add-btn:hover { background: var(--gold); color: #000; }
 
-        /* PLUS BUTTON STYLE FOR SINGLE ITEMS */
         .qty-btn { width: 100%; display: flex; justify-content: center; align-items: center; gap: 10px; background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px; font-weight: 800; cursor: pointer; transition: 0.3s; }
         .qty-btn:hover { background: var(--gold); color: #000; }
         .qty-display { font-size: 0.8rem; background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; }
@@ -76,7 +72,7 @@
 <div class="trust-bar">
     <a href="https://www.instagram.com/hotel_muskan_official/" class="t-btn insta" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
     <a href="https://share.google/qCXkweNjUrFmrluDp" class="t-btn map-link" target="_blank"><i class="fas fa-map-marked-alt"></i> Directions</a>
-    <a href="#" class="t-btn review-btn" target="_blank"><i class="fab fa-google"></i> Google Review</a>
+    <a href="https://share.google/qCXkweNjUrFmrluDp" class="t-btn review-btn" target="_blank"><i class="fab fa-google"></i> Google Review</a>
 </div>
 
 <section class="gallery-sec">
@@ -166,7 +162,7 @@
 
 <footer>
     <p>NH-22 Bhagwanpur, Vaishali, Bihar</p>
-    <p style="margin-top:15px; color:var(--gold); font-weight:700;">designed by Nitin Kumar </p>
+    <p style="margin-top:15px; color:var(--gold); font-weight:700;">Desigined  by Nitin Kumar </p>
 </footer>
 
 <script>
@@ -177,7 +173,6 @@
         document.getElementById('bill').innerText = bill;
         document.getElementById('cart').style.display = 'flex';
         
-        // Update specific item counter if it exists
         let counterId = "count-" + n.replace(/\s+/g, '-');
         let counterElem = document.getElementById(counterId);
         if(counterElem) {
@@ -191,11 +186,10 @@
         for(let k in orders) {
             if(orders[k] > 0) m += `👑 ${k} x ${orders[k]}%0A`;
         }
-        m += `%0A💰 *Total: ₹${bill}*%0A%0A_A Taste You'll Remember_`;
+        m += `%0A💰 *Grand Total: ₹${bill}*%0A%0A_A Taste You'll Remember_`;
         window.open(`https://wa.me/919608635670?text=${m}`, '_blank');
     }
 </script>
 
 </body>
 </html>
-
