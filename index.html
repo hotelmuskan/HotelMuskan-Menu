@@ -3,155 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Muskan | Admin Control Portal</title>
+    <title>Hotel Muskan | Ultimate Luxury Menu</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --gold: #c5a059; --bg: #050505; --card: rgba(255, 255, 255, 0.03); }
+        :root { --gold: #c5a059; --bg: #050505; --card: rgba(0, 0, 0, 0.7); --veg: #2ecc71; --nonveg: #e74c3c; }
         * { margin:0; padding:0; box-sizing:border-box; font-family: 'Montserrat', sans-serif; }
-        body { background: var(--bg); color:#fff; overflow-x:hidden; scroll-behavior: smooth; }
+        
+        body { 
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://img.sanishtech.com/u/6277172bfef0b5274c372834690b677f.webp'); 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+            color:#fff; 
+            overflow-x:hidden; 
+            scroll-behavior: smooth; 
+        }
 
         header {
-            height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('https://img.sanishtech.com/u/2cc752957680715b28014785956091e8.webp');
-            background-size: cover; background-position: center; border-bottom: 5px solid var(--gold);
+            height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
-        header h1 { font-family: 'Cinzel', serif; font-size: 3.5rem; color: var(--gold); }
+        header h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 8vw, 4.5rem); color: var(--gold); text-shadow: 0 0 20px rgba(0,0,0,1); }
+        .slogan { letter-spacing: 4px; font-style: italic; color: #fff; margin-top: 10px; text-shadow: 0 0 10px rgba(0,0,0,1); }
 
-        .container { padding: 40px 5%; max-width: 1200px; margin: auto; }
-        .section-title { color:var(--gold); margin:40px 0 20px; font-family:'Cinzel'; font-size: 1.8rem; border-left: 5px solid var(--gold); padding-left: 15px; }
+        /* SOCIAL BUTTONS */
+        .social-links { display: flex; gap: 15px; margin-top: 20px; }
+        .s-btn { padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .s-insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+        .s-review { background: #fff; color: #000; }
+        .s-btn:hover { transform: scale(1.05); opacity: 0.9; }
+
+        /* GALLERY SECTION */
+        .gallery-sec { padding: 30px 6%; text-align: center; }
+        .gal-flex { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 20px; scrollbar-width: none; }
+        .gal-flex::-webkit-scrollbar { display: none; }
+        .gal-item { flex: 0 0 300px; height: 220px; border: 2px solid var(--gold); border-radius: 12px; overflow: hidden; backdrop-filter: blur(5px); }
+        .gal-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        .container { padding: 40px 6%; max-width: 1300px; margin: auto; }
+        .section-title { color:var(--gold); margin:50px 0 25px; font-family:'Cinzel'; font-size: 2rem; border-left: 5px solid var(--gold); padding-left: 15px; text-transform: uppercase; background: rgba(0,0,0,0.5); width: fit-content; padding-right: 20px; }
         
-        /* MENU CARD STYLE */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .food-card { background: var(--card); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; transition: 0.3s; }
-        .food-card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .price-tag { color: var(--gold); font-weight: 900; margin-bottom: 15px; display: block; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        .food-card { background: var(--card); border: 1px solid rgba(197, 160, 89, 0.2); padding: 25px; border-radius: 15px; transition: 0.4s; backdrop-filter: blur(10px); }
+        .food-card:hover { border-color: var(--gold); transform: translateY(-8px); background: rgba(197, 160, 89, 0.1); }
         
+        .dot { font-size: 10px; margin-right: 8px; vertical-align: middle; }
+        .v { color: var(--veg); } .nv { color: var(--nonveg); }
+        
+        .price-tag { color: #ccc; font-weight: 700; margin-bottom: 20px; display: block; font-size: 0.9rem; }
         .btn-group { display: flex; gap: 10px; }
-        .add-btn { flex: 1; background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px; cursor: pointer; font-weight: 800; font-size: 0.7rem; }
+        .add-btn { flex: 1; background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px; cursor: pointer; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; border-radius: 8px; }
         .add-btn:hover { background: var(--gold); color: #000; }
 
-        /* ADMIN PANEL STYLE */
-        #admin-panel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; padding: 50px 5%; overflow-y: auto; }
-        .admin-item { background: #111; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; }
-        input { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px; width: 80px; text-align: center; border-radius: 5px; }
-        .save-btn { background: var(--gold); color: #000; border: none; padding: 15px 30px; font-weight: 900; cursor: pointer; border-radius: 5px; margin-top: 20px; }
+        /* ADMIN PANEL */
+        #admin-panel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 10000; padding: 50px 5%; overflow-y: auto; }
+        .admin-item { background: #111; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; border: 1px solid var(--gold); }
+        .admin-inputs input { background: #222; border: 1px solid var(--gold); color: #fff; padding: 8px; width: 80px; text-align: center; border-radius: 5px; }
 
-        .checkout-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 500px; background: #fff; color: #000; padding: 20px; border-radius: 15px; display: none; justify-content: space-between; align-items: center; z-index: 1000; }
-        .admin-toggle { text-align: center; padding: 20px; color: #333; cursor: pointer; font-size: 0.6rem; }
+        .checkout-bar { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 550px; background: #fff; color: #000; padding: 20px; border-radius: 20px; display: none; justify-content: space-between; align-items: center; z-index: 5000; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+        
+        /* HIDDEN ADMIN TOGGLE */
+        .footer-admin { text-align: center; padding: 40px; color: rgba(255,255,255,0.02); cursor: default; font-size: 0.6rem; user-select: none; }
     </style>
 </head>
-<body onload="loadPrices()">
+<body onload="startApp()">
 
 <header>
     <h1>Hotel Muskan</h1>
-    <p style="letter-spacing: 3px; font-style: italic;">A TASTE YOU'LL REMEMBER</p>
+    <p class="slogan">A TASTE YOU'LL REMEMBER</p>
+    <div class="social-links">
+        <a href="https://www.instagram.com/hotel_muskan_official/" target="_blank" class="s-btn s-insta"><i class="fab fa-instagram"></i> Follow Us</a>
+        <a href="https://share.google/qCXkweNjUrFmrluDp" target="_blank" class="s-btn s-review"><i class="fab fa-google"></i> Rate Us</a>
+    </div>
 </header>
 
-<div class="container" id="menu-container">
+<section class="gallery-sec">
+    <div class="gal-flex">
+        <div class="gal-item"><img src="https://img.sanishtech.com/u/6277172bfef0b5274c372834690b677f.webp"></div>
+        <div class="gal-item"><img src="https://img.sanishtech.com/u/d31c11693560bf47af7ee3f90ba9a314.webp"></div>
+        <div class="gal-item"><img src="https://img.sanishtech.com/u/f5fcd42a58fe632c96c0360755606064.webp"></div>
+        
     </div>
+</section>
+
+<div class="container" id="main-menu"></div>
 
 <div id="admin-panel">
-    <h2 style="font-family: 'Cinzel'; color: var(--gold); margin-bottom: 30px;">Admin Price Control</h2>
-    <div id="admin-items-list"></div>
-    <button class="save-btn" onclick="saveAllPrices()">SAVE CHANGES & GO LIVE</button>
-    <button onclick="toggleAdmin()" style="background:none; color:grey; border:none; margin-top:20px; cursor:pointer;">Close Dashboard</button>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+        <h2 style="font-family: 'Cinzel'; color: var(--gold);">Price Manager</h2>
+        <button onclick="toggleAdmin()" style="background:none; color:white; border:1px solid white; padding:5px 15px; cursor:pointer;">Close</button>
+    </div>
+    <div id="admin-editor"></div>
+    <button onclick="applyNewPrices()" style="background: var(--gold); color: #000; width:100%; padding: 20px; border: none; font-weight: 900; cursor: pointer; margin-top: 30px; border-radius: 10px;">SAVE CHANGES</button>
 </div>
 
-<div class="checkout-bar" id="cart">
-    <div style="font-weight:900;">Total Bill: ₹<span id="bill-total">0</span></div>
-    <button onclick="sendOrder()" style="background:#000; color:#fff; border:none; padding:10px 20px; border-radius:8px; font-weight:900;">Order on WhatsApp</button>
+<div class="checkout-bar" id="cart-box">
+    <div style="font-weight:900; font-size:1.1rem;">Total: ₹<span id="final-price">0</span></div>
+    <button onclick="checkout()" style="background:#000; color:#fff; border:none; padding:12px 25px; border-radius:10px; font-weight:900; cursor:pointer;">Order Now</button>
 </div>
 
-<div class="admin-toggle" onclick="toggleAdmin()">© Admin Access</div>
+<div class="footer-admin" onclick="toggleAdmin()">© 2026 Hotel Muskan. All rights reserved. Designed for Quality.</div>
 
 <script>
-    // Initial Menu Data
-    let menuData = [
-        { id: "pdp", name: "Paneer Do Pyaza", full: 240, half: 120, cat: "Paneer" },
-        { id: "pb", name: "Paneer Butter", full: 260, half: 130, cat: "Paneer" },
-        { id: "cdp", name: "Chicken Do Pyaza", full: 260, half: 130, cat: "Non-Veg" },
-        { id: "cc", name: "Chicken Curry", full: 180, half: 90, cat: "Non-Veg" },
-        { id: "roti", name: "Plain Roti", full: 6, half: 0, cat: "Breads", isSingle: true }
+    let db = [
+        { name: "Shahi Paneer", f: 260, h: 130, cat: "Paneer Specials", type: "v" },
+        { name: "Mattar Paneer", f: 220, h: 110, cat: "Paneer Specials", type: "v" },
+        { name: "Paneer Do Pyaza", f: 240, h: 120, cat: "Paneer Specials", type: "v" },
+        { name: "Paneer Masala", f: 240, h: 120, cat: "Paneer Specials", type: "v" },
+        { name: "Paneer Chilli", f: 240, h: 120, cat: "Paneer Specials", type: "v" },
+        { name: "Chicken Do Pyaza", f: 260, h: 130, cat: "Non-Veg", type: "nv" },
+        { name: "Chicken Curry", f: 180, h: 90, cat: "Non-Veg", type: "nv" },
+        { name: "Fish Curry", f: 160, h: 80, cat: "Non-Veg", type: "nv" },
+        { name: "Egg Curry", f: 120, h: 60, cat: "Non-Veg", type: "nv" },
+        { name: "omelette Curry", f: 160, h: 80, cat: "Non-Veg", type: "nv" },
+        { name: "Plain Rice", f: 70, h: 40, cat: "Rice & Biryani", type: "v" },
+        { name: "Jeera Rice", f: 80, h: 40, cat: "Rice & Biryani", type: "v" },
+        { name: "Plain Roti", f: 6, h: 0, cat: "Breads", type: "v" },
+        { name: "Butter Roti", f: 12, h: 0, cat: "Breads", type: "v" },
+        { name: "Special Tea", f: 10, h: 0, cat: "Extras", type: "v" },
+        { name: "Mineral Water", f: 20, h: 0, cat: "Extras", type: "v" },
+        { name: "Cold Drink", f: 40, h: 0, cat: "Extras", type: "v" }
     ];
 
-    let cart = {}; let total = 0;
+    let myCart = {}; let billSum = 0;
 
-    function loadPrices() {
-        // Check if prices are already saved in browser
-        const saved = localStorage.getItem('muskanPrices');
-        if(saved) menuData = JSON.parse(saved);
-        renderMenu();
+    function startApp() {
+        const local = localStorage.getItem('muskan_v4_db');
+        if(local) db = JSON.parse(local);
+        showMenu();
     }
 
-    function renderMenu() {
-        let html = "";
-        let currentCat = "";
-        menuData.forEach(item => {
-            if(item.cat !== currentCat) {
-                currentCat = item.cat;
-                html += `<h2 class="section-title">${currentCat}</h2><div class="grid">`;
+    function showMenu() {
+        let h = ""; let lastCat = "";
+        db.forEach((it) => {
+            if(it.cat !== lastCat) {
+                lastCat = it.cat;
+                h += `<h2 class="section-title">${lastCat}</h2><div class="grid">`;
             }
-            html += `
-                <div class="food-card">
-                    <h3>${item.name}</h3>
-                    <span class="price-tag">Full: ₹${item.full} ${item.half > 0 ? '| Half: ₹'+item.half : ''}</span>
-                    <div class="btn-group">
-                        <button class="add-btn" onclick="addToCart('${item.name} (F)', ${item.full})">ADD FULL</button>
-                        ${item.half > 0 ? `<button class="add-btn" onclick="addToCart('${item.name} (H)', ${item.half})">ADD HALF</button>` : ''}
-                    </div>
-                </div>`;
+            h += `
+            <div class="food-card">
+                <h3><span class="dot ${it.type}">●</span>${it.name}</h3>
+                <span class="price-tag">Full: ₹${it.f} ${it.h>0 ? '| Half: ₹'+it.h : ''}</span>
+                <div class="btn-group">
+                    <button class="add-btn" onclick="order('${it.name} (F)', ${it.f})">Full</button>
+                    ${it.h>0 ? `<button class="add-btn" onclick="order('${it.name} (H)', ${it.h})">Half</button>` : ''}
+                </div>
+            </div>`;
         });
-        document.getElementById('menu-container').innerHTML = html;
+        document.getElementById('main-menu').innerHTML = h;
     }
 
     function toggleAdmin() {
-        const panel = document.getElementById('admin-panel');
-        if(panel.style.display === 'block') {
-            panel.style.display = 'none';
-        } else {
-            panel.style.display = 'block';
-            renderAdminList();
+        const p = document.getElementById('admin-panel');
+        p.style.display = (p.style.display === 'block') ? 'none' : 'block';
+        if(p.style.display === 'block') {
+            let listH = "";
+            db.forEach((it, i) => {
+                listH += `<div class="admin-item"><span>${it.name}</span><div class="admin-inputs">F: <input type="number" id="f_in_${i}" value="${it.f}">${it.h>0 ? ' H: <input type="number" id="h_in_'+i+'" value="'+it.h+'">' : ''}</div></div>`;
+            });
+            document.getElementById('admin-editor').innerHTML = listH;
         }
     }
 
-    function renderAdminList() {
-        let html = "";
-        menuData.forEach((item, index) => {
-            html += `
-                <div class="admin-item">
-                    <span>${item.name}</span>
-                    <div>
-                        F: <input type="number" id="f-${index}" value="${item.full}"> 
-                        ${item.half > 0 ? `H: <input type="number" id="h-${index}" value="${item.half}">` : ''}
-                    </div>
-                </div>`;
+    function applyNewPrices() {
+        db.forEach((it, i) => {
+            it.f = parseInt(document.getElementById(`f_in_${i}`).value);
+            if(it.h > 0) it.h = parseInt(document.getElementById(`h_in_${i}`).value);
         });
-        document.getElementById('admin-items-list').innerHTML = html;
+        localStorage.setItem('muskan_v4_db', JSON.stringify(db));
+        alert("Prices Updated!"); toggleAdmin(); showMenu();
     }
 
-    function saveAllPrices() {
-        menuData.forEach((item, index) => {
-            item.full = parseInt(document.getElementById(`f-${index}`).value);
-            if(item.half > 0) item.half = parseInt(document.getElementById(`h-${index}`).value);
-        });
-        localStorage.setItem('muskanPrices', JSON.stringify(menuData));
-        alert("Prices Updated Successfully!");
-        toggleAdmin();
-        renderMenu();
+    function order(n, p) {
+        billSum += p; myCart[n] = (myCart[n] || 0) + 1;
+        document.getElementById('final-price').innerText = billSum;
+        document.getElementById('cart-box').style.display = 'flex';
     }
 
-    function addToCart(name, price) {
-        total += price; cart[name] = (cart[name] || 0) + 1;
-        document.getElementById('bill-total').innerText = total;
-        document.getElementById('cart').style.display = 'flex';
-    }
-
-    function sendOrder() {
-        let msg = "🍱 *HOTEL MUSKAN ORDER*%0A";
-        for(let key in cart) msg += `${key} x ${cart[key]}%0A`;
-        msg += `%0A💰 *Total: ₹${total}*`;
-        window.open(`https://wa.me/919608635670?text=${msg}`);
+    function checkout() {
+        let text = "🍱 *ORDER FROM HOTEL MUSKAN*%0A%0A";
+        for(let key in myCart) text += `👑 ${key} x ${myCart[key]}%0A`;
+        text += `%0A💰 *GRAND TOTAL: ₹${billSum}*`;
+        window.open(`https://wa.me/919608635670?text=${text}`);
     }
 </script>
 </body>
