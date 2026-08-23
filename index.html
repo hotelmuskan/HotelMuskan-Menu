@@ -193,7 +193,7 @@
     <div></div>
     <div class="text-center flex flex-col items-center">
       <div class="w-24 h-24 rounded-full border-2 border-gold-500/60 overflow-hidden mb-6 shadow-2xl shadow-gold-500/20 bg-black flex items-center justify-center relative">
-        <img id="splash-building-img" src="image.png" alt="Hotel Muskan Building" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&fit=crop';" />
+        <img src="image.png" alt="Hotel Muskan Building" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&fit=crop';" />
       </div>
       <div class="text-[10px] tracking-[0.3em] uppercase text-yellow-400/80 mb-1">Fine Dine · Est. 1998</div>
       <h1 class="font-display text-4xl font-bold text-yellow-400 tracking-wide mb-2">HOTEL MUSKAN</h1>
@@ -424,7 +424,6 @@
       table: CURRENT_TABLE,
       searchQuery: '',
       activeFilter: 'all',
-      includeGst: true,
       customerPhone: localStorage.getItem('muskan_user_phone') || '',
       customerName: localStorage.getItem('muskan_user_name') || ''
     };
@@ -520,9 +519,7 @@
     }
 
     function cartCount() { return state.cart.reduce((s, i) => s + i.qty, 0); }
-    function cartSubtotal() { return state.cart.reduce((s, i) => s + i.price * i.qty, 0); }
-    function cartGst() { return state.includeGst ? Math.round(cartSubtotal() * 0.05) : 0; }
-    function cartTotal() { return cartSubtotal() + cartGst(); }
+    function cartTotal() { return state.cart.reduce((s, i) => s + i.price * i.qty, 0); }
 
     function thaliTotal() {
       let total = 0;
@@ -954,8 +951,6 @@
         `;
       }
 
-      const subtotal = cartSubtotal();
-      const gst = cartGst();
       const total = cartTotal();
 
       return `
@@ -1002,21 +997,9 @@
             `}
           </div>
 
-          <div class="bg-neutral-900 border border-yellow-500/30 rounded-2xl p-3 mb-4 flex items-center justify-between">
-            <div>
-              <div class="text-xs font-bold text-white">GST Bill Tax (5%)</div>
-              <div class="text-[10px]" style="color:rgba(255,255,255,0.5)">${state.includeGst ? 'GST added' : 'No GST'}</div>
-            </div>
-            <button onclick="App.toggleGst()" class="px-3 py-1.5 rounded-full text-xs font-bold border transition ${state.includeGst ? 'bg-gold-500 text-black border-gold-500' : 'bg-neutral-800 text-white border-neutral-600'}">
-              ${state.includeGst ? '✓ GST Added' : '✕ No GST'}
-            </button>
-          </div>
-
           <div class="bg-neutral-900 rounded-2xl p-4 space-y-2 text-sm mb-5">
-            <div class="flex justify-between"><span style="color:rgba(255,255,255,0.6)">${t("Subtotal", "सबटोटल")}</span><span>${formatPrice(subtotal)}</span></div>
-            ${state.includeGst ? `<div class="flex justify-between"><span style="color:rgba(255,255,255,0.6)">${t("GST (5%)", "जीएसटी (5%)")}</span><span>${formatPrice(gst)}</span></div>` : ''}
-            <div class="border-t border-gold-500/20 pt-2 flex justify-between font-bold text-base">
-              <span>${t("Total", "कुल")}</span><span class="text-yellow-400">${formatPrice(total)}</span>
+            <div class="flex justify-between font-bold text-base">
+              <span>${t("Total Amount", "कुल राशि")}</span><span class="text-yellow-400">${formatPrice(total)}</span>
             </div>
           </div>
 
@@ -1028,8 +1011,6 @@
     }
 
     function renderPayment() {
-      const subtotal = cartSubtotal();
-      const gst = cartGst();
       const total = cartTotal();
       const methods = [
         { id: "phonepe", name: "PhonePe", nameHi: "फोनपे", icon: "💜", desc: UPI_VPA },
@@ -1047,9 +1028,7 @@
           <p class="text-sm mb-5" style="color:rgba(255,255,255,0.6)">${state.table} · ${formatPrice(total)}</p>
 
           <div class="bg-neutral-900 rounded-2xl p-4 mb-5 text-sm">
-            <div class="flex justify-between mb-1"><span style="color:rgba(255,255,255,0.6)">${t("Subtotal", "सबटोटल")}</span><span>${formatPrice(subtotal)}</span></div>
-            ${state.includeGst ? `<div class="flex justify-between mb-1"><span style="color:rgba(255,255,255,0.6)">${t("GST (5%)", "जीएसटी")}</span><span>${formatPrice(gst)}</span></div>` : ''}
-            <div class="flex justify-between font-bold text-base pt-2 border-t border-gold-500/20">
+            <div class="flex justify-between font-bold text-base">
               <span>${t("To Pay", "भुगतान करें")}</span><span class="text-yellow-400">${formatPrice(total)}</span>
             </div>
           </div>
@@ -1581,12 +1560,6 @@
         App.navigate('payment');
       },
 
-      toggleGst() {
-        state.includeGst = !state.includeGst;
-        showToast(state.includeGst ? t("GST Added (5%)", "जीएसटी जोड़ा गया") : t("GST Removed (0%)", "जीएसटी हटाया गया"));
-        App.navigate("cart");
-      },
-
       handleSearch(q) {
         state.searchQuery = q;
         const main = document.getElementById("main-content");
@@ -1703,8 +1676,6 @@
         state.order = {
           id: "HM" + Math.floor(1000 + Math.random() * 9000),
           items: state.cart.slice(),
-          subtotal: cartSubtotal(),
-          gst: cartGst(),
           total: total,
           table: state.table,
           customerPhone: state.customerPhone,
@@ -1792,7 +1763,7 @@
           <div class="w-full max-w-xs my-auto">
             <div id="printable-receipt" class="receipt-paper p-5 rounded-lg text-xs shadow-2xl">
               <div class="text-center font-bold text-sm mb-1">HOTEL MUSKAN</div>
-              <div class="text-center text-[10px] mb-2">Bhagwanpur, Vaishali, Bihar<br/>GSTIN: 10AABCM5670P1Z1</div>
+              <div class="text-center text-[10px] mb-2">Bhagwanpur, Vaishali, Bihar</div>
               <div class="border-b border-dashed border-black my-2"></div>
               <div class="flex justify-between"><span>Bill No: ${o.id}</span><span>Table: ${o.table}</span></div>
               <div class="flex justify-between"><span>Guest: ${o.customerName || 'Customer'}</span><span>Phone: ${o.customerPhone || 'N/A'}</span></div>
