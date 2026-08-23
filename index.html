@@ -1,899 +1,1930 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Muskan | Premium Menu & Lounge</title>
-    <!-- Tailwind CSS v4 -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome Pro Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Syncopate and Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0d0d0d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Hotel Muskan | Black & Gold Premium Dine-In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            muskan: {
+              50: '#faf8f0', 100: '#f5f0dc', 200: '#ebe0b8', 300: '#d4c48a',
+              400: '#c9a84c', 500: '#b8943a', 600: '#9a7a2e', 700: '#7a6125',
+              800: '#1a1a1a', 900: '#0d0d0d', 950: '#000000',
+            },
+            gold: {
+              300: '#f5e6a3', 400: '#e8d48b', 500: '#d4af37', 600: '#c9a227', 700: '#a8841f',
+            }
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --gold: #d4af37;
+      --black: #0a0a0a;
+      --white: #ffffff;
+    }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior: none;
+      background: var(--black) !important;
+      color: var(--white) !important;
+    }
+    #app {
+      background: var(--black) !important;
+      color: var(--white) !important;
+    }
+    .font-display { font-family: 'Playfair Display', serif; }
     
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0A0A0A;
-        }
-        .heading-luxury {
-            font-family: 'Syncopate', sans-serif;
-            letter-spacing: 0.15em;
-        }
-        .text-gold {
-            background: linear-gradient(135deg, #F3E7C4 0%, #D4AF37 50%, #AA7C11 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .bg-gold-gradient {
-            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
-        }
-        .bg-gold-dark {
-            background: linear-gradient(135deg, #1C1A14 0%, #12110E 100%);
-        }
-        .border-gold-subtle {
-            border-color: rgba(212, 175, 55, 0.15);
-        }
-        .glass-card {
-            background: rgba(18, 18, 18, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .tab-active {
-            background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%);
-            color: #000000 !important;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
-        }
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0A0A0A;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #2A2518;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #D4AF37;
-        }
-    </style>
+    .bottom-nav {
+      padding-bottom: calc(12px + var(--safe-bottom));
+      background: #000 !important;
+      border-top: 1px solid rgba(212,175,55,0.4) !important;
+    }
+    .floating-cart {
+      bottom: calc(80px + var(--safe-bottom));
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .status-timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 24px;
+      bottom: 24px;
+      width: 2px;
+      background: #e5e7eb;
+    }
+
+    /* 3D Thali Scene */
+    .thali-scene {
+      perspective: 900px;
+      perspective-origin: 50% 40%;
+    }
+    .thali-plate-3d {
+      width: 280px;
+      height: 280px;
+      margin: 0 auto;
+      position: relative;
+      border-radius: 50%;
+      transform-style: preserve-3d;
+      transform: rotateX(28deg) rotateZ(0deg);
+      background: radial-gradient(circle at 50% 42%, #f5e6c8 0%, #e8d4a8 25%, #d4b87a 45%, #c4a060 60%, #a88848 75%, #8a6e38 88%, #6b5428 100%);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.45), 0 10px 20px rgba(0,0,0,0.3), inset 0 -8px 20px rgba(0,0,0,0.15), inset 0 8px 16px rgba(255,255,255,0.35), 0 0 0 4px #c9a227, 0 0 0 7px #8a6e38, 0 0 0 10px #d4af37;
+      animation: thaliFloat 4s ease-in-out infinite;
+    }
+    @keyframes thaliFloat {
+      0%, 100% { transform: rotateX(28deg) translateY(0); }
+      50% { transform: rotateX(28deg) translateY(-6px); }
+    }
+    .compartment-3d {
+      position: absolute;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #fff9f0, #f0e4c8);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.12), 0 3px 8px rgba(0,0,0,0.2), 0 0 0 1.5px rgba(168, 136, 72, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translateZ(12px);
+      overflow: hidden;
+    }
+    .compartment-3d.filled {
+      transform: translateZ(18px) scale(1.08);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.1), 0 6px 14px rgba(0,0,0,0.25), 0 0 0 2px #d4af37;
+    }
+    .thali-center-3d {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 68px; height: 68px;
+      margin: -34px 0 0 -34px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #fff9f0, #e8d9b0);
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.25), 0 0 0 2px rgba(168, 136, 72, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      transform: translateZ(20px);
+      z-index: 5;
+      overflow: hidden;
+    }
+    .thali-center-3d.filled {
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.1), 0 6px 16px rgba(0,0,0,0.3), 0 0 0 2.5px #d4af37;
+    }
+
+    input, textarea, select {
+      background: #1a1a1a !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(212,175,55,0.4) !important;
+    }
+    input::placeholder, textarea::placeholder {
+      color: rgba(255,255,255,0.35) !important;
+    }
+
+    html, body, #app, #main-content, #main-content *, 
+    main, main *, p, span, div, a, li, label, td, th, button {
+      color: #ffffff !important;
+    }
+
+    h1, h2, h3, h4, .font-display, [class*="font-display"], .text-gold {
+      color: #d4af37 !important;
+    }
+    .font-bold {
+      color: #f0d78c !important;
+    }
+
+    button.bg-yellow-500, button.bg-gold-500, [class*="bg-gold-500"],
+    button[class*="bg-[#d4af37]"], #floating-cart, #floating-cart * {
+      background: var(--gold) !important;
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+
+    .receipt-paper {
+      background: #fffef8 !important;
+      color: #000 !important;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    .receipt-paper * {
+      color: #000 !important;
+    }
+
+    .loader-ring {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(212, 175, 55, 0.2);
+      border-radius: 50%;
+      border-top-color: #d4af37;
+      animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
-<body class="text-gray-300 antialiased overflow-x-hidden selection:bg-amber-500 selection:text-black">
+<body class="bg-black text-white antialiased">
 
-    <!-- Background Ambient Glows -->
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="absolute top-[50%] right-1/4 w-80 h-80 bg-yellow-600/5 rounded-full blur-[100px] pointer-events-none"></div>
+  <!-- ================= 1. PAGE LOADING / SPLASH SCREEN ================= -->
+  <div id="loading-screen" class="fixed inset-0 bg-neutral-950 z-[200] flex flex-col items-center justify-between p-8 transition-opacity duration-700">
+    <div></div>
+    <div class="text-center flex flex-col items-center">
+      <div class="w-24 h-24 rounded-full border-2 border-gold-500/60 overflow-hidden mb-6 shadow-2xl shadow-gold-500/20 bg-black flex items-center justify-center">
+        <img src="image.png" alt="Hotel Muskan Building" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='🍽️'" />
+      </div>
+      <div class="text-[10px] tracking-[0.3em] uppercase text-yellow-400/80 mb-1">Fine Dine · Est. 1998</div>
+      <h1 class="font-display text-4xl font-bold text-yellow-400 tracking-wide mb-2">HOTEL MUSKAN</h1>
+      <p class="text-xs text-stone-400 max-w-xs">Bhagwanpur, Vaishali, Bihar</p>
+      
+      <div class="mt-10 flex flex-col items-center gap-3">
+        <div class="loader-ring"></div>
+        <div class="text-[11px] text-yellow-400/70 tracking-widest uppercase">Preparing Your Table...</div>
+      </div>
+    </div>
+    <div class="text-[10px] text-stone-600 tracking-wider uppercase">Premium Table Service System</div>
+  </div>
 
-    <!-- Sticky Navbar Navigation -->
-    <nav class="sticky top-0 z-50 glass-card border-b border-gold-subtle backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="heading-luxury text-base md:text-lg font-bold tracking-widest text-gold">
-                HOTEL MUSKAN
-            </a>
-            <div class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-widest">
-                <a href="#menu" class="hover:text-amber-400 transition-colors">The Menu</a>
-                <a href="#reviews" class="hover:text-amber-400 transition-colors">Guest Reviews</a>
-                <a href="#socials" class="hover:text-amber-400 transition-colors">Connect</a>
-            </div>
-            <div>
-                <a href="tel:+919608635670" class="bg-gold-gradient text-black font-semibold text-[10px] px-4 py-2.5 rounded-full uppercase tracking-wider hover:opacity-90 transition-all">
-                    Call: +91 96086 35670
-                </a>
-            </div>
+  <!-- ================= 2. FULLSCREEN LOGIN SCREEN (NO OTP) ================= -->
+  <div id="login-screen" class="fixed inset-0 bg-neutral-950 z-[150] hidden flex-col justify-between p-6 max-w-md mx-auto overflow-y-auto">
+    <div class="pt-8 text-center">
+      <div class="w-20 h-20 mx-auto rounded-2xl overflow-hidden border border-gold-500/40 mb-3 shadow-lg">
+        <img src="image.png" alt="Hotel Muskan" class="w-full h-full object-cover" />
+      </div>
+      <h2 class="font-display text-2xl font-bold text-yellow-400">Welcome to Muskan</h2>
+      <p class="text-xs text-stone-400 mt-1">Direct Instant Login (No OTP Needed)</p>
+    </div>
+
+    <div class="bg-neutral-900 border border-gold-500/30 rounded-3xl p-6 my-auto shadow-2xl">
+      <div class="space-y-4 mb-6">
+        <div>
+          <label class="block text-[11px] font-bold text-yellow-400 uppercase tracking-wider mb-1.5">Your Name (आपका नाम)</label>
+          <input type="text" id="initial-login-name" placeholder="e.g. Rahul Sharma" 
+                 class="w-full text-sm px-4 py-3 rounded-2xl focus:outline-none" />
         </div>
-    </nav>
-
-    <!-- Master Hero Branding Header -->
-    <header class="relative min-h-[50vh] flex items-center justify-center text-center px-4 border-b border-gold-subtle">
-        <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: linear-gradient(to bottom, rgba(10,10,10,0.5), #0A0A0A), url('https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1600&q=80');"></div>
-        <div class="relative z-10 max-w-4xl mx-auto space-y-4">
-            <span class="text-xs font-bold tracking-[0.4em] text-amber-400 uppercase block">Established 1998 — Bhagwanpur, Bihar</span>
-            <h2 class="heading-luxury text-3xl md:text-5xl font-bold text-gold leading-tight">A TASTE YOU'LL REMEMBER</h2>
-            <div class="w-16 h-[2px] bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto"></div>
-            <p class="text-xs md:text-sm font-light text-gray-400 max-w-xl mx-auto tracking-wide">
-                Indulge in our freshly updated digital menu, review custom pricing metrics, and instantly share your verified dining narratives.
-            </p>
+        <div>
+          <label class="block text-[11px] font-bold text-yellow-400 uppercase tracking-wider mb-1.5">Mobile Number (मोबाइल नंबर)</label>
+          <input type="tel" id="initial-login-phone" placeholder="e.g. 9876543210" maxlength="10" 
+                 class="w-full text-sm px-4 py-3 rounded-2xl focus:outline-none" />
+          <p class="text-[10px] text-stone-400 mt-1.5">✓ Used for personal bills, WhatsApp receipt & order tracking.</p>
         </div>
-    </header>
+      </div>
 
-    <!-- Main Content Grid System -->
-    <main class="max-w-7xl mx-auto px-4 md:px-8 py-16 space-y-24">
+      <button onclick="App.submitInitialLogin()" class="w-full bg-gold-500 text-black py-3.5 rounded-2xl font-bold text-sm shadow-xl active:scale-95 transition">
+        Enter Restaurant ➔
+      </button>
 
-        <!-- SECTION 1: LIVE INTEGRATED MENU -->
-        <section id="menu" class="scroll-mt-24 space-y-10">
-            <div class="text-center space-y-1">
-                <span class="text-xs font-bold text-amber-500 uppercase tracking-widest">Gastronomy Options</span>
-                <h3 class="heading-luxury text-2xl font-bold text-white">The Digital Menu Card</h3>
-                
-                <!-- Password Protected Portal Link Element -->
-                <div class="pt-3">
-                    <button onclick="toggleAdminPanel()" id="adminPortalBtn" class="text-[10px] text-amber-500/70 hover:text-amber-400 border border-gold-subtle/30 hover:border-amber-500/50 bg-black/40 px-3 py-1 rounded-full cursor-pointer transition tracking-widest uppercase">
-                        <i class="fa-solid fa-key mr-1.5 text-[9px]"></i>Admin Portal
-                    </button>
-                </div>
-            </div>
+      <button onclick="App.skipLogin()" class="w-full text-center text-xs text-stone-400 py-3 mt-1 hover:text-white">
+        Continue as Guest (बाद में लॉगिन करें)
+      </button>
+    </div>
 
-            <!-- ADMINISTRATIVE ADD NEW ITEM CONTROL PANEL -->
-            <div id="addItemPanel" class="hidden max-w-3xl mx-auto bg-[#121212] p-6 rounded-2xl border border-amber-500/30 shadow-2xl animate-fade-in space-y-4">
-                <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
-                    <i class="fa-solid fa-plus-circle"></i> Add Custom Menu Item
-                </h4>
-                <form id="addItemForm" onsubmit="createNewItem(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                    <div>
-                        <label class="block text-gray-400 mb-1 font-medium">Item Name</label>
-                        <input type="text" id="newItemName" required class="w-full p-2.5 bg-black border border-gold-subtle rounded-xl focus:outline-none focus:border-amber-400 text-white" placeholder="e.g., Kadhai Paneer">
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 mb-1 font-medium">Menu Category</label>
-                        <select id="newItemCategory" class="w-full p-2.5 bg-black border border-gold-subtle rounded-xl focus:outline-none focus:border-amber-400 text-white cursor-pointer">
-                            <option value="paneer">Paneer Specials</option>
-                            <option value="nonveg">Non-Veg Delights</option>
-                            <option value="rice">Rice & Biryani</option>
-                            <option value="breads">Breads</option>
-                            <option value="extras">Extras</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 mb-1 font-medium">Dietary Tag</label>
-                        <select id="newItemDiet" class="w-full p-2.5 bg-black border border-gold-subtle rounded-xl focus:outline-none focus:border-amber-400 text-white cursor-pointer">
-                            <option value="veg">Vegetarian (Veg)</option>
-                            <option value="nonveg">Non-Vegetarian (Non-Veg)</option>
-                            <option value="none">None (For Drinks/Rice/Breads)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 mb-1 font-medium">Full Plate Price (or Single Unit)</label>
-                        <input type="text" id="newItemFullPrice" required class="w-full p-2.5 bg-black border border-gold-subtle rounded-xl focus:outline-none focus:border-amber-400 text-gold" placeholder="₹240">
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 mb-1 font-medium">Half Plate Price (Optional)</label>
-                        <input type="text" id="newItemHalfPrice" class="w-full p-2.5 bg-black border border-gold-subtle rounded-xl focus:outline-none focus:border-amber-400 text-gold" placeholder="₹120 (Leave blank if none)">
-                    </div>
-                    <div class="flex items-end">
-                        <button type="submit" class="w-full bg-gold-gradient text-black font-bold uppercase tracking-wider py-2.5 rounded-xl hover:opacity-90 transition cursor-pointer">
-                            Insert Into Menu
-                        </button>
-                    </div>
-                </form>
-            </div>
+    <div class="text-center text-[11px] text-stone-500 pb-4">
+      Hotel Muskan · Bhagwanpur
+    </div>
+  </div>
 
-            <!-- Modern Categorization Tabs Grid -->
-            <div class="flex justify-center flex-wrap gap-2 max-w-2xl mx-auto p-1.5 bg-[#121212] rounded-2xl md:rounded-full border border-gold-subtle">
-                <button onclick="filterMenu('all')" id="tab-all" class="menu-tab tab-active text-[11px] font-semibold px-4 py-2 rounded-full text-gray-400 transition-all cursor-pointer">All</button>
-                <button onclick="filterMenu('paneer')" id="tab-paneer" class="menu-tab text-[11px] font-semibold px-4 py-2 rounded-full text-gray-400 transition-all cursor-pointer hover:text-white">Paneer Specials</button>
-                <button onclick="filterMenu('nonveg')" id="tab-nonveg" class="menu-tab text-[11px] font-semibold px-4 py-2 rounded-full text-gray-400 transition-all cursor-pointer hover:text-white">Non-Veg Delights</button>
-                <button onclick="filterMenu('rice')" id="tab-rice" class="menu-tab text-[11px] font-semibold px-4 py-2 rounded-full text-gray-400 transition-all cursor-pointer hover:text-white">Rice & Biryani</button>
-                <button onclick="filterMenu('breads')" id="tab-breads" class="menu-tab text-[11px] font-semibold px-4 py-2 rounded-full text-gray-400 transition-all cursor-pointer hover:text-white">Breads</button>
-                <button onclick="filterMenu('extras')" id="tab-extras" class="menu-tab text-[11px] font-semibold px-4 py-2 rounded-full text-gray-400 transition-all cursor-pointer hover:text-white">Extras</button>
-            </div>
+  <!-- ================= 3. MAIN RESTAURANT APP ================= -->
+  <div id="app" class="min-h-screen max-w-md mx-auto bg-neutral-950 relative shadow-2xl border border-gold-500/20 overflow-hidden hidden">
+    
+    <!-- Top Header Bar -->
+    <div id="lang-bar" class="fixed top-0 left-0 right-0 z-50 max-w-md mx-auto flex justify-between items-center p-3 pointer-events-none">
+      <button onclick="App.simulateQR()" class="pointer-events-auto bg-neutral-900/90 backdrop-blur-sm text-xs font-semibold px-3 py-1.5 rounded-full shadow-md border border-gold-500/40 flex items-center gap-1">
+        📍 <span id="table-display-pill">TABLE-12</span>
+      </button>
+      <div class="flex items-center gap-2 pointer-events-auto">
+        <button id="user-profile-btn" onclick="App.openLoginModal()" class="bg-neutral-900/90 backdrop-blur-sm text-xs font-medium px-3 py-1.5 rounded-full shadow-md border border-gold-500/40 flex items-center gap-1">
+          👤 <span id="user-display-name">Login</span>
+        </button>
+        <button id="lang-btn" class="bg-neutral-900/90 backdrop-blur-sm text-xs font-medium px-3 py-1.5 rounded-full shadow-md border border-gold-500/40">
+          हिं / EN
+        </button>
+      </div>
+    </div>
 
-            <!-- Authentic Menu Item Layout Layout -->
-            <div id="menuGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- Category: PANEER -->
-                <div class="menu-item paneer bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <span class="text-[9px] text-emerald-400 font-bold border border-emerald-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-emerald-950/20"><i class="fa-solid fa-leaf text-[8px] mr-1"></i> Veg</span>
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide mt-2">Shahi Paneer</h4>
-                            <input type="text" value="Shahi Paneer" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹260</strong>
-                            <input type="text" value="₹260" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹130</strong>
-                            <input type="text" value="₹130" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item paneer bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <span class="text-[9px] text-emerald-400 font-bold border border-emerald-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-emerald-950/20"><i class="fa-solid fa-leaf text-[8px] mr-1"></i> Veg</span>
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide mt-2">Mattar Paneer</h4>
-                            <input type="text" value="Mattar Paneer" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹220</strong>
-                            <input type="text" value="₹220" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹110</strong>
-                            <input type="text" value="₹110" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item paneer bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <span class="text-[9px] text-emerald-400 font-bold border border-emerald-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-emerald-950/20"><i class="fa-solid fa-leaf text-[8px] mr-1"></i> Veg</span>
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide mt-2">Paneer Do Pyaza</h4>
-                            <input type="text" value="Paneer Do Pyaza" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹240</strong>
-                            <input type="text" value="₹240" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹120</strong>
-                            <input type="text" value="₹120" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item paneer bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <span class="text-[9px] text-emerald-400 font-bold border border-emerald-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-emerald-950/20"><i class="fa-solid fa-leaf text-[8px] mr-1"></i> Veg</span>
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide mt-2">Paneer Masala</h4>
-                            <input type="text" value="Paneer Masala" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹240</strong>
-                            <input type="text" value="₹240" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹120</strong>
-                            <input type="text" value="₹120" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item paneer bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <span class="text-[9px] text-emerald-400 font-bold border border-emerald-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-emerald-950/20"><i class="fa-solid fa-leaf text-[8px] mr-1"></i> Veg</span>
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide mt-2">Paneer Chilli</h4>
-                            <input type="text" value="Paneer Chilli" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹240</strong>
-                            <input type="text" value="₹240" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹120</strong>
-                            <input type="text" value="₹120" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item paneer bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <span class="text-[9px] text-emerald-400 font-bold border border-emerald-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-emerald-950/20"><i class="fa-solid fa-leaf text-[8px] mr-1"></i> Veg</span>
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide mt-2">Palak Paneer</h4>
-                            <input type="text" value="Palak Paneer" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹180</strong>
-                            <input type="text" value="₹180" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹90</strong>
-                            <input type="text" value="₹90" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <!-- Category: NON-VEG -->
-                <div class="menu-item nonveg bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <span class="text-[9px] text-red-400 font-bold border border-red-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-red-950/20"><i class="fa-solid fa-circle text-[6px] mr-1 text-red-500"></i> Non-Veg</span>
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide mt-2">Chicken Do Pyaza</h4>
-                            <input type="text" value="Chicken Do Pyaza" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹260</strong>
-                            <input type="text" value="₹260" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹130</strong>
-                            <input type="text" value="₹130" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item nonveg bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <span class="text-[9px] text-red-400 font-bold border border-red-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-red-950/20"><i class="fa-solid fa-circle text-[6px] mr-1 text-red-500"></i> Non-Veg</span>
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide mt-2">Chicken Curry</h4>
-                            <input type="text" value="Chicken Curry" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹180</strong>
-                            <input type="text" value="₹180" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹90</strong>
-                            <input type="text" value="₹90" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item nonveg bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <span class="text-[9px] text-red-400 font-bold border border-red-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-red-950/20"><i class="fa-solid fa-circle text-[6px] mr-1 text-red-500"></i> Non-Veg</span>
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide mt-2">Fish Curry</h4>
-                            <input type="text" value="Fish Curry" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹160</strong>
-                            <input type="text" value="₹160" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹80</strong>
-                            <input type="text" value="₹80" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item nonveg bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <span class="text-[9px] text-red-400 font-bold border border-red-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-red-950/20"><i class="fa-solid fa-circle text-[6px] mr-1 text-red-500"></i> Non-Veg</span>
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide mt-2">Egg Curry</h4>
-                            <input type="text" value="Egg Curry" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹120</strong>
-                            <input type="text" value="₹120" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹60</strong>
-                            <input type="text" value="₹60" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item nonveg bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <span class="text-[9px] text-red-400 font-bold border border-red-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-red-950/20"><i class="fa-solid fa-circle text-[6px] mr-1 text-red-500"></i> Non-Veg</span>
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide mt-2">Omelette Curry</h4>
-                            <input type="text" value="Omelette Curry" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹160</strong>
-                            <input type="text" value="₹160" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹80</strong>
-                            <input type="text" value="₹80" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <!-- Category: RICE & BIRYANI -->
-                <div class="menu-item rice bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide">Plain Rice</h4>
-                            <input type="text" value="Plain Rice" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹70</strong>
-                            <input type="text" value="₹70" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹40</strong>
-                            <input type="text" value="₹40" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item rice bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide">Jeera Rice</h4>
-                            <input type="text" value="Jeera Rice" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">₹80</strong>
-                            <input type="text" value="₹80" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">₹40</strong>
-                            <input type="text" value="₹40" class="menu-edit-half hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item rice bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-start">
-                        <div class="w-full">
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide">Sada Khana</h4>
-                            <input type="text" value="Sada Khana" class="menu-edit-name hidden w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                        </div>
-                    </div>
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Standard Meal</span>
-                            <strong class="menu-display-full text-gold">₹70</strong>
-                            <input type="text" value="₹70" class="menu-edit-full hidden w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4 opacity-0 select-none">
-                            <span class="block text-[10px]">None</span><strong>-</strong>
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <!-- Category: BREADS -->
-                <div class="menu-item breads bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-center">
-                        <div class="w-full flex justify-between items-center">
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide">Plain Roti</h4>
-                            <strong class="menu-display-full text-gold font-medium text-sm">₹6</strong>
-                            <div class="hidden admin-inputs-flex gap-2 w-full">
-                                <input type="text" value="Plain Roti" class="menu-edit-name p-1 bg-black text-white text-xs border border-amber-500/40 rounded focus:outline-none">
-                                <input type="text" value="₹6" class="menu-edit-full p-1 bg-black text-gold text-xs border border-amber-500/40 rounded focus:outline-none w-20">
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item breads bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-center">
-                        <div class="w-full flex justify-between items-center">
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide">Butter Roti</h4>
-                            <strong class="menu-display-full text-gold font-medium text-sm">₹12</strong>
-                            <div class="hidden admin-inputs-flex gap-2 w-full">
-                                <input type="text" value="Butter Roti" class="menu-edit-name p-1 bg-black text-white text-xs border border-amber-500/40 rounded focus:outline-none">
-                                <input type="text" value="₹12" class="menu-edit-full p-1 bg-black text-gold text-xs border border-amber-500/40 rounded focus:outline-none w-20">
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <!-- Category: EXTRAS -->
-                <div class="menu-item extras bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-center">
-                        <div class="w-full flex justify-between items-center">
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide">Special Tea</h4>
-                            <strong class="menu-display-full text-gold font-medium text-sm">₹10</strong>
-                            <div class="hidden admin-inputs-flex gap-2 w-full">
-                                <input type="text" value="Special Tea" class="menu-edit-name p-1 bg-black text-white text-xs border border-amber-500/40 rounded focus:outline-none">
-                                <input type="text" value="₹10" class="menu-edit-full p-1 bg-black text-gold text-xs border border-amber-500/40 rounded focus:outline-none w-20">
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item extras bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-center">
-                        <div class="w-full flex justify-between items-center">
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide">Mineral Water</h4>
-                            <strong class="menu-display-full text-gold font-medium text-sm">₹20</strong>
-                            <div class="hidden admin-inputs-flex gap-2 w-full">
-                                <input type="text" value="Mineral Water" class="menu-edit-name p-1 bg-black text-white text-xs border border-amber-500/40 rounded focus:outline-none">
-                                <input type="text" value="₹20" class="menu-edit-full p-1 bg-black text-gold text-xs border border-amber-500/40 rounded focus:outline-none w-20">
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-                <div class="menu-item extras bg-gold-dark p-6 rounded-2xl border border-gold-subtle space-y-4">
-                    <div class="flex justify-between items-center">
-                        <div class="w-full flex justify-between items-center">
-                            <h4 class="menu-display-name text-base font-semibold text-white tracking-wide">Cold Drink</h4>
-                            <strong class="menu-display-full text-gold font-medium text-sm">₹40</strong>
-                            <div class="hidden admin-inputs-flex gap-2 w-full">
-                                <input type="text" value="Cold Drink" class="menu-edit-name p-1 bg-black text-white text-xs border border-amber-500/40 rounded focus:outline-none">
-                                <input type="text" value="₹40" class="menu-edit-full p-1 bg-black text-gold text-xs border border-amber-500/40 rounded focus:outline-none w-20">
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="removeMenuItem(this)" class="admin-actions hidden w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- SECTION 2: DIGITAL REVIEW LOUNGE -->
-        <section id="reviews" class="scroll-mt-24 space-y-12">
-            <div class="text-center space-y-1">
-                <span class="text-xs font-bold text-amber-500 tracking-widest uppercase">Guest Evaluation</span>
-                <h3 class="heading-luxury text-2xl font-bold text-white">Verified Feedback Feed</h3>
-            </div>
-
-            <div class="grid lg:grid-cols-5 gap-8 items-start">
-                <!-- Submit Review Element -->
-                <div class="lg:col-span-2 bg-[#121212] p-6 rounded-2xl border border-gold-subtle">
-                    <h4 class="text-sm font-semibold tracking-wide text-white mb-4">
-                        <i class="fa-regular fa-pen-to-square text-amber-400 mr-2"></i>Write a Digital Review
-                    </h4>
-                    <form id="reviewForm" onsubmit="submitReview(event)" class="space-y-4">
-                        <div>
-                            <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Your Name</label>
-                            <input type="text" id="reviewerName" required class="w-full p-3 bg-black text-white text-xs border border-gold-subtle rounded-xl focus:outline-none focus:border-amber-400 transition" placeholder="Rohan Malhotra">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Rating</label>
-                            <select id="reviewerRating" class="w-full p-3 bg-black text-white text-xs border border-gold-subtle rounded-xl focus:outline-none focus:border-amber-400 transition cursor-pointer">
-                                <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
-                                <option value="4">⭐⭐⭐⭐ Great (4/5)</option>
-                                <option value="3">⭐⭐⭐ Average (3/5)</option>
-                                <option value="2">⭐⭐ Poor (2/5)</option>
-                                <option value="1">⭐ Bad (1/5)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Narrative</label>
-                            <textarea id="reviewerText" rows="3" required class="w-full p-3 bg-black text-white text-xs border border-gold-subtle rounded-xl focus:outline-none focus:border-amber-400 transition resize-none" placeholder="How was the taste and hospitality?"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-gold-gradient text-black font-semibold text-[11px] tracking-widest uppercase py-3.5 rounded-xl hover:opacity-90 transition cursor-pointer">
-                            Broadcast Review
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Feed Container Element -->
-                <div class="lg:col-span-3 space-y-4">
-                    <h4 class="text-sm font-semibold tracking-wide text-white mb-2">
-                        <i class="fa-solid fa-circle-dot text-emerald-500 animate-pulse mr-2 text-[10px]"></i>Live Stream
-                    </h4>
-                    <div id="reviewsContainer" class="space-y-4 max-h-[380px] overflow-y-auto pr-2">
-                        <div class="bg-gold-dark p-5 rounded-2xl border border-gold-subtle">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-white font-medium text-xs tracking-wide">Aishwarya Sharma</span>
-                                <span class="text-[10px] text-amber-400">⭐⭐⭐⭐⭐</span>
-                            </div>
-                            <p class="text-xs text-gray-400 font-light italic">"The Shahi Paneer and hot butter rotis here are excellent. True value for money."</p>
-                        </div>
-                        <div class="bg-gold-dark p-5 rounded-2xl border border-gold-subtle">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-white font-medium text-xs tracking-wide">Vikram Kumar</span>
-                                <span class="text-[10px] text-amber-400">⭐⭐⭐⭐⭐</span>
-                            </div>
-                            <p class="text-xs text-gray-400 font-light italic">"Best place in Bhagwanpur for non-veg lovers. Chicken curry taste is unique and wonderful!"</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3: SOCIAL MEDIA INTEGRATION -->
-        <section id="socials" class="bg-[#121212] border border-gold-subtle rounded-3xl py-12 px-6 text-center space-y-6">
-            <div class="space-y-1">
-                <span class="text-xs font-bold text-amber-500 tracking-[0.2em] uppercase block">Social Hub</span>
-                <h3 class="heading-luxury text-xl font-bold text-white">Join Hotel Muskan Online</h3>
-                <p class="text-xs text-gray-500 max-w-xs mx-auto">Track dynamic kitchen announcements and updates on our official platforms.</p>
-            </div>
-            
-            <div class="flex justify-center gap-4">
-                <a href="https://instagram.com" target="_blank" class="w-12 h-12 flex items-center justify-center bg-black rounded-xl border border-gold-subtle text-gray-400 hover:text-amber-400 hover:border-amber-400 transition-all hover:-translate-y-1">
-                    <i class="fab fa-instagram text-lg"></i>
-                </a>
-                <a href="https://facebook.com" target="_blank" class="w-12 h-12 flex items-center justify-center bg-black rounded-xl border border-gold-subtle text-gray-400 hover:text-amber-400 hover:border-amber-400 transition-all hover:-translate-y-1">
-                    <i class="fab fa-facebook-f text-lg"></i>
-                </a>
-                <a href="https://youtube.com" target="_blank" class="w-12 h-12 flex items-center justify-center bg-black rounded-xl border border-gold-subtle text-gray-400 hover:text-amber-400 hover:border-amber-400 transition-all hover:-translate-y-1">
-                    <i class="fab fa-youtube text-lg"></i>
-                </a>
-                <a href="https://wa.me/919608635670" target="_blank" class="w-12 h-12 flex items-center justify-center bg-black rounded-xl border border-gold-subtle text-gray-400 hover:text-emerald-400 hover:border-emerald-400 transition-all hover:-translate-y-1">
-                    <i class="fab fa-whatsapp text-lg"></i>
-                </a>
-            </div>
-        </section>
-
+    <!-- Main Content -->
+    <main id="main-content" class="pb-28">
+      <!-- Injected Screens -->
     </main>
 
-    <!-- Luxury Footer Structure -->
-    <footer class="border-t border-gold-subtle bg-black py-10 text-center text-[10px] text-gray-500 tracking-widest uppercase space-y-2">
-        <p class="text-white font-medium">Hotel Muskan — Bhagwanpur, Bihar</p>
-        <p class="lowercase tracking-normal text-gray-600">Contact: +91 96086 35670 | Govt taxes applicable as per law.</p>
-        <p class="text-[9px] text-amber-600/40 mt-4">&copy; 2026 Hotel Muskan. All Rights Reserved.</p>
-    </footer>
+    <!-- Floating Cart -->
+    <button id="floating-cart" class="floating-cart fixed left-1/2 -translate-x-1/2 z-40 hidden items-center gap-3 bg-gold-500 px-5 py-3 rounded-full shadow-xl shadow-gold-500/30 active:scale-95 transition-transform">
+      <span class="relative">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        <span id="cart-badge" class="absolute -top-2 -right-2 bg-black text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+      </span>
+      <div class="text-left">
+        <div class="text-xs opacity-80">View Cart</div>
+        <div id="cart-total" class="font-semibold text-sm">₹0</div>
+      </div>
+    </button>
 
-    <!-- Script Routing Modules -->
-    <script>
-        // Administration Authorization State Parameter
-        let isAdminActive = false;
-        const SECRET_KEY = "Muskan1998";
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-black border-t border-yellow-500/40 z-50 flex justify-around items-center pt-2">
+      <button data-screen="home" class="nav-btn flex flex-col items-center gap-0.5 py-1 px-3">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span class="text-[10px] font-medium">Home</span>
+      </button>
+      <button data-screen="thali" class="nav-btn flex flex-col items-center gap-0.5 py-1 px-3" style="color:rgba(255,255,255,0.4)">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/><circle cx="12" cy="12" r="9" stroke-width="2"/></svg>
+        <span class="text-[10px] font-medium">Thali</span>
+      </button>
+      <button data-screen="menu" class="nav-btn flex flex-col items-center gap-0.5 py-1 px-3" style="color:rgba(255,255,255,0.4)">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <span class="text-[10px] font-medium">Menu</span>
+      </button>
+      <button data-screen="myorders" class="nav-btn flex flex-col items-center gap-0.5 py-1 px-3" style="color:rgba(255,255,255,0.4)">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+        <span class="text-[10px] font-medium">Orders</span>
+      </button>
+      <button data-screen="cart" class="nav-btn flex flex-col items-center gap-0.5 py-1 px-3" style="color:rgba(255,255,255,0.4)">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        <span class="text-[10px] font-medium">Cart</span>
+      </button>
+    </nav>
+  </div>
 
-        // Toggle Control Portal Logic
-        function toggleAdminPanel() {
-            if (!isAdminActive) {
-                const userKey = prompt("Enter Administrative Access Password:");
-                if (userKey === SECRET_KEY) {
-                    isAdminActive = true;
-                    document.getElementById('adminPortalBtn').innerHTML = '<i class="fa-solid fa-check mr-1.5"></i>Save Menu Changes';
-                    document.getElementById('adminPortalBtn').classList.add('border-emerald-500/50', 'text-emerald-400');
-                    document.getElementById('addItemPanel').classList.remove('hidden');
-                    toggleFormFields(true);
-                } else if (userKey !== null) {
-                    alert("Invalid signature password key sequence. Modification locked.");
-                }
-            } else {
-                // Save and Lock sequence
-                isAdminActive = false;
-                document.getElementById('adminPortalBtn').innerHTML = '<i class="fa-solid fa-key mr-1.5 text-[9px]"></i>Admin Portal';
-                document.getElementById('adminPortalBtn').classList.remove('border-emerald-500/50', 'text-emerald-400');
-                document.getElementById('addItemPanel').classList.add('hidden');
-                saveFormChanges();
-                toggleFormFields(false);
-                alert("All adjustments written into system state successfully.");
-            }
-        }
+  <!-- Modal Container -->
+  <div id="modal-container" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[110] hidden items-center justify-center p-4 overflow-y-auto"></div>
 
-        // FEATURE: Dynamic Custom Item Insertion 
-        function createNewItem(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('newItemName').value;
-            const category = document.getElementById('newItemCategory').value;
-            const diet = document.getElementById('newItemDiet').value;
-            const fullPrice = document.getElementById('newItemFullPrice').value;
-            let halfPrice = document.getElementById('newItemHalfPrice').value;
+  <!-- Toast -->
+  <div id="toast" class="fixed top-16 left-1/2 -translate-x-1/2 z-[100] max-w-sm w-full px-4 hidden">
+    <div class="bg-neutral-900 text-yellow-400 border border-gold-500/30 text-sm font-medium px-4 py-3 rounded-xl shadow-lg text-center"></div>
+  </div>
 
-            // Clean up currency prefixing if user forgot it
-            const formattedFull = fullPrice.startsWith('₹') ? fullPrice : '₹' + fullPrice;
-            const formattedHalf = halfPrice ? (halfPrice.startsWith('₹') ? halfPrice : '₹' + halfPrice) : '';
+  <script>
+  // ========== DATA.JS ==========
+  const UPI_VPA = "ajaykumar2569563@ybl";
+  const UPI_NAME = "Hotel Muskan";
 
-            // Generate Dietary HTML Node conditions
-            let dietHTML = '';
-            if (diet === 'veg') {
-                dietHTML = `<span class="text-[9px] text-emerald-400 font-bold border border-emerald-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-emerald-950/20"><i class="fa-solid fa-leaf text-[8px] mr-1"></i> Veg</span>`;
-            } else if (diet === 'nonveg') {
-                dietHTML = `<span class="text-[9px] text-red-400 font-bold border border-red-500/30 px-2 py-0.5 rounded uppercase tracking-wider bg-red-950/20"><i class="fa-solid fa-circle text-[6px] mr-1 text-red-500"></i> Non-Veg</span>`;
-            }
+  const TABLES = Array.from({ length: 20 }, (_, i) => ({
+    id: `TABLE-${String(i + 1).padStart(2, "0")}`,
+    status: i === 11 ? "ordering" : "available"
+  }));
 
-            // Generate Half-Plate Layout structural variants if applicable
-            let pricingHTML = '';
-            if (formattedHalf) {
-                pricingHTML = `
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Full Plate</span>
-                            <strong class="menu-display-full text-gold">${formattedFull}</strong>
-                            <input type="text" value="${formattedFull}" class="menu-edit-full ${isAdminActive ? '' : 'hidden'} w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4">
-                            <span class="text-gray-500 block text-[10px] uppercase">Half Plate</span>
-                            <strong class="menu-display-half text-gold">${formattedHalf}</strong>
-                            <input type="text" value="${formattedHalf}" class="menu-edit-half ${isAdminActive ? '' : 'hidden'} w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                    </div>
-                `;
-            } else {
-                // Single layout price configuration (e.g. standard meal, tea, drinks)
-                pricingHTML = `
-                    <div class="flex gap-4 border-t border-gold-subtle/40 pt-3 text-xs">
-                        <div class="flex-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Rate / Cost</span>
-                            <strong class="menu-display-full text-gold">${formattedFull}</strong>
-                            <input type="text" value="${formattedFull}" class="menu-edit-full ${isAdminActive ? '' : 'hidden'} w-full p-1 bg-black text-gold border border-amber-500/40 rounded mt-1 focus:outline-none">
-                        </div>
-                        <div class="flex-1 border-l border-gold-subtle/30 pl-4 opacity-0 select-none">
-                            <span class="block text-[10px]">None</span><strong>-</strong>
-                        </div>
-                    </div>
-                `;
-            }
+  let CURRENT_TABLE = "TABLE-12";
 
-            // Compile card structural block
-            const gridContainer = document.getElementById('menuGrid');
-            const newCard = document.createElement('div');
-            newCard.className = `menu-item ${category} bg-gold-dark p-6 rounded-2xl border border-emerald-500/30 space-y-4 shadow-xl animate-fade-in`;
-            
-            newCard.innerHTML = `
-                <div class="flex justify-between items-start">
-                    <div class="w-full">
-                        ${dietHTML}
-                        <h4 class="menu-display-name ${isAdminActive ? 'hidden' : ''} text-base font-semibold text-white tracking-wide mt-2">${name}</h4>
-                        <input type="text" value="${name}" class="menu-edit-name ${isAdminActive ? '' : 'hidden'} w-full p-2 bg-black text-white text-xs border border-amber-500/40 rounded mt-2 focus:outline-none">
-                    </div>
+  const DEFAULT_MENU = [
+    { id: "m1", name: "Shahi Paneer", nameHi: "शाही पनीर", desc: "Rich royal paneer in creamy gravy", price: 260, halfPrice: 130, cat: "paneer", veg: true, rating: 4.9, orders: 980, badge: "🔥 Bestseller", spice: 2, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop" },
+    { id: "m2", name: "Mattar Paneer", nameHi: "मटर पनीर", desc: "Paneer with green peas in tomato gravy", price: 220, halfPrice: 110, cat: "paneer", veg: true, rating: 4.7, orders: 720, badge: null, spice: 2, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop" },
+    { id: "m3", name: "Paneer Do Pyaza", nameHi: "पनीर दो प्याज़ा", desc: "Paneer cooked with double onions", price: 240, halfPrice: 120, cat: "paneer", veg: true, rating: 4.6, orders: 540, badge: null, spice: 2, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" },
+    { id: "m4", name: "Paneer Masala", nameHi: "पनीर मसाला", desc: "Spiced paneer curry", price: 240, halfPrice: 120, cat: "paneer", veg: true, rating: 4.7, orders: 610, badge: null, spice: 3, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop" },
+    { id: "m5", name: "Paneer Chilli", nameHi: "पनीर चिल्ली", desc: "Indo-Chinese spicy paneer", price: 240, halfPrice: 120, cat: "paneer", veg: true, rating: 4.5, orders: 480, badge: "🌶 Spicy", spice: 4, img: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&h=300&fit=crop" },
+    { id: "m6", name: "Palak Paneer", nameHi: "पालक पनीर", desc: "Paneer in spinach gravy", price: 180, halfPrice: 90, cat: "paneer", veg: true, rating: 4.6, orders: 550, badge: null, spice: 1, img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop" },
+    { id: "m7", name: "Chicken Do Pyaza", nameHi: "चिकन दो प्याज़ा", desc: "Chicken with double onions", price: 260, halfPrice: 130, cat: "nonveg", veg: false, rating: 4.8, orders: 890, badge: "🔥 Bestseller", spice: 3, img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop" },
+    { id: "m8", name: "Chicken Curry", nameHi: "चिकन करी", desc: "Home-style chicken curry — unique Muskan taste", price: 180, halfPrice: 90, cat: "nonveg", veg: false, rating: 4.9, orders: 1100, badge: "👑 Chef Special", spice: 3, img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop" },
+    { id: "m9", name: "Fish Curry", nameHi: "फिश करी", desc: "Fresh fish in traditional gravy", price: 160, halfPrice: 80, cat: "nonveg", veg: false, rating: 4.5, orders: 320, badge: null, spice: 3, img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=300&fit=crop" },
+    { id: "m10", name: "Egg Curry", nameHi: "अंडा करी", desc: "Boiled eggs in spicy gravy", price: 120, halfPrice: 60, cat: "nonveg", veg: false, rating: 4.4, orders: 410, badge: null, spice: 3, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop" },
+    { id: "m11", name: "Omelette Curry", nameHi: "ऑमलेट करी", desc: "Omelette pieces in curry", price: 160, halfPrice: 80, cat: "nonveg", veg: false, rating: 4.3, orders: 280, badge: null, spice: 2, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop" },
+    { id: "m12", name: "Plain Rice", nameHi: "प्लेन राइस", desc: "Steamed basmati rice", price: 70, halfPrice: 40, cat: "rice", veg: true, rating: 4.5, orders: 1500, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop" },
+    { id: "m13", name: "Jeera Rice", nameHi: "जीरा राइस", desc: "Cumin tempered rice", price: 80, halfPrice: 40, cat: "rice", veg: true, rating: 4.6, orders: 980, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop" },
+    { id: "m14", name: "Sada Khana", nameHi: "सादा खाना", desc: "Simple rice plate", price: 70, halfPrice: null, cat: "rice", veg: true, rating: 4.4, orders: 600, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop" },
+    { id: "m15", name: "Plain Roti", nameHi: "प्लेन रोटी", desc: "Fresh tawa roti", price: 6, halfPrice: null, cat: "bread", veg: true, rating: 4.7, orders: 5000, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" },
+    { id: "m16", name: "Butter Roti", nameHi: "बटर रोटी", desc: "Roti with butter — guest favourite", price: 12, halfPrice: null, cat: "bread", veg: true, rating: 4.9, orders: 4200, badge: "⭐ Highly Rated", spice: 0, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" },
+    { id: "m17", name: "Special Tea", nameHi: "स्पेशल चाय", desc: "Hotel Muskan special chai", price: 10, halfPrice: null, cat: "beverages", veg: true, rating: 4.8, orders: 3000, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=300&fit=crop" },
+    { id: "m18", name: "Mineral Water", nameHi: "मिनरल वॉटर", desc: "Bottled water", price: 20, halfPrice: null, cat: "beverages", veg: true, rating: 4.5, orders: 2000, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&h=300&fit=crop" },
+    { id: "m19", name: "Cold Drink", nameHi: "कोल्ड ड्रिंक", desc: "Soft drink", price: 40, halfPrice: null, cat: "beverages", veg: true, rating: 4.4, orders: 1800, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=300&fit=crop" }
+  ];
+
+  function getDynamicMenu() {
+    try {
+      const stored = localStorage.getItem("muskan_custom_menu");
+      return stored ? JSON.parse(stored) : DEFAULT_MENU;
+    } catch (e) {
+      return DEFAULT_MENU;
+    }
+  }
+
+  let MENU = getDynamicMenu();
+
+  const THALI_OPTIONS = {
+    rice: [
+      { id: "t-rice1", name: "Steamed Rice", nameHi: "स्टीम्ड राइस", price: 40, cal: 180, emoji: "🍚", img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=200&h=200&fit=crop" },
+      { id: "t-rice2", name: "Jeera Rice", nameHi: "जीरा राइस", price: 60, cal: 210, emoji: "🍚", img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=200&h=200&fit=crop" },
+      { id: "t-rice3", name: "Veg Pulao", nameHi: "वेज पुलाव", price: 80, cal: 250, emoji: "🍚", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=200&h=200&fit=crop" }
+    ],
+    bread: [
+      { id: "t-bread1", name: "Tandoori Roti (2)", nameHi: "तंदूरी रोटी", price: 40, cal: 160, emoji: "🫓", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
+      { id: "t-bread2", name: "Butter Naan (1)", nameHi: "बटर नान", price: 50, cal: 220, emoji: "🫓", img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200&h=200&fit=crop" },
+      { id: "t-bread3", name: "Lachha Paratha (1)", nameHi: "लच्छा पराठा", price: 55, cal: 280, emoji: "🫓", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" }
+    ],
+    dal: [
+      { id: "t-dal1", name: "Dal Tadka", nameHi: "दाल तड़का", price: 50, cal: 140, emoji: "🥣", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" },
+      { id: "t-dal2", name: "Dal Fry", nameHi: "दाल फ्राई", price: 55, cal: 160, emoji: "🥣", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" },
+      { id: "t-dal3", name: "Dal Makhani", nameHi: "दाल मखनी", price: 70, cal: 220, emoji: "🥣", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" }
+    ],
+    sabzi: [
+      { id: "t-sab1", name: "Mix Veg", nameHi: "मिक्स वेज", price: 60, cal: 120, emoji: "🥗", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
+      { id: "t-sab2", name: "Aloo Gobi", nameHi: "आलू गोभी", price: 55, cal: 140, emoji: "🥔", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
+      { id: "t-sab3", name: "Seasonal Sabzi", nameHi: "सीजनल सब्जी", price: 65, cal: 110, emoji: "🥬", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" }
+    ],
+    protein: [
+      { id: "t-pro1", name: "Paneer Butter Masala", nameHi: "पनीर बटर मसाला", price: 90, cal: 280, emoji: "🧀", veg: true, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200&h=200&fit=crop" },
+      { id: "t-pro2", name: "Shahi Paneer", nameHi: "शाही पनीर", price: 95, cal: 300, emoji: "🧀", veg: true, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200&h=200&fit=crop" },
+      { id: "t-pro3", name: "Chicken Curry", nameHi: "चिकन करी", price: 110, cal: 320, emoji: "🍗", veg: false, img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=200&h=200&fit=crop" },
+      { id: "t-pro4", name: "Egg Curry", nameHi: "अंडा करी", price: 70, cal: 240, emoji: "🥚", veg: false, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=200&h=200&fit=crop" }
+    ],
+    sides: [
+      { id: "t-side1", name: "Green Salad", nameHi: "ग्रीन सैलेड", price: 30, cal: 40, emoji: "🥗", img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=200&h=200&fit=crop" },
+      { id: "t-side2", name: "Boondi Raita", nameHi: "बूंदी रायता", price: 40, cal: 90, emoji: "🥛", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" },
+      { id: "t-side3", name: "Papad", nameHi: "पापड़", price: 20, cal: 50, emoji: "🍘", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
+      { id: "t-side4", name: "Pickle", nameHi: "अचार", price: 15, cal: 20, emoji: "🫙", img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=200&h=200&fit=crop" }
+    ],
+    dessert: [
+      { id: "t-des1", name: "Gulab Jamun (1)", nameHi: "गुलाब जामुन", price: 40, cal: 150, emoji: "🍮", img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=200&h=200&fit=crop" },
+      { id: "t-des2", name: "Ice Cream", nameHi: "आइसक्रीम", price: 50, cal: 180, emoji: "🍦", img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=200&h=200&fit=crop" },
+      { id: "t-des3", name: "None", nameHi: "कोई नहीं", price: 0, cal: 0, emoji: "—", img: "" }
+    ]
+  };
+
+  const THALI_PRESETS = [
+    { id: "preset-student", name: "Student Thali", nameHi: "स्टूडेंट थाली", price: 149, items: ["t-rice1", "t-bread1", "t-dal1", "t-sab1", "t-side1"], emoji: "🎓" },
+    { id: "preset-family", name: "Family Thali", nameHi: "फैमिली थाली", price: 399, items: ["t-rice2", "t-bread2", "t-dal3", "t-sab1", "t-pro1", "t-side2", "t-des1"], emoji: "👨‍👩‍👧‍👦" },
+    { id: "preset-veg", name: "Premium Veg", nameHi: "प्रीमियम वेज", price: 279, items: ["t-rice3", "t-bread2", "t-dal3", "t-sab3", "t-pro1", "t-side2", "t-des1"], emoji: "🥦" },
+    { id: "preset-nonveg", name: "Non-Veg Special", nameHi: "नॉन-वेज स्पेशल", price: 349, items: ["t-rice2", "t-bread2", "t-dal2", "t-sab1", "t-pro3", "t-side2", "t-des1"], emoji: "🍗" },
+    { id: "preset-budget", name: "Budget Thali", nameHi: "बजट थाली", price: 129, items: ["t-rice1", "t-bread1", "t-dal1", "t-sab2", "t-side3"], emoji: "💰" },
+    { id: "preset-chef", name: "Chef Special", nameHi: "शेफ स्पेशल", price: 329, items: ["t-rice3", "t-bread3", "t-dal3", "t-sab3", "t-pro2", "t-side2", "t-des2"], emoji: "👨‍🍳" }
+  ];
+
+  // ========== APP CORE ==========
+  (function () {
+    "use strict";
+
+    let state = {
+      lang: "en",
+      screen: "home",
+      adminTab: "orders",
+      cart: [],
+      thali: { rice: null, bread: null, dal: null, sabzi: null, protein: null, sides: [], dessert: null },
+      order: null,
+      orderStatus: 0,
+      paymentMethod: null,
+      table: CURRENT_TABLE,
+      searchQuery: '',
+      activeFilter: 'all',
+      includeGst: true,
+      customerPhone: localStorage.getItem('muskan_user_phone') || '',
+      customerName: localStorage.getItem('muskan_user_name') || ''
+    };
+
+    const STATUS_LABELS = [
+      { en: "Order Placed", hi: "ऑर्डर प्लेस हो गया", icon: "🛒" },
+      { en: "Accepted by Kitchen", hi: "किचन ने स्वीकार किया", icon: "👨‍🍳" },
+      { en: "Preparing", hi: "तैयार हो रहा है", icon: "🔥" },
+      { en: "Ready", hi: "रेडी", icon: "🍽" },
+      { en: "Coming to Table", hi: "टेबल पर आ रहा है", icon: "🚶" },
+      { en: "Served", hi: "सर्व हो गया", icon: "✅" }
+    ];
+
+    function t(en, hi) { return state.lang === "hi" ? hi : en; }
+
+    function loadOrders() {
+      try { return JSON.parse(localStorage.getItem("muskan_orders") || "[]"); } 
+      catch (e) { return []; }
+    }
+
+    function saveOrder(order) {
+      var list = loadOrders();
+      list.unshift(order);
+      if (list.length > 100) list = list.slice(0, 100);
+      localStorage.setItem("muskan_orders", JSON.stringify(list));
+      return list;
+    }
+
+    function updateStoredOrder(id, patch) {
+      var list = loadOrders();
+      list = list.map(function(o) {
+        if (o.id === id) { for (var k in patch) o[k] = patch[k]; }
+        return o;
+      });
+      localStorage.setItem("muskan_orders", JSON.stringify(list));
+      return list;
+    }
+
+    function saveMenuData(newMenu) {
+      MENU = newMenu;
+      localStorage.setItem("muskan_custom_menu", JSON.stringify(MENU));
+    }
+
+    function formatPrice(n) { return "₹" + n; }
+
+    function buildUpiUrl(amount) {
+      var am = (amount != null && amount > 0) ? Number(amount).toFixed(2) : "";
+      var tn = encodeURIComponent("Hotel Muskan " + (state.table || "Order"));
+      var pn = encodeURIComponent(UPI_NAME);
+      var pa = UPI_VPA;
+      var q = "pa=" + encodeURIComponent(pa) + "&pn=" + pn + "&cu=INR&tn=" + tn;
+      if (am) q += "&am=" + am;
+      return {
+        pa: pa,
+        amount: am,
+        upi: "upi://pay?" + q,
+        gpay: "tez://upi/pay?" + q,
+        phonepe: "phonepe://pay?" + q,
+        paytm: "paytmmp://pay?" + q,
+        navi: "intent://pay?" + q + "#Intent;scheme=upi;package=com.navi.finance;end"
+      };
+    }
+
+    function upiQrImageUrl(amount, size) {
+      size = size || 220;
+      var links = buildUpiUrl(amount);
+      return "https://api.qrserver.com/v1/create-qr-code/?size=" + size + "x" + size + "&margin=8&data=" + encodeURIComponent(links.upi);
+    }
+
+    function tryOpenSpecificUpi(method, amount) {
+      var links = buildUpiUrl(amount);
+      showToast(t("Opening Payment App...", "पेमेंट ऐप खुल रहा है..."));
+      var targetUrl = links.upi;
+      if (method === "gpay") targetUrl = links.gpay;
+      else if (method === "phonepe") targetUrl = links.phonepe;
+      else if (method === "paytm") targetUrl = links.paytm;
+      else if (method === "navi") targetUrl = links.navi;
+
+      var a = document.createElement("a");
+      a.href = targetUrl;
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() { try { document.body.removeChild(a); } catch(e) {} }, 500);
+      return links;
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toast");
+      el.querySelector("div").textContent = msg;
+      el.classList.remove("hidden");
+      setTimeout(() => el.classList.add("hidden"), 2500);
+    }
+
+    function cartCount() { return state.cart.reduce((s, i) => s + i.qty, 0); }
+    function cartSubtotal() { return state.cart.reduce((s, i) => s + i.price * i.qty, 0); }
+    function cartGst() { return state.includeGst ? Math.round(cartSubtotal() * 0.05) : 0; }
+    function cartTotal() { return cartSubtotal() + cartGst(); }
+
+    function thaliTotal() {
+      let total = 0;
+      let cal = 0;
+      ["rice", "bread", "dal", "sabzi", "protein", "dessert"].forEach(k => {
+        if (state.thali[k]) { total += state.thali[k].price; cal += state.thali[k].cal || 0; }
+      });
+      state.thali.sides.forEach(s => { total += s.price; cal += s.cal || 0; });
+      return { total, cal };
+    }
+
+    function updateCartUI() {
+      const btn = document.getElementById("floating-cart");
+      const badge = document.getElementById("cart-badge");
+      const totalEl = document.getElementById("cart-total");
+      const count = cartCount();
+      if (count > 0) {
+        btn.classList.remove("hidden");
+        btn.classList.add("flex");
+        badge.textContent = count;
+        totalEl.textContent = formatPrice(cartTotal());
+      } else {
+        btn.classList.add("hidden");
+        btn.classList.remove("flex");
+      }
+    }
+
+    function updateProfileUI() {
+      const el = document.getElementById("user-display-name");
+      if (state.customerPhone) {
+        el.textContent = state.customerName ? state.customerName.split(" ")[0] : state.customerPhone.slice(-4);
+      } else {
+        el.textContent = "Login";
+      }
+    }
+
+    function setActiveNav(screen) {
+      document.querySelectorAll(".nav-btn").forEach(btn => {
+        const isActive = btn.dataset.screen === screen;
+        btn.style.color = isActive ? "#d4af37" : "rgba(255,255,255,0.4)";
+      });
+    }
+
+    function sendReceiptToWhatsApp(order, phone) {
+      if (!order) return;
+      var cleanPhone = (phone || state.customerPhone || "").replace(/[^0-9]/g, "");
+      if (cleanPhone.length === 10) cleanPhone = "91" + cleanPhone;
+
+      var text = "✨ *HOTEL MUSKAN - OFFICIAL BILL* ✨\n";
+      text += "📍 Bhagwanpur, Vaishali, Bihar\n";
+      text += "📞 +91 96086 35670\n";
+      text += "👤 *Guest:* " + (order.customerName || "Customer") + " (" + (order.customerPhone || "N/A") + ")\n";
+      text += "---------------------------------\n";
+      text += "🧾 *Bill No:* " + order.id + "\n";
+      text += "🪑 *Table:* " + order.table + "\n";
+      text += "⏰ *Time:* " + (order.time || "Today") + "\n";
+      text += "💳 *Payment:* " + (order.payment || "PAID").toUpperCase() + "\n";
+      text += "---------------------------------\n";
+      text += "*ITEMS:*\n";
+      (order.items || []).forEach(function(it) {
+        text += "▪ " + (it.qty || 1) + "x " + it.name + " = ₹" + ((it.price || 0) * (it.qty || 1)) + "\n";
+      });
+      text += "---------------------------------\n";
+      text += "💰 *Total Amount:* ₹" + order.total + "\n\n";
+      text += "🙏 *Thank you! Visit Hotel Muskan Again!*";
+
+      var waUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(text);
+      if (cleanPhone.length >= 10) {
+        waUrl = "https://api.whatsapp.com/send?phone=" + cleanPhone + "&text=" + encodeURIComponent(text);
+      }
+      window.open(waUrl, "_blank");
+    }
+
+    // ========== RENDERERS ==========
+    function renderHome() {
+      const bestsellers = MENU.filter(m => m.badge).slice(0, 4);
+      return `
+        <div class="relative">
+          <div class="relative h-72 overflow-hidden">
+            <img src="image.png" alt="Hotel Muskan Building"
+                 class="absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute inset-0" style="background:linear-gradient(to top, #0a0a0a 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%)"></div>
+            <div class="relative z-10 h-full flex flex-col justify-end p-5">
+              <div class="text-[10px] tracking-[0.25em] uppercase mb-1" style="color:#d4af37">Est. 1998</div>
+              <h1 class="font-display text-3xl font-bold" style="color:#d4af37">Hotel Muskan</h1>
+              <p class="text-sm mt-1" style="color:rgba(255,255,255,0.85)">
+                ${state.customerPhone ? `Welcome, <b class="text-yellow-400">${state.customerName || state.customerPhone}</b>` : 'Bhagwanpur, Bihar'}
+              </p>
+              <div class="flex flex-wrap gap-2 mt-4">
+                <button onclick="App.navigate('menu')" class="font-bold text-sm px-5 py-2.5 rounded-full" style="background:#d4af37;color:#000">Menu</button>
+                <button onclick="App.navigate('thali')" class="font-semibold text-sm px-5 py-2.5 rounded-full border border-yellow-500" style="color:#d4af37">Build Thali</button>
+              </div>
+              <div class="flex flex-wrap gap-2 mt-3">
+                <button onclick="App.randomThali()" class="text-[11px] px-3 py-1.5 rounded-full border border-yellow-500/40" style="color:#d4af37">🎲 Surprise Thali</button>
+                <button onclick="App.requestWaiter()" class="text-[11px] px-3 py-1.5 rounded-full border border-yellow-500/40" style="color:#d4af37">🙋 Call Waiter</button>
+                <button onclick="App.requestWater()" class="text-[11px] px-3 py-1.5 rounded-full border border-yellow-500/40" style="color:#d4af37">💧 Water</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="px-4 mt-4">
+            <div class="rounded-2xl p-4 border border-yellow-500/30 bg-neutral-900">
+              <div class="flex justify-between items-center text-sm">
+                <div>
+                  <div style="color:#d4af37;font-size:10px;text-transform:uppercase">Direct Line</div>
+                  <a href="tel:+919608635670" style="color:#fff;font-weight:600">+91 96086 35670</a>
                 </div>
-                ${pricingHTML}
-                <button onclick="removeMenuItem(this)" class="admin-actions ${isAdminActive ? '' : 'hidden'} w-full mt-2 py-1 bg-red-950/40 border border-red-500/30 text-red-400 text-[10px] rounded hover:bg-red-900/30 cursor-pointer uppercase transition">Remove Item</button>
-            `;
-
-            // Prepend new item to menu grid
-            gridContainer.insertBefore(newCard, gridContainer.firstChild);
-            
-            // Reset input panel elements
-            document.getElementById('addItemForm').reset();
-            alert(`"${name}" successfully created and cataloged live into your menu viewport.`);
-        }
-
-        // Swapping UI Nodes (Text vs Inputs)
-        function toggleFormFields(showInputs) {
-            const items = document.querySelectorAll('.menu-item');
-            
-            items.forEach(card => {
-                const textName = card.querySelector('.menu-display-name');
-                const inputName = card.querySelector('.menu-edit-name');
-                const textFull = card.querySelector('.menu-display-full');
-                const inputFull = card.querySelector('.menu-edit-full');
-                const textHalf = card.querySelector('.menu-display-half');
-                const inputHalf = card.querySelector('.menu-edit-half');
-                const delBtn = card.querySelector('.admin-actions');
-                const inlineFlexBox = card.querySelector('.admin-inputs-flex');
-
-                if (showInputs) {
-                    if(textName) textName.classList.add('hidden');
-                    if(inputName) inputName.classList.remove('hidden');
-                    if(textFull) textFull.classList.add('hidden');
-                    if(inputFull) inputFull.classList.remove('hidden');
-                    if(textHalf) textHalf.classList.add('hidden');
-                    if(inputHalf) inputHalf.classList.remove('hidden');
-                    if(delBtn) delBtn.classList.remove('hidden');
-                    if(inlineFlexBox) {
-                        inlineFlexBox.classList.remove('hidden');
-                        inlineFlexBox.classList.add('flex');
-                        card.querySelector('.menu-display-name').nextElementSibling.classList.add('hidden'); 
-                    }
-                } else {
-                    if(textName) textName.classList.remove('hidden');
-                    if(inputName) inputName.classList.add('hidden');
-                    if(textFull) textFull.classList.remove('hidden');
-                    if(inputFull) inputFull.classList.add('hidden');
-                    if(textHalf) textHalf.classList.remove('hidden');
-                    if(inputHalf) inputHalf.classList.add('hidden');
-                    if(delBtn) delBtn.classList.add('hidden');
-                    if(inlineFlexBox) {
-                        inlineFlexBox.classList.add('hidden');
-                        inlineFlexBox.classList.remove('flex');
-                        card.querySelector('.menu-display-name').classList.remove('hidden');
-                        card.querySelector('.menu-display-full').classList.remove('hidden');
-                    }
-                }
-            });
-        }
-
-        // Persist Inputs to Text Content
-        function saveFormChanges() {
-            const items = document.querySelectorAll('.menu-item');
-            items.forEach(card => {
-                const inputName = card.querySelector('.menu-edit-name');
-                const inputFull = card.querySelector('.menu-edit-full');
-                const inputHalf = card.querySelector('.menu-edit-half');
-
-                if(inputName) card.querySelector('.menu-display-name').innerText = inputName.value;
-                if(inputFull) card.querySelector('.menu-display-full').innerText = inputFull.value;
-                if(inputHalf && card.querySelector('.menu-display-half')) {
-                    card.querySelector('.menu-display-half').innerText = inputHalf.value;
-                }
-            });
-        }
-
-        // Action interface deletion
-        function removeMenuItem(buttonNode) {
-            if(confirm("Confirm deletion of this item from current viewport state?")) {
-                buttonNode.closest('.menu-item').remove();
-            }
-        }
-
-        // Menu filtering engine logic
-        function filterMenu(category) {
-            const tabs = document.querySelectorAll('.menu-tab');
-            tabs.forEach(tab => {
-                tab.classList.remove('tab-active');
-                if(tab.id === `tab-${category}`) tab.classList.add('tab-active');
-            });
-
-            const items = document.querySelectorAll('.menu-item');
-            items.forEach(item => {
-                item.style.opacity = '0';
-                item.style.transform = 'scale(0.97)';
-                setTimeout(() => {
-                    if (category === 'all' || item.classList.contains(category)) {
-                        item.style.display = 'block';
-                        setTimeout(() => {
-                            item.style.opacity = '1';
-                            item.style.transform = 'scale(1)';
-                        }, 30);
-                    } else {
-                        item.style.display = 'none';
-                    }
-                }, 150);
-            });
-        }
-
-        // Live submission framework simulator
-        function submitReview(event) {
-            event.preventDefault();
-            const name = document.getElementById('reviewerName').value;
-            const rating = document.getElementById('reviewerRating').value;
-            const text = document.getElementById('reviewerText').value;
-
-            let stars = '';
-            for(let i=0; i<rating; i++) { stars += '⭐'; }
-
-            const container = document.getElementById('reviewsContainer');
-            const card = document.createElement('div');
-            card.className = "bg-gold-dark p-5 rounded-2xl border border-emerald-500/30 transition-all duration-500 transform translate-y-2 opacity-0";
-            card.innerHTML = `
-                <div class="flex justify-between items-center mb-1">
-                    <span class="text-white font-medium text-xs tracking-wide">${name} <span class="text-[9px] text-emerald-400 bg-emerald-950/40 border border-emerald-500/20 px-2 py-0.5 rounded-full ml-1">Just Posted</span></span>
-                    <span class="text-[10px] text-amber-400">${stars}</span>
+                <div class="text-right">
+                  <div style="color:#d4af37;font-size:10px;text-transform:uppercase">Customer Portal</div>
+                  <div class="text-xs text-yellow-400">${state.customerPhone ? '🟢 Active' : '⚪ Guest'}</div>
                 </div>
-                <p class="text-xs text-gray-400 font-light italic">"${text}"</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 px-4 pb-8">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="font-display text-lg font-semibold" style="color:#d4af37">${t("Popular Dishes", "पॉपुलर डिशेस")}</h2>
+              <button onclick="App.navigate('menu')" class="text-xs" style="color:#d4af37">${t("Full menu", "पूरा मेन्यू")}</button>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              ${bestsellers.map(item => foodCard(item)).join("")}
+            </div>
+            <button onclick="App.openAdmin()" class="mt-8 w-full text-[10px] py-2" style="color:rgba(255,255,255,0.25)">⚙ Staff Admin</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function foodCard(item) {
+      const name = state.lang === "hi" ? item.nameHi : item.name;
+      return `
+        <div class="bg-neutral-900 rounded-2xl border border-gold-500/20 overflow-hidden shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="h-28 bg-neutral-900 relative overflow-hidden">
+              <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+              <div class="hidden absolute inset-0 items-center justify-center text-4xl bg-neutral-800">🍽️</div>
+              ${item.badge ? `<span class="absolute top-2 left-2 text-[9px] bg-black/80 text-yellow-400 border border-gold-500/40 px-1.5 py-0.5 rounded-full font-medium">${item.badge}</span>` : ""}
+              <span class="absolute top-2 right-2 text-sm drop-shadow">${item.veg ? "🟢" : "🔴"}</span>
+            </div>
+            <div class="p-3">
+              <h3 class="font-semibold text-sm leading-tight line-clamp-1 text-white">${name}</h3>
+              <div class="flex items-center gap-1 mt-1 text-[10px]" style="color:rgba(255,255,255,0.6)">
+                <span>★ ${item.rating || 4.5}</span>
+                <span>•</span>
+                <span>${item.orders || 100}+ ${t("orders", "ऑर्डर")}</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-3 pt-0">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-bold text-yellow-400">${formatPrice(item.price)}</span>
+              ${item.halfPrice ? `<button onclick="App.addHalf('${item.id}')" class="text-[10px] px-2 py-0.5 border border-yellow-500/40 rounded-full" style="color:#d4af37">Half ₹${item.halfPrice}</button>` : ''}
+            </div>
+            <div class="flex gap-1.5">
+              <button onclick="App.addToCart('${item.id}')" class="flex-1 bg-gold-500 text-black text-xs font-semibold py-1.5 rounded-full active:scale-95 transition">
+                ${t("ADD", "जोड़ें")}
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderThali() {
+      const { total, cal } = thaliTotal();
+      const compartments = [
+        { key: "rice", label: t("Rice", "चावल") },
+        { key: "bread", label: t("Bread", "रोटी") },
+        { key: "dal", label: t("Dal", "दाल") },
+        { key: "sabzi", label: t("Sabzi", "सब्जी") },
+        { key: "protein", label: t("Protein", "प्रोटीन") },
+        { key: "dessert", label: t("Dessert", "मिठाई") }
+      ];
+
+      return `
+        <div class="px-4 pt-14 pb-4">
+          <div class="flex items-center justify-between mb-1">
+            <h1 class="font-display text-2xl font-bold">${t("Build Your Thali", "अपनी थाली बनाएं")}</h1>
+            <button onclick="App.randomThali()" class="text-[10px] px-2 py-1 rounded-full border border-yellow-500/50" style="color:#d4af37">🎲 Surprise</button>
+          </div>
+          <p class="text-sm mb-5" style="color:rgba(255,255,255,0.6)">${t("Tap items to place them on the plate", "आइटम चुनकर प्लेट पर रखें")}</p>
+
+          <div class="thali-scene mb-8 mt-2">
+            <div class="thali-plate-3d">
+              <div class="thali-center-3d ${state.thali.protein ? 'filled' : ''}">
+                ${state.thali.protein
+                  ? `<img src="${state.thali.protein.img}" class="food-item-enter w-full h-full object-cover" alt=""/>`
+                  : `<span style="font-size:11px;color:#8a6e38;text-align:center;line-height:1.2">Main</span>`}
+              </div>
+              ${compartments.filter(c => c.key !== "protein").map((c, i) => {
+                const angle = (i * 60) - 90;
+                const rad = (angle * Math.PI) / 180;
+                const r = 92;
+                const x = Math.cos(rad) * r;
+                const y = Math.sin(rad) * r;
+                const item = state.thali[c.key];
+                return `
+                  <div class="compartment-3d ${item ? 'filled' : ''}"
+                       style="left:50%;top:50%;margin-left:-28px;margin-top:-28px;transform:translate(${x}px, ${y}px) translateZ(12px);">
+                    ${item && item.img
+                      ? `<img src="${item.img}" class="food-item-enter w-full h-full object-cover" alt=""/>`
+                      : `<span style="font-size:9px;color:#a88848;text-align:center;padding:2px">${c.label}</span>`}
+                  </div>`;
+              }).join("")}
+              ${state.thali.sides.length ? `
+              <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%) translateZ(15px);display:flex;gap:4px;z-index:6">
+                ${state.thali.sides.map(s => s.img 
+                  ? `<img src="${s.img}" class="w-6 h-6 rounded-full object-cover shadow border border-gold-500" alt=""/>` 
+                  : `<span style="font-size:14px">${s.emoji}</span>`).join("")}
+              </div>` : ""}
+            </div>
+            <p style="text-align:center;font-size:10px;color:#c9a227;margin-top:12px">↻ ${t("3D Thali — tap items below to fill", "3D थाली — नीचे से आइटम चुनें")}</p>
+          </div>
+
+          <div class="bg-neutral-900 border border-gold-500/30 rounded-2xl p-4 mb-5 flex justify-between items-center text-white">
+            <div>
+              <div class="text-xs" style="color:rgba(255,255,255,0.6)">${t("Your Thali", "आपकी थाली")}</div>
+              <div class="font-bold text-lg text-yellow-400">${formatPrice(total)}</div>
+              <div class="text-xs" style="color:rgba(255,255,255,0.6)">${cal} kcal</div>
+            </div>
+            <button onclick="App.addThaliToCart()" class="bg-gold-500 text-black font-semibold px-5 py-2.5 rounded-full text-sm ${total === 0 ? "opacity-40 pointer-events-none" : ""}">
+              ${t("Add to Cart", "कार्ट में डालें")}
+            </button>
+          </div>
+
+          <h3 class="font-semibold text-sm mb-2">${t("Quick Presets", "क्विक प्रीसेट")}</h3>
+          <div class="flex gap-2 overflow-x-auto hide-scrollbar mb-5 pb-1">
+            ${THALI_PRESETS.map(p => `
+              <button onclick="App.applyPreset('${p.id}')" class="flex-shrink-0 bg-neutral-900 border border-gold-500/20 rounded-xl px-3 py-2 text-left active:scale-95 transition">
+                <div class="text-lg">${p.emoji}</div>
+                <div class="text-xs font-semibold">${t(p.name, p.nameHi)}</div>
+                <div class="text-[10px] text-yellow-500 font-medium">${formatPrice(p.price)}</div>
+              </button>
+            `).join("")}
+          </div>
+
+          ${Object.entries(THALI_OPTIONS).map(([key, options]) => {
+            const labels = {
+              rice: t("Rice / Pulao", "चावल / पुलाव"),
+              bread: t("Roti / Naan", "रोटी / नान"),
+              dal: t("Dal", "दाल"),
+              sabzi: t("Sabzi", "सब्जी"),
+              protein: t("Main Protein", "मुख्य प्रोटीन"),
+              sides: t("Sides", "साइड्स"),
+              dessert: t("Dessert", "मिठाई")
+            };
+            const isMulti = key === "sides";
+            return `
+              <div class="mb-4">
+                <h4 class="text-sm font-semibold mb-2">${labels[key]}</h4>
+                <div class="grid grid-cols-2 gap-2">
+                  ${options.map(opt => {
+                    const selected = isMulti
+                      ? state.thali.sides.some(s => s.id === opt.id)
+                      : state.thali[key]?.id === opt.id;
+                    return `
+                      <button onclick="App.selectThaliItem('${key}', '${opt.id}')"
+                        class="p-2 rounded-xl text-xs font-medium border flex items-center gap-2 transition active:scale-95 text-left
+                          ${selected ? "bg-gold-500 text-black border-gold-500" : "bg-neutral-900 border-gold-500/20 text-white"}">
+                        ${opt.img ? `<img src="${opt.img}" class="w-8 h-8 rounded-lg object-cover flex-shrink-0" alt=""/>` : `<span class="text-lg">${opt.emoji}</span>`}
+                        <div class="min-w-0 flex-1">
+                          <div class="truncate font-semibold">${t(opt.name, opt.nameHi)}</div>
+                          <div class="text-[10px] opacity-80">${formatPrice(opt.price)}</div>
+                        </div>
+                      </button>
+                    `;
+                  }).join("")}
+                </div>
+              </div>
             `;
-            container.insertBefore(card, container.firstChild);
-            setTimeout(() => { card.classList.remove('translate-y-2', 'opacity-0'); }, 50);
-            document.getElementById('reviewForm').reset();
+          }).join("")}
+        </div>
+      `;
+    }
+
+    function renderMenu() {
+      const cats = [
+        { id: "paneer", name: "Paneer Specials", nameHi: "पनीर स्पेशल" },
+        { id: "nonveg", name: "Non-Veg Delights", nameHi: "नॉन-वेज" },
+        { id: "rice", name: "Rice", nameHi: "राइस" },
+        { id: "bread", name: "Breads", nameHi: "रोटी" },
+        { id: "beverages", name: "Extras", nameHi: "एक्सट्रा" }
+      ];
+
+      const filteredItems = MENU.filter(m => {
+        const matchesQuery = !state.searchQuery || 
+          m.name.toLowerCase().includes(state.searchQuery.toLowerCase()) || 
+          (m.nameHi && m.nameHi.includes(state.searchQuery));
+        const matchesType = state.activeFilter === 'all' || 
+          (state.activeFilter === 'veg' && m.veg) || 
+          (state.activeFilter === 'nonveg' && !m.veg);
+        return matchesQuery && matchesType;
+      });
+
+      return `
+        <div class="pt-14 pb-4">
+          <div class="px-4 mb-3">
+            <h1 class="font-display text-2xl font-bold" style="color:#d4af37">${t("Menu", "मेन्यू")}</h1>
+            <p class="text-sm mt-0.5" style="color:rgba(255,255,255,0.6)">Hotel Muskan · ${state.table}</p>
+          </div>
+
+          <div class="px-4 mb-4 space-y-2">
+            <input type="text" value="${state.searchQuery}" placeholder="🔍 ${t("Search dishes...", "खाना खोजें...")}"
+                   oninput="App.handleSearch(this.value)"
+                   class="w-full px-3.5 py-2 text-xs rounded-xl border border-yellow-500/30 focus:outline-none" />
+            <div class="flex gap-2 text-xs">
+              <button onclick="App.setFilter('all')" class="px-3 py-1 rounded-full border ${state.activeFilter === 'all' ? 'bg-gold-500 text-black border-gold-500' : 'border-yellow-500/40 text-white'}">All</button>
+              <button onclick="App.setFilter('veg')" class="px-3 py-1 rounded-full border ${state.activeFilter === 'veg' ? 'bg-green-600 text-white border-green-600' : 'border-yellow-500/40 text-white'}">🟢 Pure Veg</button>
+              <button onclick="App.setFilter('nonveg')" class="px-3 py-1 rounded-full border ${state.activeFilter === 'nonveg' ? 'bg-red-600 text-white border-red-600' : 'border-yellow-500/40 text-white'}">🔴 Non-Veg</button>
+            </div>
+          </div>
+
+          <div class="px-4 space-y-8">
+            ${cats.map(c => {
+              const items = filteredItems.filter(m => m.cat === c.id);
+              if (!items.length) return "";
+              return `
+                <div id="cat-${c.id}">
+                  <h2 class="font-semibold text-base mb-3" style="color:#d4af37">${t(c.name, c.nameHi)}</h2>
+                  <div class="grid grid-cols-2 gap-3">
+                    ${items.map(item => foodCard(item)).join("")}
+                  </div>
+                </div>`;
+            }).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderMyOrders() {
+      var allOrders = loadOrders();
+      var userOrders = state.customerPhone ? allOrders.filter(o => o.customerPhone === state.customerPhone) : [];
+      
+      var statusNames = [
+        t("Placed", "प्लेस्ड"),
+        t("Accepted", "स्वीकृत"),
+        t("Preparing", "तैयार हो रहा"),
+        t("Ready", "रेडी"),
+        t("Serving", "सर्विंग"),
+        t("Served", "सर्व्ड")
+      ];
+
+      return `
+        <div class="pt-14 px-4 pb-10">
+          <div class="flex justify-between items-center mb-4">
+            <div>
+              <h1 class="font-display text-2xl font-bold" style="color:#d4af37">${t("My Orders", "मेरे ऑर्डर")}</h1>
+              <p class="text-xs text-stone-400">${state.customerPhone ? `Account: ${state.customerPhone}` : 'Guest Mode'}</p>
+            </div>
+            ${!state.customerPhone ? `
+              <button onclick="App.openLoginModal()" class="text-xs px-3 py-1.5 rounded-full bg-gold-500 text-black font-bold">Login</button>
+            ` : `
+              <button onclick="App.logout()" class="text-[10px] px-2.5 py-1 rounded-full border border-red-500/40 text-red-400">Logout</button>
+            `}
+          </div>
+
+          ${!state.customerPhone ? `
+            <div class="text-center py-16 bg-neutral-900 border border-gold-500/20 rounded-2xl p-6">
+              <div class="text-5xl mb-3">📱</div>
+              <h3 class="font-bold text-base text-yellow-400 mb-1">Enter Phone Number</h3>
+              <p class="text-xs text-stone-400 mb-5">Login with your phone number to see your private orders and bills.</p>
+              <button onclick="App.openLoginModal()" class="w-full bg-gold-500 text-black py-2.5 rounded-xl font-bold text-xs">
+                Quick Phone Login (No OTP)
+              </button>
+            </div>
+          ` : userOrders.length === 0 ? `
+            <div class="text-center py-16" style="color:rgba(255,255,255,0.45)">
+              <div class="text-5xl mb-3">📋</div>
+              <p class="text-base font-semibold text-white mb-1">${t("No orders found for this number", "इस नंबर पर कोई ऑर्डर नहीं है")}</p>
+              <p class="text-xs mb-6">${t("Place an order to see your live order status here", "मेन्यू से ऑर्डर करें")}</p>
+              <button onclick="App.navigate('menu')" class="bg-gold-500 text-black px-5 py-2.5 rounded-full text-xs font-bold">
+                ${t("Browse Menu", "मेन्यू देखें")}
+              </button>
+            </div>
+          ` : userOrders.map(function(o) {
+            var st = (o.status != null ? o.status : 0);
+            return `
+              <div class="rounded-2xl p-4 mb-4 border border-yellow-500/30" style="background:#141414">
+                <div class="flex justify-between items-start mb-2">
+                  <div>
+                    <div class="font-bold text-white text-base">${o.id}</div>
+                    <div class="text-[11px]" style="color:#d4af37">${o.table || ""} · ${o.time || ""} · ${(o.payment || "PAID").toUpperCase()}</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="font-bold text-base" style="color:#d4af37">₹${o.total}</div>
+                    <span class="inline-block text-[10px] px-2 py-0.5 rounded-full bg-yellow-900/40 border border-yellow-500/40 text-yellow-300 font-medium">
+                      ${statusNames[st] || statusNames[0]}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="space-y-1.5 my-3 border-y border-neutral-800 py-2.5">
+                  ${(o.items || []).map(function(i) {
+                    return `
+                      <div class="flex justify-between text-xs" style="color:rgba(255,255,255,0.85)">
+                        <span>${i.qty || 1}× ${i.name}</span>
+                        <span>₹${(i.price || 0) * (i.qty || 1)}</span>
+                      </div>
+                    `;
+                  }).join("")}
+                </div>
+
+                <div class="flex gap-2 mt-2">
+                  <button onclick="App.sendWhatsAppDirect('${o.id}')" class="flex-1 py-2 bg-green-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1">
+                    💬 WhatsApp Bill
+                  </button>
+                  <button onclick="App.printPaperReceipt('${o.id}')" class="flex-1 py-2 bg-neutral-900 border border-yellow-500/40 rounded-xl text-xs font-semibold text-yellow-400">
+                    🧾 ${t("Bill / Image", "पक्का बिल")}
+                  </button>
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+
+    function renderCart() {
+      if (state.cart.length === 0) {
+        return `
+          <div class="pt-20 px-6 text-center">
+            <div class="text-6xl mb-4">🛒</div>
+            <h2 class="font-display text-xl font-bold mb-2">${t("Your cart is empty", "आपका कार्ट खाली है")}</h2>
+            <p class="text-sm mb-6" style="color:rgba(255,255,255,0.6)">${t("Add something delicious from the menu", "मेन्यू से कुछ स्वादिष्ट जोड़ें")}</p>
+            <button onclick="App.navigate('menu')" class="bg-gold-500 text-black px-6 py-3 rounded-full font-semibold">${t("Browse Menu", "मेन्यू देखें")}</button>
+          </div>
+        `;
+      }
+
+      const subtotal = cartSubtotal();
+      const gst = cartGst();
+      const total = cartTotal();
+
+      return `
+        <div class="pt-14 px-4 pb-8">
+          <div class="flex justify-between items-start mb-1">
+            <h1 class="font-display text-2xl font-bold" style="color:#d4af37">${t("Your Cart", "आपका कार्ट")}</h1>
+            <button onclick="App.clearCart()" class="text-xs" style="color:rgba(255,255,255,0.45)">${t("Clear", "खाली करें")}</button>
+          </div>
+          <p class="text-sm mb-4" style="color:rgba(255,255,255,0.5)">${state.table} · ${cartCount()} ${t("items", "आइटम")}</p>
+
+          <div class="space-y-3 mb-4">
+            ${state.cart.map((item, idx) => `
+              <div class="flex gap-3 bg-neutral-900 border border-gold-500/20 rounded-2xl p-3">
+                <div class="w-14 h-14 rounded-xl bg-neutral-800 overflow-hidden flex-shrink-0">
+                  <img src="${item.img}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='🍽️'"/>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-sm">${item.name}</div>
+                  ${item.custom ? `<div class="text-[10px] text-yellow-500/80 mt-0.5">${item.custom}</div>` : ""}
+                  <div class="flex items-center justify-between mt-2">
+                    <span class="font-bold text-yellow-400">${formatPrice(item.price * item.qty)}</span>
+                    <div class="flex items-center gap-2">
+                      <button onclick="App.updateQty(${idx}, -1)" class="w-7 h-7 rounded-full bg-neutral-800 flex items-center justify-center text-sm font-bold">−</button>
+                      <span class="text-sm font-semibold w-5 text-center">${item.qty}</span>
+                      <button onclick="App.updateQty(${idx}, 1)" class="w-7 h-7 rounded-full bg-gold-500 text-black flex items-center justify-center text-sm font-bold">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+
+          <div class="bg-neutral-900 border border-gold-500/30 rounded-2xl p-3.5 mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-[11px] font-semibold text-yellow-400">👤 Guest Identification</label>
+              <button onclick="App.openLoginModal()" class="text-[10px] text-stone-400 underline">Change</button>
+            </div>
+            ${state.customerPhone ? `
+              <div class="text-xs font-semibold text-white">${state.customerName || 'Guest'} (${state.customerPhone})</div>
+            ` : `
+              <button onclick="App.openLoginModal()" class="w-full bg-neutral-800 border border-dashed border-gold-500/40 text-yellow-400 py-2 rounded-xl text-xs font-semibold">
+                + Add Phone Number for Bill
+              </button>
+            `}
+          </div>
+
+          <div class="bg-neutral-900 border border-yellow-500/30 rounded-2xl p-3 mb-4 flex items-center justify-between">
+            <div>
+              <div class="text-xs font-bold text-white">GST Bill Tax (5%)</div>
+              <div class="text-[10px]" style="color:rgba(255,255,255,0.5)">${state.includeGst ? 'GST added' : 'No GST'}</div>
+            </div>
+            <button onclick="App.toggleGst()" class="px-3 py-1.5 rounded-full text-xs font-bold border transition ${state.includeGst ? 'bg-gold-500 text-black border-gold-500' : 'bg-neutral-800 text-white border-neutral-600'}">
+              ${state.includeGst ? '✓ GST Added' : '✕ No GST'}
+            </button>
+          </div>
+
+          <div class="bg-neutral-900 rounded-2xl p-4 space-y-2 text-sm mb-5">
+            <div class="flex justify-between"><span style="color:rgba(255,255,255,0.6)">${t("Subtotal", "सबटोटल")}</span><span>${formatPrice(subtotal)}</span></div>
+            ${state.includeGst ? `<div class="flex justify-between"><span style="color:rgba(255,255,255,0.6)">${t("GST (5%)", "जीएसटी (5%)")}</span><span>${formatPrice(gst)}</span></div>` : ''}
+            <div class="border-t border-gold-500/20 pt-2 flex justify-between font-bold text-base">
+              <span>${t("Total", "कुल")}</span><span class="text-yellow-400">${formatPrice(total)}</span>
+            </div>
+          </div>
+
+          <button onclick="App.proceedToCheckout()" class="w-full bg-gold-500 text-black font-semibold py-3.5 rounded-2xl text-base shadow-lg shadow-gold-500/20 active:scale-[0.98] transition">
+            ${t("Proceed to Payment", "पेमेंट पर जाएं")} · ${formatPrice(total)}
+          </button>
+        </div>
+      `;
+    }
+
+    function renderPayment() {
+      const subtotal = cartSubtotal();
+      const gst = cartGst();
+      const total = cartTotal();
+      const methods = [
+        { id: "phonepe", name: "PhonePe", nameHi: "फोनपे", icon: "💜", desc: UPI_VPA },
+        { id: "gpay", name: "Google Pay", nameHi: "गूगल पे", icon: "🔵", desc: UPI_VPA },
+        { id: "paytm", name: "Paytm UPI", nameHi: "पेटीएम", icon: "🟦", desc: UPI_VPA },
+        { id: "navi", name: "Navi UPI", nameHi: "नवी यूपीआई", icon: "🟢", desc: UPI_VPA },
+        { id: "upi", name: "Any UPI App", nameHi: "कोई भी UPI ऐप", icon: "📱", desc: "Instant Intent Pay" },
+        { id: "cash", name: "Cash at Counter", nameHi: "कैश काउंटर पर", icon: "💵", desc: "Pay when food arrives" }
+      ];
+
+      return `
+        <div class="pt-14 px-4 pb-8">
+          <button onclick="App.navigate('cart')" class="text-sm text-yellow-500 mb-4">← ${t("Back to Cart", "कार्ट पर वापस")}</button>
+          <h1 class="font-display text-2xl font-bold mb-1">${t("Payment", "पेमेंट")}</h1>
+          <p class="text-sm mb-5" style="color:rgba(255,255,255,0.6)">${state.table} · ${formatPrice(total)}</p>
+
+          <div class="bg-neutral-900 rounded-2xl p-4 mb-5 text-sm">
+            <div class="flex justify-between mb-1"><span style="color:rgba(255,255,255,0.6)">${t("Subtotal", "सबटोटल")}</span><span>${formatPrice(subtotal)}</span></div>
+            ${state.includeGst ? `<div class="flex justify-between mb-1"><span style="color:rgba(255,255,255,0.6)">${t("GST (5%)", "जीएसटी")}</span><span>${formatPrice(gst)}</span></div>` : ''}
+            <div class="flex justify-between font-bold text-base pt-2 border-t border-gold-500/20">
+              <span>${t("To Pay", "भुगतान करें")}</span><span class="text-yellow-400">${formatPrice(total)}</span>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <div class="text-xs font-semibold mb-2" style="color:#d4af37">⚡ Fast UPI Payment:</div>
+            <div class="grid grid-cols-4 gap-2">
+              <button onclick="App.directAppPay('phonepe')" class="p-2.5 bg-neutral-900 border border-purple-500/40 rounded-xl text-center active:scale-95 transition">
+                <div class="text-xl">💜</div>
+                <div class="text-[10px] font-bold mt-1">PhonePe</div>
+              </button>
+              <button onclick="App.directAppPay('gpay')" class="p-2.5 bg-neutral-900 border border-blue-500/40 rounded-xl text-center active:scale-95 transition">
+                <div class="text-xl">🔵</div>
+                <div class="text-[10px] font-bold mt-1">GPay</div>
+              </button>
+              <button onclick="App.directAppPay('paytm')" class="p-2.5 bg-neutral-900 border border-sky-500/40 rounded-xl text-center active:scale-95 transition">
+                <div class="text-xl">🟦</div>
+                <div class="text-[10px] font-bold mt-1">Paytm</div>
+              </button>
+              <button onclick="App.directAppPay('navi')" class="p-2.5 bg-neutral-900 border border-green-500/40 rounded-xl text-center active:scale-95 transition">
+                <div class="text-xl">🟢</div>
+                <div class="text-[10px] font-bold mt-1">Navi</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="rounded-2xl p-4 mb-5 border border-yellow-500/40 text-center" style="background:#111">
+            <div class="text-[10px] uppercase tracking-wider mb-2" style="color:#d4af37">${t("Scan to Pay", "स्कैन करके भुगतान करें")}</div>
+            <img src="${upiQrImageUrl(total, 220)}" alt="UPI QR"
+                 style="width:220px;height:220px;margin:0 auto;border-radius:12px;background:#fff;padding:8px;display:block" />
+            <div class="mt-3 text-xs font-bold text-white">${UPI_VPA}</div>
+            <div class="text-sm font-bold mt-1" style="color:#d4af37">${formatPrice(total)}</div>
+          </div>
+
+          <h3 class="font-semibold text-sm mb-3">${t("Or Choose Method", "पेमेंट तरीका चुनें")}</h3>
+          <div class="space-y-2 mb-6">
+            ${methods.map(m => `
+              <button onclick="App.selectPayment('${m.id}')" 
+                class="w-full flex items-center gap-3 bg-neutral-900 border-2 ${state.paymentMethod === m.id ? 'border-yellow-500' : 'border-gold-500/20'} rounded-2xl p-3.5 text-left active:scale-[0.99] transition">
+                <span class="text-2xl">${m.icon}</span>
+                <div class="flex-1">
+                  <div class="font-semibold text-sm">${t(m.name, m.nameHi)}</div>
+                  <div class="text-[10px]" style="color:rgba(255,255,255,0.5)">${m.desc}</div>
+                </div>
+                ${state.paymentMethod === m.id ? '<span class="text-yellow-400 font-bold">✓</span>' : ''}
+              </button>
+            `).join("")}
+          </div>
+
+          <button onclick="App.confirmPayment()" 
+            class="w-full bg-gold-500 text-black font-semibold py-3.5 rounded-2xl text-base shadow-lg ${!state.paymentMethod ? 'opacity-40 pointer-events-none' : ''}">
+            ${state.paymentMethod === 'cash' 
+              ? t("Confirm Order (Pay at Counter)", "ऑर्डर कन्फर्म करें (कैश काउंटर)") 
+              : t("Pay & Place Order", "भुगतान करें") + " · " + formatPrice(total)}
+          </button>
+        </div>
+      `;
+    }
+
+    function renderOrderTracking() {
+      if (!state.order) return renderHome();
+      return `
+        <div class="pt-14 px-4 pb-8">
+          <div class="text-center mb-6">
+            <div class="text-4xl mb-2">🎉</div>
+            <h1 class="font-display text-xl font-bold">${t("Order Placed!", "ऑर्डर हो गया!")}</h1>
+            <p class="text-sm mt-1" style="color:rgba(255,255,255,0.6)">${state.order.id} · ${state.table}</p>
+          </div>
+
+          <div class="bg-neutral-900 border border-gold-500/20 rounded-2xl p-5 mb-5 relative status-timeline">
+            ${STATUS_LABELS.map((s, i) => `
+              <div class="flex gap-4 mb-5 last:mb-0 relative">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm z-10
+                  ${i <= state.orderStatus ? "bg-gold-500 text-black" : "bg-neutral-800 text-white"}">
+                  ${i < state.orderStatus ? "✓" : s.icon}
+                </div>
+                <div class="pt-1">
+                  <div class="font-semibold text-sm">${t(s.en, s.hi)}</div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+
+          <div class="flex gap-2">
+            <button onclick="App.printPaperReceipt('${state.order.id}')" class="flex-1 bg-neutral-900 border border-yellow-500/40 py-3 rounded-xl text-xs font-semibold text-yellow-400">
+              🧾 ${t("Bill / Save Image", "पक्का बिल")}
+            </button>
+            <button onclick="App.sendWhatsAppDirect('${state.order.id}')" class="flex-1 bg-green-600 text-white py-3 rounded-xl text-xs font-bold">
+              💬 WhatsApp Bill
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAdmin() {
+      var orders = loadOrders();
+      var statusNames = [t("Placed", "प्लेस्ड"), t("Accepted", "स्वीकृत"), t("Preparing", "तैयार हो रहा"), t("Ready", "रेडी"), t("Serving", "सर्विंग"), t("Served", "सर्व्ड")];
+      return `
+        <div class="pt-14 px-4 pb-10">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <h1 class="font-display text-2xl font-bold" style="color:#d4af37">Staff Admin</h1>
+              <p class="text-[11px] text-stone-400">Hotel Muskan Management</p>
+            </div>
+            <button onclick="App.navigate('home')" class="text-xs px-3 py-1.5 rounded-full border border-yellow-500/40" style="color:#d4af37">← Home</button>
+          </div>
+
+          <div class="flex border-b border-neutral-800 mb-4">
+            <button onclick="App.setAdminTab('orders')" class="flex-1 py-2 text-xs font-bold ${state.adminTab === 'orders' ? 'border-b-2 border-yellow-500 text-yellow-400' : 'text-stone-400'}">
+              📋 Live Orders (${orders.length})
+            </button>
+            <button onclick="App.setAdminTab('menu')" class="flex-1 py-2 text-xs font-bold ${state.adminTab === 'menu' ? 'border-b-2 border-yellow-500 text-yellow-400' : 'text-stone-400'}">
+              🍲 Edit Menu (${MENU.length})
+            </button>
+          </div>
+
+          ${state.adminTab === 'orders' ? `
+            <div class="flex gap-2 mb-4 flex-wrap">
+              <button onclick="App.adminClearOrders()" class="text-[10px] px-3 py-1.5 rounded-full border border-red-500/40 text-red-400">Clear All Orders</button>
+              <span class="text-[10px] px-2 py-1.5 text-stone-400">${orders.length} total orders</span>
+            </div>
+
+            ${orders.length === 0 ? `
+              <div class="text-center py-16 text-stone-500">
+                <div class="text-4xl mb-2">📋</div>
+                <p>No orders recorded yet</p>
+              </div>
+            ` : orders.map(function(o) {
+              var st = (o.status != null ? o.status : 0);
+              return `
+              <div class="rounded-2xl p-4 mb-3 border border-yellow-500/25 bg-neutral-900">
+                <div class="flex justify-between items-start mb-2">
+                  <div>
+                    <div class="font-bold text-white">${o.id}</div>
+                    <div class="text-[10px] text-yellow-400">${o.table || ""} · ${o.customerName || 'Guest'} (${o.customerPhone || 'No Phone'})</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="font-bold text-yellow-400">₹${o.total}</div>
+                    <div class="text-[10px] text-stone-400">${statusNames[st]}</div>
+                  </div>
+                </div>
+                <div class="space-y-1 mb-3">
+                  ${(o.items || []).map(function(i) {
+                    return `<div class="flex justify-between text-xs text-stone-300">
+                      <span>${i.qty || 1}× ${i.name}</span>
+                      <span>₹${(i.price || 0) * (i.qty || 1)}</span>
+                    </div>`;
+                  }).join("")}
+                </div>
+                <div class="flex flex-wrap gap-1">
+                  <button onclick="App.adminSetStatus('${o.id}',1)" class="text-[10px] px-2 py-1 rounded-full bg-blue-900/50 border border-blue-500/30">Accept</button>
+                  <button onclick="App.adminSetStatus('${o.id}',2)" class="text-[10px] px-2 py-1 rounded-full bg-orange-900/50 border border-orange-500/30">Prep</button>
+                  <button onclick="App.adminSetStatus('${o.id}',3)" class="text-[10px] px-2 py-1 rounded-full bg-green-900/50 border border-green-500/30">Ready</button>
+                  <button onclick="App.adminSetStatus('${o.id}',5)" class="text-[10px] px-2 py-1 rounded-full bg-yellow-900/40 border border-yellow-500/30">Served</button>
+                  <button onclick="App.printPaperReceipt('${o.id}')" class="text-[10px] px-2 py-1 rounded-full bg-neutral-800 border border-yellow-500/40 text-yellow-400">Print Bill</button>
+                </div>
+              </div>`;
+            }).join("")}
+          ` : `
+            <div class="flex gap-2 mb-4">
+              <button onclick="App.openAddDishModal()" class="flex-1 bg-gold-500 text-black py-2 rounded-xl text-xs font-bold">
+                + Add New Dish
+              </button>
+              <button onclick="App.resetMenuToDefault()" class="px-3 py-2 border border-red-500/40 text-red-400 rounded-xl text-xs font-semibold">
+                Reset Menu
+              </button>
+            </div>
+
+            <div class="space-y-3">
+              ${MENU.map((item, idx) => `
+                <div class="bg-neutral-900 border border-gold-500/30 rounded-2xl p-3 flex items-center justify-between gap-3">
+                  <img src="${item.img}" class="w-12 h-12 rounded-xl object-cover bg-neutral-800 flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop'" />
+                  <div class="flex-1 min-w-0">
+                    <div class="font-bold text-xs truncate">${item.name} (${item.nameHi || ''})</div>
+                    <div class="text-[10px] text-stone-400">${item.veg ? '🟢 Veg' : '🔴 Non-Veg'} · Cat: ${item.cat}</div>
+                    <div class="text-xs font-bold text-yellow-400">Full: ₹${item.price} ${item.halfPrice ? `· Half: ₹${item.halfPrice}` : ''}</div>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <button onclick="App.openEditDishModal('${item.id}')" class="px-2.5 py-1 bg-neutral-800 border border-yellow-500/40 text-yellow-400 rounded-lg text-[10px] font-bold">Edit</button>
+                    <button onclick="App.deleteDish('${item.id}')" class="px-2.5 py-1 bg-neutral-800 border border-red-500/40 text-red-400 rounded-lg text-[10px] font-bold">Del</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    // ========== EXPOSED API ==========
+    window.App = {
+      initAppFlow() {
+        setTimeout(function () {
+          const loadingScreen = document.getElementById("loading-screen");
+          loadingScreen.style.opacity = "0";
+          setTimeout(function () {
+            loadingScreen.style.display = "none";
+            if (!state.customerPhone) {
+              const loginScreen = document.getElementById("login-screen");
+              loginScreen.classList.remove("hidden");
+              loginScreen.classList.add("flex");
+            } else {
+              App.showMainApp();
+            }
+          }, 600);
+        }, 1800);
+      },
+
+      showMainApp() {
+        const app = document.getElementById("app");
+        app.classList.remove("hidden");
+        updateProfileUI();
+        App.navigate("home");
+      },
+
+      submitInitialLogin() {
+        const nameInput = document.getElementById("initial-login-name");
+        const phoneInput = document.getElementById("initial-login-phone");
+        const phone = (phoneInput.value || "").trim().replace(/[^0-9]/g, "");
+        const name = (nameInput.value || "").trim();
+
+        if (phone.length < 10) {
+          showToast("Please enter a valid 10-digit number");
+          return;
         }
-    </script>
+
+        state.customerPhone = phone;
+        state.customerName = name || "Customer";
+        localStorage.setItem("muskan_user_phone", state.customerPhone);
+        localStorage.setItem("muskan_user_name", state.customerName);
+
+        const loginScreen = document.getElementById("login-screen");
+        loginScreen.classList.add("hidden");
+        loginScreen.classList.remove("flex");
+
+        App.showMainApp();
+        showToast("Welcome, " + state.customerName);
+      },
+
+      skipLogin() {
+        const loginScreen = document.getElementById("login-screen");
+        loginScreen.classList.add("hidden");
+        loginScreen.classList.remove("flex");
+        App.showMainApp();
+      },
+
+      navigate(screen) {
+        state.screen = screen;
+        setActiveNav(screen);
+        const main = document.getElementById("main-content");
+        let html = "";
+        switch (screen) {
+          case "home": html = renderHome(); break;
+          case "thali": html = renderThali(); break;
+          case "menu": html = renderMenu(); break;
+          case "myorders": html = renderMyOrders(); break;
+          case "admin": html = renderAdmin(); break;
+          case "cart": html = renderCart(); break;
+          case "payment": html = renderPayment(); break;
+          case "order": html = renderOrderTracking(); break;
+          default: html = renderHome();
+        }
+        main.innerHTML = html;
+        window.scrollTo(0, 0);
+        updateCartUI();
+        updateProfileUI();
+      },
+
+      setAdminTab(tab) {
+        state.adminTab = tab;
+        App.navigate('admin');
+      },
+
+      openAddDishModal() {
+        const modal = document.getElementById("modal-container");
+        modal.innerHTML = `
+          <div class="bg-neutral-900 border border-gold-500/40 rounded-2xl p-5 w-full max-w-xs text-white my-auto shadow-2xl">
+            <h3 class="font-bold text-base mb-3 text-yellow-400 text-center">Add New Dish</h3>
+            <div class="space-y-2 text-xs mb-4">
+              <div>
+                <label class="block text-[10px] text-stone-400 mb-1">Dish Name (English)</label>
+                <input type="text" id="new-dish-name" placeholder="e.g. Kadhai Paneer" class="w-full px-3 py-2 rounded-xl focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-[10px] text-stone-400 mb-1">Dish Name (Hindi)</label>
+                <input type="text" id="new-dish-name-hi" placeholder="e.g. कढ़ाई पनीर" class="w-full px-3 py-2 rounded-xl focus:outline-none" />
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[10px] text-stone-400 mb-1">Full Price (₹)</label>
+                  <input type="number" id="new-dish-price" placeholder="250" class="w-full px-3 py-2 rounded-xl focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-[10px] text-stone-400 mb-1">Half Price (₹)</label>
+                  <input type="number" id="new-dish-half" placeholder="130" class="w-full px-3 py-2 rounded-xl focus:outline-none" />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[10px] text-stone-400 mb-1">Category</label>
+                  <select id="new-dish-cat" class="w-full px-2 py-2 rounded-xl focus:outline-none text-xs">
+                    <option value="paneer">Paneer</option>
+                    <option value="nonveg">Non-Veg</option>
+                    <option value="rice">Rice</option>
+                    <option value="bread">Bread</option>
+                    <option value="beverages">Extras</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[10px] text-stone-400 mb-1">Type</label>
+                  <select id="new-dish-veg" class="w-full px-2 py-2 rounded-xl focus:outline-none text-xs">
+                    <option value="true">Veg 🟢</option>
+                    <option value="false">Non-Veg 🔴</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block text-[10px] text-stone-400 mb-1">Image URL</label>
+                <input type="text" id="new-dish-img" placeholder="https://..." value="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&fit=crop" class="w-full px-3 py-2 rounded-xl focus:outline-none" />
+              </div>
+            </div>
+            <button onclick="App.saveNewDish()" class="w-full bg-gold-500 text-black py-2.5 rounded-xl font-bold text-xs mb-2">Add Dish to Menu</button>
+            <button onclick="App.closeModal()" class="w-full text-center text-xs text-stone-400 py-1">Cancel</button>
+          </div>
+        `;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      },
+
+      saveNewDish() {
+        const name = document.getElementById("new-dish-name").value.trim();
+        const nameHi = document.getElementById("new-dish-name-hi").value.trim();
+        const price = Number(document.getElementById("new-dish-price").value);
+        const halfPrice = document.getElementById("new-dish-half").value ? Number(document.getElementById("new-dish-half").value) : null;
+        const cat = document.getElementById("new-dish-cat").value;
+        const veg = document.getElementById("new-dish-veg").value === "true";
+        const img = document.getElementById("new-dish-img").value.trim() || "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&fit=crop";
+
+        if (!name || !price) {
+          showToast("Name and Full Price are required");
+          return;
+        }
+
+        const newDish = {
+          id: "m" + Date.now(),
+          name: name,
+          nameHi: nameHi || name,
+          desc: name + " at Hotel Muskan",
+          price: price,
+          halfPrice: halfPrice,
+          cat: cat,
+          veg: veg,
+          rating: 4.8,
+          orders: 50,
+          badge: "⭐ New",
+          spice: 2,
+          img: img
+        };
+
+        const updatedMenu = [...MENU, newDish];
+        saveMenuData(updatedMenu);
+        App.closeModal();
+        showToast("Dish added successfully!");
+        App.navigate("admin");
+      },
+
+      openEditDishModal(dishId) {
+        const item = MENU.find(m => m.id === dishId);
+        if (!item) return;
+
+        const modal = document.getElementById("modal-container");
+        modal.innerHTML = `
+          <div class="bg-neutral-900 border border-gold-500/40 rounded-2xl p-5 w-full max-w-xs text-white my-auto shadow-2xl">
+            <h3 class="font-bold text-base mb-3 text-yellow-400 text-center">Edit Dish Details</h3>
+            <div class="space-y-2 text-xs mb-4">
+              <div>
+                <label class="block text-[10px] text-stone-400 mb-1">Dish Name (English)</label>
+                <input type="text" id="edit-dish-name" value="${item.name}" class="w-full px-3 py-2 rounded-xl focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-[10px] text-stone-400 mb-1">Dish Name (Hindi)</label>
+                <input type="text" id="edit-dish-name-hi" value="${item.nameHi || ''}" class="w-full px-3 py-2 rounded-xl focus:outline-none" />
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[10px] text-stone-400 mb-1">Full Price (₹)</label>
+                  <input type="number" id="edit-dish-price" value="${item.price}" class="w-full px-3 py-2 rounded-xl focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-[10px] text-stone-400 mb-1">Half Price (₹)</label>
+                  <input type="number" id="edit-dish-half" value="${item.halfPrice || ''}" placeholder="No Half" class="w-full px-3 py-2 rounded-xl focus:outline-none" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-[10px] text-stone-400 mb-1">Category</label>
+                <select id="edit-dish-cat" class="w-full px-2 py-2 rounded-xl focus:outline-none text-xs">
+                  <option value="paneer" ${item.cat === 'paneer' ? 'selected' : ''}>Paneer</option>
+                  <option value="nonveg" ${item.cat === 'nonveg' ? 'selected' : ''}>Non-Veg</option>
+                  <option value="rice" ${item.cat === 'rice' ? 'selected' : ''}>Rice</option>
+                  <option value="bread" ${item.cat === 'bread' ? 'selected' : ''}>Bread</option>
+                  <option value="beverages" ${item.cat === 'beverages' ? 'selected' : ''}>Extras</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] text-stone-400 mb-1">Image URL</label>
+                <input type="text" id="edit-dish-img" value="${item.img || ''}" class="w-full px-3 py-2 rounded-xl focus:outline-none" />
+              </div>
+            </div>
+            <button onclick="App.saveEditDish('${item.id}')" class="w-full bg-gold-500 text-black py-2.5 rounded-xl font-bold text-xs mb-2">Save Changes</button>
+            <button onclick="App.closeModal()" class="w-full text-center text-xs text-stone-400 py-1">Cancel</button>
+          </div>
+        `;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      },
+
+      saveEditDish(dishId) {
+        const name = document.getElementById("edit-dish-name").value.trim();
+        const nameHi = document.getElementById("edit-dish-name-hi").value.trim();
+        const price = Number(document.getElementById("edit-dish-price").value);
+        const halfPrice = document.getElementById("edit-dish-half").value ? Number(document.getElementById("edit-dish-half").value) : null;
+        const cat = document.getElementById("edit-dish-cat").value;
+        const img = document.getElementById("edit-dish-img").value.trim();
+
+        const updatedMenu = MENU.map(m => {
+          if (m.id === dishId) {
+            return { ...m, name, nameHi, price, halfPrice, cat, img };
+          }
+          return m;
+        });
+
+        saveMenuData(updatedMenu);
+        App.closeModal();
+        showToast("Dish updated successfully!");
+        App.navigate("admin");
+      },
+
+      deleteDish(dishId) {
+        if (!confirm("Are you sure you want to delete this dish from menu?")) return;
+        const updatedMenu = MENU.filter(m => m.id !== dishId);
+        saveMenuData(updatedMenu);
+        showToast("Dish removed!");
+        App.navigate("admin");
+      },
+
+      resetMenuToDefault() {
+        if (!confirm("Reset all menu items to original factory defaults?")) return;
+        saveMenuData(DEFAULT_MENU);
+        showToast("Menu reset to defaults!");
+        App.navigate("admin");
+      },
+
+      openLoginModal(onSuccessNav) {
+        const modal = document.getElementById("modal-container");
+        modal.innerHTML = `
+          <div class="bg-neutral-900 border border-gold-500/40 rounded-2xl p-5 w-full max-w-xs text-white my-auto shadow-2xl">
+            <h3 class="font-bold text-base mb-1 text-yellow-400 text-center">Customer Login</h3>
+            <p class="text-[11px] text-stone-400 text-center mb-4">No OTP required. Instant phone login.</p>
+            
+            <div class="space-y-3 mb-4">
+              <div>
+                <label class="block text-[10px] text-yellow-400 uppercase font-bold mb-1">Your Name</label>
+                <input type="text" id="login-name-input" placeholder="e.g. Rahul" value="${state.customerName}" 
+                       class="w-full text-xs px-3 py-2 rounded-xl focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-[10px] text-yellow-400 uppercase font-bold mb-1">Phone Number (10 Digits)</label>
+                <input type="tel" id="login-phone-input" placeholder="e.g. 9876543210" maxlength="10" value="${state.customerPhone}" 
+                       class="w-full text-xs px-3 py-2 rounded-xl focus:outline-none" />
+              </div>
+            </div>
+
+            <button onclick="App.saveLogin('${onSuccessNav || ''}')" class="w-full bg-gold-500 text-black py-2.5 rounded-xl text-xs font-bold mb-2">
+              Save & Continue
+            </button>
+            <button onclick="App.closeModal()" class="w-full text-center text-xs text-stone-400 py-1">Cancel</button>
+          </div>
+        `;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      },
+
+      saveLogin(onSuccessNav) {
+        const phoneInput = document.getElementById("login-phone-input");
+        const nameInput = document.getElementById("login-name-input");
+        const phone = (phoneInput.value || "").trim().replace(/[^0-9]/g, "");
+        const name = (nameInput.value || "").trim();
+
+        if (phone.length < 10) {
+          showToast("Please enter a valid 10-digit number");
+          return;
+        }
+
+        state.customerPhone = phone;
+        state.customerName = name || "Guest";
+        localStorage.setItem("muskan_user_phone", state.customerPhone);
+        localStorage.setItem("muskan_user_name", state.customerName);
+
+        App.closeModal();
+        updateProfileUI();
+        showToast("Logged in as " + state.customerPhone);
+
+        if (onSuccessNav) App.navigate(onSuccessNav);
+        else App.navigate(state.screen);
+      },
+
+      logout() {
+        localStorage.removeItem("muskan_user_phone");
+        localStorage.removeItem("muskan_user_name");
+        state.customerPhone = '';
+        state.customerName = '';
+        updateProfileUI();
+        showToast("Logged out");
+        App.navigate("home");
+      },
+
+      closeModal() {
+        const modal = document.getElementById("modal-container");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      },
+
+      proceedToCheckout() {
+        if (!state.customerPhone) {
+          App.openLoginModal('payment');
+          return;
+        }
+        App.navigate('payment');
+      },
+
+      toggleGst() {
+        state.includeGst = !state.includeGst;
+        showToast(state.includeGst ? t("GST Added (5%)", "जीएसटी जोड़ा गया") : t("GST Removed (0%)", "जीएसटी हटाया गया"));
+        App.navigate("cart");
+      },
+
+      handleSearch(q) {
+        state.searchQuery = q;
+        const main = document.getElementById("main-content");
+        if (state.screen === 'menu') main.innerHTML = renderMenu();
+      },
+
+      setFilter(type) {
+        state.activeFilter = type;
+        const main = document.getElementById("main-content");
+        if (state.screen === 'menu') main.innerHTML = renderMenu();
+      },
+
+      addToCart(id) {
+        const item = MENU.find(m => m.id === id);
+        if (!item) return;
+        const existing = state.cart.find(c => c.id === id && !c.custom);
+        if (existing) existing.qty++;
+        else state.cart.push({ ...item, qty: 1, name: state.lang === "hi" ? item.nameHi : item.name });
+        updateCartUI();
+        showToast(t("Added to cart", "कार्ट में जोड़ा गया") + " ✓");
+      },
+
+      addHalf(id) {
+        const item = MENU.find(m => m.id === id);
+        if (!item || !item.halfPrice) return;
+        const halfName = (state.lang === "hi" ? item.nameHi : item.name) + " (Half)";
+        const existing = state.cart.find(c => c.id === id + "-half");
+        if (existing) existing.qty++;
+        else state.cart.push({ id: id + "-half", name: halfName, price: item.halfPrice, qty: 1, img: item.img, veg: item.veg });
+        updateCartUI();
+        showToast(t("Half plate added", "हाफ प्लेट जुड़ी") + " ✓");
+      },
+
+      updateQty(idx, delta) {
+        state.cart[idx].qty += delta;
+        if (state.cart[idx].qty <= 0) state.cart.splice(idx, 1);
+        App.navigate("cart");
+      },
+
+      selectThaliItem(category, id) {
+        const options = THALI_OPTIONS[category];
+        const item = options.find(o => o.id === id);
+        if (!item) return;
+        if (category === "sides") {
+          const idx = state.thali.sides.findIndex(s => s.id === id);
+          if (idx >= 0) state.thali.sides.splice(idx, 1);
+          else state.thali.sides.push(item);
+        } else {
+          state.thali[category] = state.thali[category]?.id === id ? null : item;
+        }
+        App.navigate("thali");
+      },
+
+      applyPreset(presetId) {
+        const preset = THALI_PRESETS.find(p => p.id === presetId);
+        if (!preset) return;
+        state.thali = { rice: null, bread: null, dal: null, sabzi: null, protein: null, sides: [], dessert: null };
+        preset.items.forEach(id => {
+          for (const [cat, opts] of Object.entries(THALI_OPTIONS)) {
+            const found = opts.find(o => o.id === id);
+            if (found) {
+              if (cat === "sides") state.thali.sides.push(found);
+              else state.thali[cat] = found;
+              break;
+            }
+          }
+        });
+        App.navigate("thali");
+        showToast(t("Preset applied", "प्रीसेट लागू हो गया"));
+      },
+
+      addThaliToCart() {
+        const { total } = thaliTotal();
+        if (total === 0) return;
+        const parts = [];
+        ["rice", "bread", "dal", "sabzi", "protein", "dessert"].forEach(k => {
+          if (state.thali[k]) parts.push(state.thali[k].name);
+        });
+        state.thali.sides.forEach(s => parts.push(s.name));
+        state.cart.push({
+          id: "custom-thali-" + Date.now(),
+          name: t("Custom Thali", "कस्टम थाली"),
+          price: total,
+          qty: 1,
+          img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&fit=crop",
+          custom: parts.join(", "),
+          veg: !state.thali.protein || state.thali.protein.veg !== false
+        });
+        state.thali = { rice: null, bread: null, dal: null, sabzi: null, protein: null, sides: [], dessert: null };
+        updateCartUI();
+        showToast(t("Thali added to cart!", "थाली कार्ट में जुड़ गई!"));
+        App.navigate("cart");
+      },
+
+      selectPayment(method) {
+        state.paymentMethod = method;
+        App.navigate("payment");
+      },
+
+      directAppPay(method) {
+        if (!state.customerPhone) {
+          App.openLoginModal('payment');
+          return;
+        }
+        var total = cartTotal();
+        state.paymentMethod = method;
+        tryOpenSpecificUpi(method, total);
+        setTimeout(function() {
+          App.executeOrderPlacement(method, total);
+        }, 3000);
+      },
+
+      executeOrderPlacement(method, total) {
+        state.order = {
+          id: "HM" + Math.floor(1000 + Math.random() * 9000),
+          items: state.cart.slice(),
+          subtotal: cartSubtotal(),
+          gst: cartGst(),
+          total: total,
+          table: state.table,
+          customerPhone: state.customerPhone,
+          customerName: state.customerName,
+          time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+          payment: method,
+          status: 0
+        };
+        saveOrder(state.order);
+        state.cart = [];
+        state.paymentMethod = null;
+        updateCartUI();
+        App.navigate("order");
+        showToast(t("Order placed!", "ऑर्डर हो गया!"));
+
+        if (state.customerPhone && state.customerPhone.length >= 10) {
+          setTimeout(function() {
+            sendReceiptToWhatsApp(state.order, state.customerPhone);
+          }, 1200);
+        }
+
+        [1,2,3,4,5].forEach(function(status, i) {
+          setTimeout(function() {
+            if (state.order) {
+              state.orderStatus = status;
+              updateStoredOrder(state.order.id, { status: status });
+              if (state.screen === "order") App.navigate("order");
+              if (status === 5) showToast(t("Food served! Enjoy", "खाना सर्व हो गया!"));
+            }
+          }, (i + 1) * 7000);
+        });
+      },
+
+      confirmPayment() {
+        if (!state.customerPhone) {
+          App.openLoginModal('payment');
+          return;
+        }
+        if (!state.paymentMethod || state.cart.length === 0) return;
+        var total = cartTotal();
+
+        if (["phonepe", "gpay", "paytm", "navi", "upi"].includes(state.paymentMethod)) {
+          tryOpenSpecificUpi(state.paymentMethod, total);
+          setTimeout(function() {
+            App.executeOrderPlacement(state.paymentMethod, total);
+          }, 2500);
+          return;
+        }
+
+        showToast(t("Placing order...", "ऑर्डर हो रहा है..."));
+        setTimeout(function() {
+          App.executeOrderPlacement(state.paymentMethod, total);
+        }, 1000);
+      },
+
+      sendWhatsAppDirect(orderId) {
+        var orders = loadOrders();
+        var o = orders.find(x => x.id === orderId) || state.order;
+        if (!o) return;
+        sendReceiptToWhatsApp(o, o.customerPhone || state.customerPhone);
+      },
+
+      downloadBillImage() {
+        var element = document.getElementById("printable-receipt");
+        if (!element) return;
+        showToast(t("Generating Bill Image...", "बिल इमेज बन रही है..."));
+        html2canvas(element, { scale: 2, backgroundColor: "#fffef8" }).then(function(canvas) {
+          var link = document.createElement("a");
+          link.download = "Hotel_Muskan_Bill_" + Date.now() + ".png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+          showToast(t("Bill Image Saved!", "बिल इमेज सेव हो गई!"));
+        }).catch(function(err) {
+          console.error(err);
+          showToast("Error creating image");
+        });
+      },
+
+      printPaperReceipt(orderId) {
+        const orders = loadOrders();
+        const o = orders.find(x => x.id === orderId) || state.order;
+        if (!o) return;
+        const modal = document.getElementById("modal-container");
+        modal.innerHTML = `
+          <div class="w-full max-w-xs my-auto">
+            <div id="printable-receipt" class="receipt-paper p-5 rounded-lg text-xs shadow-2xl">
+              <div class="text-center font-bold text-sm mb-1">HOTEL MUSKAN</div>
+              <div class="text-center text-[10px] mb-2">Bhagwanpur, Vaishali, Bihar<br/>GSTIN: 10AABCM5670P1Z1</div>
+              <div class="border-b border-dashed border-black my-2"></div>
+              <div class="flex justify-between"><span>Bill No: ${o.id}</span><span>Table: ${o.table}</span></div>
+              <div class="flex justify-between"><span>Guest: ${o.customerName || 'Customer'}</span><span>Phone: ${o.customerPhone || 'N/A'}</span></div>
+              <div class="flex justify-between"><span>Date: ${o.time || 'Today'}</span><span>Mode: ${(o.payment||'CASH').toUpperCase()}</span></div>
+              <div class="border-b border-dashed border-black my-2"></div>
+              <div class="space-y-1">
+                ${(o.items || []).map(it => `
+                  <div class="flex justify-between">
+                    <span>${it.qty}x ${it.name.substring(0, 15)}</span>
+                    <span>₹${it.price * it.qty}</span>
+                  </div>
+                `).join('')}
+              </div>
+              <div class="border-b border-dashed border-black my-2"></div>
+              <div class="flex justify-between font-bold text-sm mt-1"><span>Total Paid:</span><span>₹${o.total}</span></div>
+              <div class="text-center text-[10px] mt-4">Thank You! Visit Again<br/>Call: +91 96086 35670</div>
+            </div>
+
+            <div class="space-y-2 mt-3">
+              <button onclick="App.downloadBillImage()" class="w-full bg-blue-600 text-white py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1">
+                📷 Save Bill as Image (PNG)
+              </button>
+              <div class="flex gap-2">
+                <button onclick="App.sendWhatsAppDirect('${o.id}')" class="flex-1 bg-green-600 text-white py-2 rounded-xl font-bold text-[11px]">WHATSAPP BILL</button>
+                <button onclick="window.print()" class="flex-1 bg-neutral-800 border border-yellow-500/40 text-yellow-400 py-2 rounded-xl font-bold text-[11px]">PRINT</button>
+              </div>
+              <button onclick="App.closeModal()" class="w-full text-center text-xs py-1 text-stone-400 underline">Close</button>
+            </div>
+          </div>
+        `;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      },
+
+      simulateQR() {
+        const modal = document.getElementById("modal-container");
+        modal.innerHTML = `
+          <div class="bg-neutral-900 border border-gold-500/40 rounded-2xl p-5 w-full max-w-xs text-white text-center my-auto">
+            <h3 class="font-bold text-sm mb-2 text-yellow-400">Select Active Table</h3>
+            <div class="grid grid-cols-4 gap-2 mb-4">
+              ${TABLES.slice(0, 12).map(tbl => `
+                <button onclick="App.setTable('${tbl.id}')" class="p-2 rounded-xl text-xs font-bold border ${state.table === tbl.id ? 'bg-gold-500 text-black' : 'bg-neutral-800 border-yellow-500/20'}">${tbl.id.replace('TABLE-','')}</button>
+              `).join('')}
+            </div>
+            <button onclick="App.closeModal()" class="w-full py-2 bg-neutral-800 rounded-xl text-xs">Cancel</button>
+          </div>
+        `;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      },
+
+      setTable(tblId) {
+        state.table = tblId;
+        document.getElementById("table-display-pill").textContent = tblId;
+        App.closeModal();
+        showToast(`${t("Connected to ", "टेबल बदला: ")}${tblId}`);
+        App.navigate(state.screen);
+      },
+
+      clearCart() {
+        state.cart = [];
+        updateCartUI();
+        App.navigate("cart");
+        showToast(t("Cart cleared", "कार्ट खाली"));
+      },
+
+      randomThali() {
+        var picks = {};
+        ["rice", "bread", "dal", "sabzi", "protein", "dessert"].forEach(function(k) {
+          var opts = (THALI_OPTIONS[k] || []).filter(function(o) { return o.price > 0; });
+          if (opts.length) picks[k] = opts[Math.floor(Math.random() * opts.length)];
+        });
+        state.thali = {
+          rice: picks.rice || null,
+          bread: picks.bread || null,
+          dal: picks.dal || null,
+          sabzi: picks.sabzi || null,
+          protein: picks.protein || null,
+          sides: [],
+          dessert: picks.dessert || null
+        };
+        App.navigate("thali");
+        showToast("🎲 " + t("Surprise Thali ready!", "सरप्राइज़ थाली तैयार!"));
+      },
+
+      requestWater() { showToast("💧 " + t("Water requested — waiter notified", "पानी का अनुरोध — भेजा गया")); },
+      requestWaiter() { showToast("🙋 " + t("Waiter called to your table", "वेटर को सूचित किया गया")); },
+
+      openAdmin() {
+        var pin = prompt(t("Admin PIN", "एडमिन पिन"), "");
+        if (pin === null) return;
+        if (pin !== "1234" && pin !== "muskan") {
+          showToast(t("Wrong PIN", "गलत पिन"));
+          return;
+        }
+        App.navigate("admin");
+      },
+
+      adminSetStatus(orderId, statusNum) {
+        state.orderStatus = statusNum;
+        updateStoredOrder(orderId, { status: statusNum });
+        if (state.order && state.order.id === orderId) state.orderStatus = statusNum;
+        showToast(t("Status updated", "स्टेटस अपडेट"));
+        App.navigate("admin");
+      },
+
+      adminClearOrders() {
+        if (!confirm(t("Clear all orders?", "सभी ऑर्डर मिटाएँ?"))) return;
+        localStorage.setItem("muskan_orders", "[]");
+        showToast(t("Orders cleared", "ऑर्डर क्लियर"));
+        App.navigate("admin");
+      },
+
+      toggleLang() {
+        state.lang = state.lang === "en" ? "hi" : "en";
+        App.navigate(state.screen);
+      }
+    };
+
+    // ========== INIT ==========
+    try {
+      var langBtn = document.getElementById("lang-btn");
+      if (langBtn) langBtn.addEventListener("click", function() { App.toggleLang(); });
+      var cartBtn = document.getElementById("floating-cart");
+      if (cartBtn) cartBtn.addEventListener("click", function() { App.navigate("cart"); });
+      document.querySelectorAll(".nav-btn").forEach(function(btn) {
+        btn.addEventListener("click", function() { App.navigate(btn.dataset.screen); });
+      });
+    } catch (e) { console.error(e); }
+
+    // Start App Flow: Loading -> Login -> Main Screen
+    App.initAppFlow();
+  })();
+  </script>
 </body>
 </html>
-
