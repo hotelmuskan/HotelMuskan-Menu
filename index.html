@@ -327,25 +327,25 @@
   let CURRENT_TABLE = "TABLE-12";
 
   const DEFAULT_MENU = [
-    { id: "m1", name: "Shahi Paneer", desc: "Rich royal paneer in creamy gravy", price: 260, halfPrice: 130, cat: "paneer", veg: true, rating: 4.9, orders: 980, badge: "🔥 Bestseller", spice: 2, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop" },
-    { id: "m2", name: "Mattar Paneer", desc: "Paneer with green peas in tomato gravy", price: 220, halfPrice: 110, cat: "paneer", veg: true, rating: 4.7, orders: 720, badge: null, spice: 2, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop" },
-    { id: "m3", name: "Paneer Do Pyaza", desc: "Paneer cooked with double onions", price: 240, halfPrice: 120, cat: "paneer", veg: true, rating: 4.6, orders: 540, badge: null, spice: 2, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" },
-    { id: "m4", name: "Paneer Masala", desc: "Spiced paneer curry", price: 240, halfPrice: 120, cat: "paneer", veg: true, rating: 4.7, orders: 610, badge: null, spice: 3, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop" },
-    { id: "m5", name: "Paneer Chilli", desc: "Indo-Chinese spicy paneer", price: 240, halfPrice: 120, cat: "paneer", veg: true, rating: 4.5, orders: 480, badge: "🌶 Spicy", spice: 4, img: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&h=300&fit=crop" },
-    { id: "m6", name: "Palak Paneer", desc: "Paneer in spinach gravy", price: 180, halfPrice: 90, cat: "paneer", veg: true, rating: 4.6, orders: 550, badge: null, spice: 1, img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop" },
-    { id: "m7", name: "Chicken Do Pyaza", desc: "Chicken with double onions", price: 260, halfPrice: 130, cat: "nonveg", veg: false, rating: 4.8, orders: 890, badge: "🔥 Bestseller", spice: 3, img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop" },
-    { id: "m8", name: "Chicken Curry", desc: "Home-style chicken curry — unique Muskan taste", price: 180, halfPrice: 90, cat: "nonveg", veg: false, rating: 4.9, orders: 1100, badge: "👑 Chef Special", spice: 3, img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop" },
-    { id: "m9", name: "Fish Curry", desc: "Fresh fish in traditional gravy", price: 160, halfPrice: 80, cat: "nonveg", veg: false, rating: 4.5, orders: 320, badge: null, spice: 3, img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=300&fit=crop" },
-    { id: "m10", name: "Egg Curry", desc: "Boiled eggs in spicy gravy", price: 120, halfPrice: 60, cat: "nonveg", veg: false, rating: 4.4, orders: 410, badge: null, spice: 3, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop" },
-    { id: "m11", name: "Omelette Curry", desc: "Omelette pieces in curry", price: 160, halfPrice: 80, cat: "nonveg", veg: false, rating: 4.3, orders: 280, badge: null, spice: 2, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop" },
-    { id: "m12", name: "Plain Rice", desc: "Steamed basmati rice", price: 70, halfPrice: 40, cat: "rice", veg: true, rating: 4.5, orders: 1500, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop" },
-    { id: "m13", name: "Jeera Rice", desc: "Cumin tempered rice", price: 80, halfPrice: 40, cat: "rice", veg: true, rating: 4.6, orders: 980, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop" },
-    { id: "m14", name: "Sada Khana", desc: "Simple rice plate", price: 70, halfPrice: null, cat: "rice", veg: true, rating: 4.4, orders: 600, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop" },
-    { id: "m15", name: "Plain Roti", desc: "Fresh tawa roti", price: 6, halfPrice: null, cat: "bread", veg: true, rating: 4.7, orders: 5000, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" },
-    { id: "m16", name: "Butter Roti", desc: "Roti with butter — guest favourite", price: 12, halfPrice: null, cat: "bread", veg: true, rating: 4.9, orders: 4200, badge: "⭐ Highly Rated", spice: 0, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" },
-    { id: "m17", name: "Special Tea", desc: "Hotel Muskan special chai", price: 10, halfPrice: null, cat: "beverages", veg: true, rating: 4.8, orders: 3000, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=300&fit=crop" },
-    { id: "m18", name: "Mineral Water", desc: "Bottled water", price: 20, halfPrice: null, cat: "beverages", veg: true, rating: 4.5, orders: 2000, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&h=300&fit=crop" },
-    { id: "m19", name: "Cold Drink", desc: "Soft drink", price: 40, halfPrice: null, cat: "beverages", veg: true, rating: 4.4, orders: 1800, badge: null, spice: 0, img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=300&fit=crop" }
+    { id: "m1", name: "Shahi Paneer", desc: "Rich royal paneer in creamy gravy", price: 260, halfPrice: 130, cat: "paneer", veg: true, rating: 4.9, orders: 980, badge: "🔥 Bestseller", spice: 2, available: true, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop" },
+    { id: "m2", name: "Mattar Paneer", desc: "Paneer with green peas in tomato gravy", price: 220, halfPrice: 110, cat: "paneer", veg: true, rating: 4.7, orders: 720, badge: null, spice: 2, available: true, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop" },
+    { id: "m3", name: "Paneer Do Pyaza", desc: "Paneer cooked with double onions", price: 240, halfPrice: 120, cat: "paneer", veg: true, rating: 4.6, orders: 540, badge: null, spice: 2, available: true, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" },
+    { id: "m4", name: "Paneer Masala", desc: "Spiced paneer curry", price: 240, halfPrice: 120, cat: "paneer", veg: true, rating: 4.7, orders: 610, badge: null, spice: 3, available: true, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop" },
+    { id: "m5", name: "Paneer Chilli", desc: "Indo-Chinese spicy paneer", price: 240, halfPrice: 120, cat: "paneer", veg: true, rating: 4.5, orders: 480, badge: "🌶 Spicy", spice: 4, available: true, img: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&h=300&fit=crop" },
+    { id: "m6", name: "Palak Paneer", desc: "Paneer in spinach gravy", price: 180, halfPrice: 90, cat: "paneer", veg: true, rating: 4.6, orders: 550, badge: null, spice: 1, available: true, img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop" },
+    { id: "m7", name: "Chicken Do Pyaza", desc: "Chicken with double onions", price: 260, halfPrice: 130, cat: "nonveg", veg: false, rating: 4.8, orders: 890, badge: "🔥 Bestseller", spice: 3, available: true, img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop" },
+    { id: "m8", name: "Chicken Curry", desc: "Home-style chicken curry — unique Muskan taste", price: 180, halfPrice: 90, cat: "nonveg", veg: false, rating: 4.9, orders: 1100, badge: "👑 Chef Special", spice: 3, available: true, img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop" },
+    { id: "m9", name: "Fish Curry", desc: "Fresh fish in traditional gravy", price: 160, halfPrice: 80, cat: "nonveg", veg: false, rating: 4.5, orders: 320, badge: null, spice: 3, available: true, img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=300&fit=crop" },
+    { id: "m10", name: "Egg Curry", desc: "Boiled eggs in spicy gravy", price: 120, halfPrice: 60, cat: "nonveg", veg: false, rating: 4.4, orders: 410, badge: null, spice: 3, available: true, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop" },
+    { id: "m11", name: "Omelette Curry", desc: "Omelette pieces in curry", price: 160, halfPrice: 80, cat: "nonveg", veg: false, rating: 4.3, orders: 280, badge: null, spice: 2, available: true, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop" },
+    { id: "m12", name: "Plain Rice", desc: "Steamed basmati rice", price: 70, halfPrice: 40, cat: "rice", veg: true, rating: 4.5, orders: 1500, badge: null, spice: 0, available: true, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop" },
+    { id: "m13", name: "Jeera Rice", desc: "Cumin tempered rice", price: 80, halfPrice: 40, cat: "rice", veg: true, rating: 4.6, orders: 980, badge: null, spice: 0, available: true, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop" },
+    { id: "m14", name: "Sada Khana", desc: "Simple rice plate", price: 70, halfPrice: null, cat: "rice", veg: true, rating: 4.4, orders: 600, badge: null, spice: 0, available: true, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop" },
+    { id: "m15", name: "Plain Roti", desc: "Fresh tawa roti", price: 6, halfPrice: null, cat: "bread", veg: true, rating: 4.7, orders: 5000, badge: null, spice: 0, available: true, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" },
+    { id: "m16", name: "Butter Roti", desc: "Roti with butter — guest favourite", price: 12, halfPrice: null, cat: "bread", veg: true, rating: 4.9, orders: 4200, badge: "⭐ Highly Rated", spice: 0, available: true, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop" },
+    { id: "m17", name: "Special Tea", desc: "Hotel Muskan special chai", price: 10, halfPrice: null, cat: "beverages", veg: true, rating: 4.8, orders: 3000, badge: null, spice: 0, available: true, img: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=300&fit=crop" },
+    { id: "m18", name: "Mineral Water", desc: "Bottled water", price: 20, halfPrice: null, cat: "beverages", veg: true, rating: 4.5, orders: 2000, badge: null, spice: 0, available: true, img: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&h=300&fit=crop" },
+    { id: "m19", name: "Cold Drink", desc: "Soft drink", price: 40, halfPrice: null, cat: "beverages", veg: true, rating: 4.4, orders: 1800, badge: null, spice: 0, available: true, img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=300&fit=crop" }
   ];
 
   function getDynamicMenu() {
@@ -361,41 +361,41 @@
 
   const DEFAULT_THALI_OPTIONS = {
     rice: [
-      { id: "t-rice1", name: "Steamed Rice", price: 40, cal: 180, emoji: "🍚", img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=200&h=200&fit=crop" },
-      { id: "t-rice2", name: "Jeera Rice", price: 60, cal: 210, emoji: "🍚", img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=200&h=200&fit=crop" },
-      { id: "t-rice3", name: "Veg Pulao", price: 80, cal: 250, emoji: "🍚", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=200&h=200&fit=crop" }
+      { id: "t-rice1", name: "Steamed Rice", price: 40, cal: 180, emoji: "🍚", available: true, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=200&h=200&fit=crop" },
+      { id: "t-rice2", name: "Jeera Rice", price: 60, cal: 210, emoji: "🍚", available: true, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=200&h=200&fit=crop" },
+      { id: "t-rice3", name: "Veg Pulao", price: 80, cal: 250, emoji: "🍚", available: true, img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=200&h=200&fit=crop" }
     ],
     bread: [
-      { id: "t-bread1", name: "Tandoori Roti (2)", price: 40, cal: 160, emoji: "🫓", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
-      { id: "t-bread2", name: "Butter Naan (1)", price: 50, cal: 220, emoji: "🫓", img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200&h=200&fit=crop" },
-      { id: "t-bread3", name: "Lachha Paratha (1)", price: 55, cal: 280, emoji: "🫓", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" }
+      { id: "t-bread1", name: "Tandoori Roti (2)", price: 40, cal: 160, emoji: "🫓", available: true, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
+      { id: "t-bread2", name: "Butter Naan (1)", price: 50, cal: 220, emoji: "🫓", available: true, img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200&h=200&fit=crop" },
+      { id: "t-bread3", name: "Lachha Paratha (1)", price: 55, cal: 280, emoji: "🫓", available: true, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" }
     ],
     dal: [
-      { id: "t-dal1", name: "Dal Tadka", price: 50, cal: 140, emoji: "🥣", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" },
-      { id: "t-dal2", name: "Dal Fry", price: 55, cal: 160, emoji: "🥣", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" },
-      { id: "t-dal3", name: "Dal Makhani", price: 70, cal: 220, emoji: "🥣", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" }
+      { id: "t-dal1", name: "Dal Tadka", price: 50, cal: 140, emoji: "🥣", available: true, img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" },
+      { id: "t-dal2", name: "Dal Fry", price: 55, cal: 160, emoji: "🥣", available: true, img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" },
+      { id: "t-dal3", name: "Dal Makhani", price: 70, cal: 220, emoji: "🥣", available: true, img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" }
     ],
     sabzi: [
-      { id: "t-sab1", name: "Mix Veg", price: 60, cal: 120, emoji: "🥗", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
-      { id: "t-sab2", name: "Aloo Gobi", price: 55, cal: 140, emoji: "🥔", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
-      { id: "t-sab3", name: "Seasonal Sabzi", price: 65, cal: 110, emoji: "🥬", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" }
+      { id: "t-sab1", name: "Mix Veg", price: 60, cal: 120, emoji: "🥗", available: true, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
+      { id: "t-sab2", name: "Aloo Gobi", price: 55, cal: 140, emoji: "🥔", available: true, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
+      { id: "t-sab3", name: "Seasonal Sabzi", price: 65, cal: 110, emoji: "🥬", available: true, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" }
     ],
     protein: [
-      { id: "t-pro1", name: "Paneer Butter Masala", price: 90, cal: 280, emoji: "🧀", veg: true, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200&h=200&fit=crop" },
-      { id: "t-pro2", name: "Shahi Paneer", price: 95, cal: 300, emoji: "🧀", veg: true, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200&h=200&fit=crop" },
-      { id: "t-pro3", name: "Chicken Curry", price: 110, cal: 320, emoji: "🍗", veg: false, img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=200&h=200&fit=crop" },
-      { id: "t-pro4", name: "Egg Curry", price: 70, cal: 240, emoji: "🥚", veg: false, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=200&h=200&fit=crop" }
+      { id: "t-pro1", name: "Paneer Butter Masala", price: 90, cal: 280, emoji: "🧀", veg: true, available: true, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200&h=200&fit=crop" },
+      { id: "t-pro2", name: "Shahi Paneer", price: 95, cal: 300, emoji: "🧀", veg: true, available: true, img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200&h=200&fit=crop" },
+      { id: "t-pro3", name: "Chicken Curry", price: 110, cal: 320, emoji: "🍗", veg: false, available: true, img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=200&h=200&fit=crop" },
+      { id: "t-pro4", name: "Egg Curry", price: 70, cal: 240, emoji: "🥚", veg: false, available: true, img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=200&h=200&fit=crop" }
     ],
     sides: [
-      { id: "t-side1", name: "Green Salad", price: 30, cal: 40, emoji: "🥗", img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=200&h=200&fit=crop" },
-      { id: "t-side2", name: "Boondi Raita", price: 40, cal: 90, emoji: "🥛", img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" },
-      { id: "t-side3", name: "Papad", price: 20, cal: 50, emoji: "🍘", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
-      { id: "t-side4", name: "Pickle", price: 15, cal: 20, emoji: "🫙", img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=200&h=200&fit=crop" }
+      { id: "t-side1", name: "Green Salad", price: 30, cal: 40, emoji: "🥗", available: true, img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=200&h=200&fit=crop" },
+      { id: "t-side2", name: "Boondi Raita", price: 40, cal: 90, emoji: "🥛", available: true, img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop" },
+      { id: "t-side3", name: "Papad", price: 20, cal: 50, emoji: "🍘", available: true, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&h=200&fit=crop" },
+      { id: "t-side4", name: "Pickle", price: 15, cal: 20, emoji: "🫙", available: true, img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=200&h=200&fit=crop" }
     ],
     dessert: [
-      { id: "t-des1", name: "Gulab Jamun (1)", price: 40, cal: 150, emoji: "🍮", img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=200&h=200&fit=crop" },
-      { id: "t-des2", name: "Ice Cream", price: 50, cal: 180, emoji: "🍦", img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=200&h=200&fit=crop" },
-      { id: "t-des3", name: "None", price: 0, cal: 0, emoji: "—", img: "" }
+      { id: "t-des1", name: "Gulab Jamun (1)", price: 40, cal: 150, emoji: "🍮", available: true, img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=200&h=200&fit=crop" },
+      { id: "t-des2", name: "Ice Cream", price: 50, cal: 180, emoji: "🍦", available: true, img: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=200&h=200&fit=crop" },
+      { id: "t-des3", name: "None", price: 0, cal: 0, emoji: "—", available: true, img: "" }
     ]
   };
 
@@ -419,6 +419,96 @@
     { id: "preset-chef", name: "Chef Special", price: 329, items: ["t-rice3", "t-bread3", "t-dal3", "t-sab3", "t-pro2", "t-side2", "t-des2"], emoji: "👨‍🍳" }
   ];
 
+  // ========== DUAL STORAGE BASE (IndexedDB + Cloud Broadcast Sync) ==========
+  const DB_NAME = "HotelMuskanDB";
+  const DB_VERSION = 1;
+  let idb = null;
+
+  function initIndexedDB() {
+    return new Promise((resolve) => {
+      if (!window.indexedDB) {
+        resolve(null);
+        return;
+      }
+      const req = indexedDB.open(DB_NAME, DB_VERSION);
+      req.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains("orders")) {
+          const store = db.createObjectStore("orders", { keyPath: "id" });
+          store.createIndex("phone", "customerPhone", { unique: false });
+          store.createIndex("table", "table", { unique: false });
+        }
+      };
+      req.onsuccess = (e) => {
+        idb = e.target.result;
+        resolve(idb);
+      };
+      req.onerror = () => resolve(null);
+    });
+  }
+
+  function saveOrderToIndexedDB(order) {
+    if (!idb) return;
+    try {
+      const tx = idb.transaction("orders", "readwrite");
+      tx.objectStore("orders").put(order);
+    } catch (e) { console.error("IDB Save Error:", e); }
+  }
+
+  // Cross-device & cross-tab sync channel
+  let syncChannel = null;
+  try {
+    syncChannel = new BroadcastChannel("hotel_muskan_live_orders");
+    syncChannel.onmessage = function(event) {
+      if (event.data && event.data.type === "NEW_ORDER") {
+        triggerAdminNotification("📦 New Order Received!", `Table ${event.data.order.table} placed order ${event.data.order.id}`);
+        if (state.screen === "admin") App.navigate("admin");
+      }
+    };
+  } catch(e) {}
+
+  // Multi-device Cloud Sync Polling Bridge
+  const CLOUD_ROOM_ID = "muskan_bhagwanpur_hq";
+  const CLOUD_SYNC_URL = `https://kvdb.io/4Wk7k8gX7R5mC1Z7qT5z/${CLOUD_ROOM_ID}`;
+
+  async function pushOrderToCloud(order) {
+    try {
+      let orders = loadOrders();
+      await fetch(CLOUD_SYNC_URL, {
+        method: "POST",
+        body: JSON.stringify(orders.slice(0, 50))
+      });
+    } catch (e) {}
+  }
+
+  async function syncFromCloud() {
+    try {
+      const res = await fetch(CLOUD_SYNC_URL);
+      if (res.ok) {
+        const cloudOrders = await res.json();
+        if (Array.isArray(cloudOrders) && cloudOrders.length > 0) {
+          const localOrders = loadOrders();
+          const merged = [...localOrders];
+          let updated = false;
+          cloudOrders.forEach(co => {
+            if (!merged.find(lo => lo.id === co.id)) {
+              merged.push(co);
+              updated = true;
+            }
+          });
+          if (updated) {
+            localStorage.setItem("muskan_orders", JSON.stringify(merged));
+            merged.forEach(o => saveOrderToIndexedDB(o));
+            if (state.screen === "admin") App.navigate("admin");
+          }
+        }
+      }
+    } catch (e) {}
+  }
+
+  // Polling every 5 seconds for cross-customer orders
+  setInterval(syncFromCloud, 5000);
+
   // ========== APP CORE ==========
   (function () {
     "use strict";
@@ -427,6 +517,9 @@
       screen: "home",
       adminTab: "orders",
       cart: [],
+      cookingNotes: '',
+      tipAmount: 0,
+      adminOrderSearch: '',
       thali: { rice: null, bread: null, dal: null, sabzi: null, protein: null, sides: [], dessert: null },
       order: null,
       orderStatus: 0,
@@ -447,6 +540,30 @@
       { label: "Served", icon: "✅" }
     ];
 
+    function playAudioTone(freq = 587.33, type = "sine", duration = 0.25) {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playHotelChime() {
+      playAudioTone(523.25, "triangle", 0.15);
+      setTimeout(() => playAudioTone(659.25, "triangle", 0.15), 160);
+      setTimeout(() => playAudioTone(783.99, "triangle", 0.35), 320);
+    }
+
     function loadOrders() {
       try { return JSON.parse(localStorage.getItem("muskan_orders") || "[]"); } 
       catch (e) { return []; }
@@ -455,8 +572,16 @@
     function saveOrder(order) {
       var list = loadOrders();
       list.unshift(order);
-      if (list.length > 100) list = list.slice(0, 100);
+      if (list.length > 500) list = list.slice(0, 500);
       localStorage.setItem("muskan_orders", JSON.stringify(list));
+      
+      // Save permanently to IndexedDB
+      saveOrderToIndexedDB(order);
+
+      // Broadcast to all tabs and push to cloud sync
+      if (syncChannel) syncChannel.postMessage({ type: "NEW_ORDER", order });
+      pushOrderToCloud(order);
+
       return list;
     }
 
@@ -467,6 +592,11 @@
         return o;
       });
       localStorage.setItem("muskan_orders", JSON.stringify(list));
+      const updatedItem = list.find(o => o.id === id);
+      if (updatedItem) {
+        saveOrderToIndexedDB(updatedItem);
+        pushOrderToCloud(updatedItem);
+      }
       return list;
     }
 
@@ -484,6 +614,7 @@
     }
 
     function triggerAdminNotification(title, bodyText) {
+      playHotelChime();
       if ("Notification" in window) {
         if (Notification.permission === "granted") {
           new Notification(title, {
@@ -568,7 +699,13 @@
     }
 
     function cartCount() { return state.cart.reduce((s, i) => s + i.qty, 0); }
-    function cartTotal() { return state.cart.reduce((s, i) => s + i.price * i.qty, 0); }
+    function cartSubtotal() { return state.cart.reduce((s, i) => s + i.price * i.qty, 0); }
+    
+    function cartTotal() {
+      let sub = cartSubtotal();
+      let total = sub + (state.tipAmount || 0);
+      return Math.max(0, total);
+    }
 
     function thaliTotal() {
       let total = 0;
@@ -621,6 +758,7 @@
           <div style="display:flex;justify-content:space-between"><span>Bill No: ${o.id}</span><span>Table: ${o.table}</span></div>
           <div style="display:flex;justify-content:space-between"><span>Guest: ${o.customerName || 'Customer'}</span><span>Phone: ${o.customerPhone || 'N/A'}</span></div>
           <div style="display:flex;justify-content:space-between"><span>Date: ${o.time || 'Today'}</span><span>Mode: ${(o.payment||'CASH').toUpperCase()}</span></div>
+          ${o.notes ? `<div style="font-size:10px;margin-top:2px;color:#444">Note: <i>${o.notes}</i></div>` : ''}
           <div style="border-bottom:1px dashed #000;margin:8px 0"></div>
           <div style="display:flex;flex-direction:column;gap:4px">
             ${(o.items || []).map(it => `
@@ -631,6 +769,7 @@
             `).join('')}
           </div>
           <div style="border-bottom:1px dashed #000;margin:8px 0"></div>
+          ${o.tip ? `<div style="display:flex;justify-content:space-between"><span>Staff Tip:</span><span>+₹${o.tip}</span></div>` : ''}
           <div style="display:flex;justify-content:space-between;font-weight:bold;font-size:14px;margin-top:4px"><span>Total Amount:</span><span>₹${o.total}</span></div>
           <div style="text-align:center;font-size:10px;margin-top:14px">Thank You! Visit Hotel Muskan Again!</div>
         </div>
@@ -647,12 +786,14 @@
       text += "🪑 *Table:* " + order.table + "\n";
       text += "⏰ *Time:* " + (order.time || "Today") + "\n";
       text += "💳 *Payment:* " + (order.payment || "PAID").toUpperCase() + "\n";
+      if (order.notes) text += "📝 *Instructions:* " + order.notes + "\n";
       text += "---------------------------------\n";
       text += "*ITEMS:*\n";
       (order.items || []).forEach(function(it) {
         text += "▪ " + (it.qty || 1) + "x " + it.name + " = ₹" + ((it.price || 0) * (it.qty || 1)) + "\n";
       });
       text += "---------------------------------\n";
+      if (order.tip) text += "❤️ *Tip:* +₹" + order.tip + "\n";
       text += "💰 *Total Amount:* ₹" + order.total + "\n\n";
       text += "🙏 *Thank you! Visit Hotel Muskan Again!*";
       return text;
@@ -671,7 +812,6 @@
         const file = new File([blob], `Hotel_Muskan_Bill_${order.id}.png`, { type: 'image/png' });
         const shareText = buildBillText(order);
 
-        // Native Web Share API allows attaching image + text together to WhatsApp
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({
             files: [file],
@@ -680,7 +820,6 @@
           });
           showToast("Bill shared with Image!");
         } else {
-          // Fallback: auto-download image & open WhatsApp with text
           var link = document.createElement("a");
           link.download = file.name;
           link.href = canvas.toDataURL("image/png");
@@ -764,14 +903,16 @@
     }
 
     function foodCard(item) {
+      const isUnavailable = item.available === false;
       return `
-        <div class="bg-neutral-900 rounded-2xl border border-gold-500/20 overflow-hidden shadow-sm flex flex-col justify-between">
+        <div class="bg-neutral-900 rounded-2xl border border-gold-500/20 overflow-hidden shadow-sm flex flex-col justify-between ${isUnavailable ? 'opacity-50 grayscale' : ''}">
           <div>
             <div class="h-28 bg-neutral-900 relative overflow-hidden">
               <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
               <div class="hidden absolute inset-0 items-center justify-center text-4xl bg-neutral-800">🍽️</div>
               ${item.badge ? `<span class="absolute top-2 left-2 text-[9px] bg-black/80 text-yellow-400 border border-gold-500/40 px-1.5 py-0.5 rounded-full font-medium">${item.badge}</span>` : ""}
               <span class="absolute top-2 right-2 text-sm drop-shadow">${item.veg ? "🟢" : "🔴"}</span>
+              ${isUnavailable ? `<span class="absolute inset-0 bg-black/70 flex items-center justify-center text-xs font-bold text-red-400 uppercase">Sold Out</span>` : ''}
             </div>
             <div class="p-3">
               <h3 class="font-semibold text-sm leading-tight line-clamp-1 text-white">${item.name}</h3>
@@ -785,11 +926,11 @@
           <div class="p-3 pt-0">
             <div class="flex items-center justify-between mb-2">
               <span class="font-bold text-yellow-400">${formatPrice(item.price)}</span>
-              ${item.halfPrice ? `<button onclick="App.addHalf('${item.id}')" class="text-[10px] px-2 py-0.5 border border-yellow-500/40 rounded-full" style="color:#d4af37">Half ₹${item.halfPrice}</button>` : ''}
+              ${item.halfPrice && !isUnavailable ? `<button onclick="App.addHalf('${item.id}')" class="text-[10px] px-2 py-0.5 border border-yellow-500/40 rounded-full" style="color:#d4af37">Half ₹${item.halfPrice}</button>` : ''}
             </div>
             <div class="flex gap-1.5">
-              <button onclick="App.addToCart('${item.id}')" class="flex-1 bg-gold-500 text-black text-xs font-semibold py-1.5 rounded-full active:scale-95 transition">
-                ADD
+              <button onclick="${isUnavailable ? '' : `App.addToCart('${item.id}')`}" class="flex-1 ${isUnavailable ? 'bg-neutral-800 text-stone-500 cursor-not-allowed' : 'bg-gold-500 text-black'} text-xs font-semibold py-1.5 rounded-full active:scale-95 transition">
+                ${isUnavailable ? 'UNAVAILABLE' : 'ADD'}
               </button>
             </div>
           </div>
@@ -889,13 +1030,14 @@
                     const selected = isMulti
                       ? state.thali.sides.some(s => s.id === opt.id)
                       : state.thali[key]?.id === opt.id;
+                    const isOut = opt.available === false;
                     return `
-                      <button onclick="App.selectThaliItem('${key}', '${opt.id}')"
+                      <button onclick="${isOut ? '' : `App.selectThaliItem('${key}', '${opt.id}')`}"
                         class="p-2 rounded-xl text-xs font-medium border flex items-center gap-2 transition active:scale-95 text-left
-                          ${selected ? "bg-gold-500 text-black border-gold-500" : "bg-neutral-900 border-gold-500/20 text-white"}">
+                          ${isOut ? 'opacity-40 bg-neutral-900 border-neutral-800' : selected ? "bg-gold-500 text-black border-gold-500" : "bg-neutral-900 border-gold-500/20 text-white"}">
                         ${opt.img ? `<img src="${opt.img}" class="w-8 h-8 rounded-lg object-cover flex-shrink-0" alt=""/>` : `<span class="text-lg">${opt.emoji}</span>`}
                         <div class="min-w-0 flex-1">
-                          <div class="truncate font-semibold">${opt.name}</div>
+                          <div class="truncate font-semibold">${opt.name} ${isOut ? '(Out)' : ''}</div>
                           <div class="text-[10px] opacity-80">${formatPrice(opt.price)}</div>
                         </div>
                       </button>
@@ -1029,8 +1171,11 @@
                 </div>
 
                 <div class="flex gap-2 mt-2">
-                  <button onclick="App.printPaperReceipt('${o.id}')" class="w-full py-2 bg-neutral-900 border border-yellow-500/40 rounded-xl text-xs font-semibold text-yellow-400">
-                    🧾 View Bill / Receipt
+                  <button onclick="App.reorderItems('${o.id}')" class="flex-1 py-2 bg-gold-500 text-black rounded-xl text-xs font-bold">
+                    🔄 Re-Order Items
+                  </button>
+                  <button onclick="App.printPaperReceipt('${o.id}')" class="flex-1 py-2 bg-neutral-900 border border-yellow-500/40 rounded-xl text-xs font-semibold text-yellow-400">
+                    🧾 View Bill
                   </button>
                 </div>
               </div>
@@ -1052,6 +1197,7 @@
         `;
       }
 
+      const subtotal = cartSubtotal();
       const total = cartTotal();
 
       return `
@@ -1084,6 +1230,26 @@
             `).join("")}
           </div>
 
+          <!-- Kitchen Cooking Notes Box -->
+          <div class="bg-neutral-900 border border-gold-500/30 rounded-2xl p-3.5 mb-3">
+            <label class="block text-[11px] font-semibold text-yellow-400 mb-1">👨‍🍳 Cooking / Kitchen Instructions</label>
+            <input type="text" id="cart-cooking-notes" value="${state.cookingNotes || ''}" oninput="state.cookingNotes = this.value" placeholder="e.g. Less spicy, Extra gravy, No onions..." class="w-full text-xs px-3 py-2 rounded-xl focus:outline-none" />
+          </div>
+
+          <!-- Staff Tip -->
+          <div class="bg-neutral-900 border border-gold-500/30 rounded-2xl p-3.5 mb-3 space-y-2.5">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-stone-300">Tip for Waiter/Staff</span>
+              <div class="flex gap-1">
+                ${[0, 10, 20, 50].map(tip => `
+                  <button onclick="App.setTip(${tip})" class="px-2 py-0.5 rounded-lg border text-[10px] ${state.tipAmount === tip ? 'bg-gold-500 text-black border-gold-500 font-bold' : 'border-yellow-500/30 text-stone-300'}">
+                    ${tip === 0 ? 'None' : '₹' + tip}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
           <div class="bg-neutral-900 border border-gold-500/30 rounded-2xl p-3.5 mb-4">
             <div class="flex justify-between items-center mb-2">
               <label class="text-[11px] font-semibold text-yellow-400">👤 Guest Identification</label>
@@ -1098,8 +1264,10 @@
             `}
           </div>
 
-          <div class="bg-neutral-900 rounded-2xl p-4 space-y-2 text-sm mb-5">
-            <div class="flex justify-between font-bold text-base">
+          <div class="bg-neutral-900 rounded-2xl p-4 space-y-1.5 text-xs mb-5 border border-gold-500/20">
+            <div class="flex justify-between text-stone-300"><span>Items Subtotal</span><span>${formatPrice(subtotal)}</span></div>
+            ${state.tipAmount > 0 ? `<div class="flex justify-between text-yellow-300"><span>Staff Tip</span><span>+₹${state.tipAmount}</span></div>` : ''}
+            <div class="flex justify-between font-bold text-base pt-2 border-t border-neutral-800 text-white">
               <span>Total Amount</span><span class="text-yellow-400">${formatPrice(total)}</span>
             </div>
           </div>
@@ -1223,7 +1391,7 @@
     }
 
     function renderAdmin() {
-      var orders = loadOrders();
+      var allOrders = loadOrders();
       var serviceReqs = loadServiceRequests();
       var statusNames = ["Placed", "Accepted", "Preparing", "Ready", "Serving", "Served"];
       const thaliCategoryNames = {
@@ -1236,6 +1404,20 @@
         dessert: "Dessert"
       };
 
+      // Filtered Orders for search
+      const orders = allOrders.filter(o => {
+        if (!state.adminOrderSearch) return true;
+        const q = state.adminOrderSearch.toLowerCase();
+        return (o.id && o.id.toLowerCase().includes(q)) || 
+               (o.table && o.table.toLowerCase().includes(q)) || 
+               (o.customerPhone && o.customerPhone.includes(q)) ||
+               (o.customerName && o.customerName.toLowerCase().includes(q));
+      });
+
+      // Live Business Analytics Calculation
+      const totalRevenue = allOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+      const activePendingOrders = allOrders.filter(o => (o.status || 0) < 5).length;
+
       return `
         <div class="pt-14 px-4 pb-10">
           <div class="flex items-center justify-between mb-3">
@@ -1246,9 +1428,25 @@
             <button onclick="App.navigate('home')" class="text-xs px-3 py-1.5 rounded-full border border-yellow-500/40" style="color:#d4af37">← Home</button>
           </div>
 
+          <!-- Sales Summary Stats Banner -->
+          <div class="grid grid-cols-3 gap-2 mb-4">
+            <div class="bg-neutral-900 border border-gold-500/30 p-2.5 rounded-2xl text-center">
+              <div class="text-[10px] text-stone-400">Total Sales</div>
+              <div class="font-bold text-sm text-yellow-400">₹${totalRevenue}</div>
+            </div>
+            <div class="bg-neutral-900 border border-gold-500/30 p-2.5 rounded-2xl text-center">
+              <div class="text-[10px] text-stone-400">Total Orders</div>
+              <div class="font-bold text-sm text-white">${allOrders.length}</div>
+            </div>
+            <div class="bg-neutral-900 border border-gold-500/30 p-2.5 rounded-2xl text-center">
+              <div class="text-[10px] text-stone-400">Active Kitchen</div>
+              <div class="font-bold text-sm text-orange-400">${activePendingOrders}</div>
+            </div>
+          </div>
+
           <div class="flex border-b border-neutral-800 mb-4">
             <button onclick="App.setAdminTab('orders')" class="flex-1 py-2 text-xs font-bold ${state.adminTab === 'orders' ? 'border-b-2 border-yellow-500 text-yellow-400' : 'text-stone-400'}">
-              📋 Orders (${orders.length})
+              📋 Orders (${allOrders.length})
             </button>
             <button onclick="App.setAdminTab('requests')" class="flex-1 py-2 text-xs font-bold ${state.adminTab === 'requests' ? 'border-b-2 border-yellow-500 text-yellow-400' : 'text-stone-400'}">
               🔔 Calls (${serviceReqs.length})
@@ -1262,15 +1460,20 @@
           </div>
 
           ${state.adminTab === 'orders' ? `
-            <div class="flex gap-2 mb-4 flex-wrap">
-              <button onclick="App.adminClearOrders()" class="text-[10px] px-3 py-1.5 rounded-full border border-red-500/40 text-red-400">Clear All Orders</button>
-              <span class="text-[10px] px-2 py-1.5 text-stone-400">${orders.length} total orders</span>
+            <div class="space-y-2 mb-4">
+              <input type="text" value="${state.adminOrderSearch || ''}" oninput="App.handleAdminSearch(this.value)" placeholder="🔍 Search by Order ID, Table, or Phone..." class="w-full px-3 py-2 text-xs rounded-xl focus:outline-none" />
+              <div class="flex justify-between items-center">
+                <button onclick="App.exportOrdersToCSV()" class="text-[10px] px-3 py-1.5 rounded-full bg-emerald-700/60 border border-emerald-500 text-emerald-200 font-bold">
+                  📊 Export Sales (Excel/CSV)
+                </button>
+                <button onclick="App.adminClearOrders()" class="text-[10px] px-3 py-1.5 rounded-full border border-red-500/40 text-red-400">Clear All Orders</button>
+              </div>
             </div>
 
             ${orders.length === 0 ? `
               <div class="text-center py-16 text-stone-500">
                 <div class="text-4xl mb-2">📋</div>
-                <p>No orders recorded yet</p>
+                <p>No matching orders recorded</p>
               </div>
             ` : orders.map(function(o) {
               var st = (o.status != null ? o.status : 0);
@@ -1286,6 +1489,7 @@
                     <div class="text-[10px] text-stone-400">${statusNames[st]}</div>
                   </div>
                 </div>
+                ${o.notes ? `<div class="bg-black/60 p-2 rounded-xl text-[11px] text-yellow-300/90 mb-2.5 border border-gold-500/20">📝 <b>Note:</b> ${o.notes}</div>` : ''}
                 <div class="space-y-1 mb-3">
                   ${(o.items || []).map(function(i) {
                     return `<div class="flex justify-between text-xs text-stone-300">
@@ -1353,8 +1557,13 @@
                           <div class="text-xs font-bold text-yellow-400">₹${item.price}</div>
                         </div>
                         <div class="flex flex-col gap-1">
-                          <button onclick="App.openEditThaliItemModal('${catKey}', '${item.id}')" class="px-2.5 py-1 bg-neutral-800 border border-yellow-500/40 text-yellow-400 rounded-lg text-[10px] font-bold">Edit</button>
-                          <button onclick="App.deleteThaliItem('${catKey}', '${item.id}')" class="px-2.5 py-1 bg-neutral-800 border border-red-500/40 text-red-400 rounded-lg text-[10px] font-bold">Del</button>
+                          <button onclick="App.toggleThaliStock('${catKey}', '${item.id}')" class="px-2 py-0.5 rounded-lg text-[9px] font-bold border ${item.available !== false ? 'bg-green-900/40 border-green-500 text-green-300' : 'bg-red-900/40 border-red-500 text-red-300'}">
+                            ${item.available !== false ? 'In Stock' : 'Out'}
+                          </button>
+                          <div class="flex gap-1">
+                            <button onclick="App.openEditThaliItemModal('${catKey}', '${item.id}')" class="px-2 py-1 bg-neutral-800 border border-yellow-500/40 text-yellow-400 rounded-lg text-[10px] font-bold">Edit</button>
+                            <button onclick="App.deleteThaliItem('${catKey}', '${item.id}')" class="px-2 py-1 bg-neutral-800 border border-red-500/40 text-red-400 rounded-lg text-[10px] font-bold">Del</button>
+                          </div>
                         </div>
                       </div>
                     `).join('')}
@@ -1382,8 +1591,13 @@
                     <div class="text-xs font-bold text-yellow-400">Full: ₹${item.price} ${item.halfPrice ? `· Half: ₹${item.halfPrice}` : ''}</div>
                   </div>
                   <div class="flex flex-col gap-1">
-                    <button onclick="App.openEditDishModal('${item.id}')" class="px-2.5 py-1 bg-neutral-800 border border-yellow-500/40 text-yellow-400 rounded-lg text-[10px] font-bold">Edit</button>
-                    <button onclick="App.deleteDish('${item.id}')" class="px-2.5 py-1 bg-neutral-800 border border-red-500/40 text-red-400 rounded-lg text-[10px] font-bold">Del</button>
+                    <button onclick="App.toggleDishStock('${item.id}')" class="px-2 py-0.5 rounded-lg text-[9px] font-bold border ${item.available !== false ? 'bg-green-900/40 border-green-500 text-green-300' : 'bg-red-900/40 border-red-500 text-red-300'}">
+                      ${item.available !== false ? 'In Stock' : 'Out of Stock'}
+                    </button>
+                    <div class="flex gap-1">
+                      <button onclick="App.openEditDishModal('${item.id}')" class="px-2 py-1 bg-neutral-800 border border-yellow-500/40 text-yellow-400 rounded-lg text-[10px] font-bold">Edit</button>
+                      <button onclick="App.deleteDish('${item.id}')" class="px-2 py-1 bg-neutral-800 border border-red-500/40 text-red-400 rounded-lg text-[10px] font-bold">Del</button>
+                    </div>
                   </div>
                 </div>
               `).join('')}
@@ -1395,7 +1609,10 @@
 
     // ========== EXPOSED API ==========
     window.App = {
-      initAppFlow() {
+      async initAppFlow() {
+        await initIndexedDB();
+        syncFromCloud();
+        
         if ("Notification" in window && Notification.permission !== "granted") {
           Notification.requestPermission();
         }
@@ -1478,6 +1695,64 @@
       setAdminTab(tab) {
         state.adminTab = tab;
         App.navigate('admin');
+      },
+
+      handleAdminSearch(val) {
+        state.adminOrderSearch = val;
+        const main = document.getElementById("main-content");
+        if (state.screen === 'admin') main.innerHTML = renderAdmin();
+      },
+
+      setTip(amount) {
+        state.tipAmount = amount;
+        App.navigate("cart");
+      },
+
+      reorderItems(orderId) {
+        const orders = loadOrders();
+        const o = orders.find(x => x.id === orderId);
+        if (!o || !o.items) return;
+        state.cart = [...o.items];
+        updateCartUI();
+        showToast("Previous order added to cart!");
+        App.navigate("cart");
+      },
+
+      toggleDishStock(id) {
+        const updated = MENU.map(m => m.id === id ? { ...m, available: m.available === false ? true : false } : m);
+        saveMenuData(updated);
+        showToast("Item stock updated!");
+        App.navigate("admin");
+      },
+
+      toggleThaliStock(catKey, id) {
+        const updated = { ...THALI_OPTIONS };
+        if (updated[catKey]) {
+          updated[catKey] = updated[catKey].map(i => i.id === id ? { ...i, available: i.available === false ? true : false } : i);
+        }
+        saveThaliData(updated);
+        showToast("Thali stock updated!");
+        App.navigate("admin");
+      },
+
+      exportOrdersToCSV() {
+        const orders = loadOrders();
+        if (orders.length === 0) {
+          showToast("No orders to export");
+          return;
+        }
+        let csvContent = "data:text/csv;charset=utf-8,Bill ID,Table,Customer Name,Phone,Time,Payment,Total\n";
+        orders.forEach(o => {
+          csvContent += `"${o.id}","${o.table}","${o.customerName || 'Guest'}","${o.customerPhone || ''}","${o.time}","${o.payment}","${o.total}"\n`;
+        });
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `Hotel_Muskan_Sales_${Date.now()}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast("Sales Report Downloaded!");
       },
 
       handleFileUpload(inputElement, targetInputId, previewContainerId) {
@@ -1588,6 +1863,7 @@
           orders: 50,
           badge: "⭐ New",
           spice: 2,
+          available: true,
           img: img
         };
 
@@ -1774,6 +2050,7 @@
           cal: cal,
           emoji: emoji,
           img: img,
+          available: true,
           veg: veg
         };
 
@@ -1998,7 +2275,7 @@
 
       addToCart(id) {
         const item = MENU.find(m => m.id === id);
-        if (!item) return;
+        if (!item || item.available === false) return;
         const existing = state.cart.find(c => c.id === id && !c.custom);
         if (existing) existing.qty++;
         else state.cart.push({ ...item, qty: 1, name: item.name });
@@ -2008,7 +2285,7 @@
 
       addHalf(id) {
         const item = MENU.find(m => m.id === id);
-        if (!item || !item.halfPrice) return;
+        if (!item || !item.halfPrice || item.available === false) return;
         const halfName = item.name + " (Half)";
         const existing = state.cart.find(c => c.id === id + "-half");
         if (existing) existing.qty++;
@@ -2026,7 +2303,7 @@
       selectThaliItem(category, id) {
         const options = THALI_OPTIONS[category];
         const item = options.find(o => o.id === id);
-        if (!item) return;
+        if (!item || item.available === false) return;
         if (category === "sides") {
           const idx = state.thali.sides.findIndex(s => s.id === id);
           if (idx >= 0) state.thali.sides.splice(idx, 1);
@@ -2044,7 +2321,7 @@
         preset.items.forEach(id => {
           for (const [cat, opts] of Object.entries(THALI_OPTIONS)) {
             const found = opts.find(o => o.id === id);
-            if (found) {
+            if (found && found.available !== false) {
               if (cat === "sides") state.thali.sides.push(found);
               else state.thali[cat] = found;
               break;
@@ -2100,6 +2377,8 @@
         state.order = {
           id: "HM" + Math.floor(1000 + Math.random() * 9000),
           items: state.cart.slice(),
+          notes: state.cookingNotes || "",
+          tip: state.tipAmount || 0,
           total: total,
           table: state.table,
           customerPhone: state.customerPhone,
@@ -2110,6 +2389,8 @@
         };
         saveOrder(state.order);
         state.cart = [];
+        state.cookingNotes = '';
+        state.tipAmount = 0;
         state.paymentMethod = null;
         updateCartUI();
         App.navigate("order");
@@ -2123,7 +2404,7 @@
               state.orderStatus = status;
               updateStoredOrder(state.order.id, { status: status });
               if (state.screen === "order") App.navigate("order");
-              if (status === 5) showToast("Food served! Enjoy");
+              if (status === 5) showToast("Food served! Enjoy your meal");
             }
           }, (i + 1) * 7000);
         });
@@ -2225,6 +2506,8 @@
 
       clearCart() {
         state.cart = [];
+        state.cookingNotes = '';
+        state.tipAmount = 0;
         updateCartUI();
         App.navigate("cart");
         showToast("Cart cleared");
@@ -2233,7 +2516,7 @@
       randomThali() {
         var picks = {};
         ["rice", "bread", "dal", "sabzi", "protein", "dessert"].forEach(function(k) {
-          var opts = (THALI_OPTIONS[k] || []).filter(function(o) { return o.price > 0; });
+          var opts = (THALI_OPTIONS[k] || []).filter(function(o) { return o.price > 0 && o.available !== false; });
           if (opts.length) picks[k] = opts[Math.floor(Math.random() * opts.length)];
         });
         state.thali = {
@@ -2307,6 +2590,12 @@
       adminClearOrders() {
         if (!confirm("Clear all orders?")) return;
         localStorage.setItem("muskan_orders", "[]");
+        if (idb) {
+          try {
+            const tx = idb.transaction("orders", "readwrite");
+            tx.objectStore("orders").clear();
+          } catch(e) {}
+        }
         showToast("Orders cleared");
         App.navigate("admin");
       }
