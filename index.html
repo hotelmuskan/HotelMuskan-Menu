@@ -314,6 +314,43 @@
     <div class="bg-neutral-900 text-yellow-400 border border-gold-500/30 text-sm font-medium px-4 py-3 rounded-xl shadow-lg text-center"></div>
   </div>
 
+  <!-- ================= FIRESTORE INTEGRATION ================= -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBhZl84pL0CER7OtmR-8RIgrXJMILB59JM",
+      authDomain: "hoteloowner.firebaseapp.com",
+      projectId: "hoteloowner",
+      storageBucket: "hoteloowner.firebasestorage.app",
+      messagingSenderId: "299586039524",
+      appId: "1:299586039524:web:c67bd4b2cee14d041706f1"
+    };
+
+    const fbApp = initializeApp(firebaseConfig);
+    const db = getFirestore(fbApp);
+
+    window.pushOrderToFirestore = async function(order) {
+      try {
+        await addDoc(collection(db, "orders"), {
+          tableNumber: order.table,
+          customerName: order.customerName || "",
+          phone: order.customerPhone || "",
+          items: (order.items || []).map(function(i) {
+            return { name: i.name, qty: i.qty, price: i.price };
+          }),
+          total: order.total,
+          status: "new",
+          createdAt: serverTimestamp()
+        });
+        console.log("Order saved to Firestore successfully!");
+      } catch (e) {
+        console.error("Firestore order push failed:", e);
+      }
+    };
+  </script>
+
   <script>
   // ========== DATA.JS ==========
   const UPI_VPA = "ajaykumar2569563@ybl";
@@ -419,96 +456,6 @@
     { id: "preset-chef", name: "Chef Special", price: 329, items: ["t-rice3", "t-bread3", "t-dal3", "t-sab3", "t-pro2", "t-side2", "t-des2"], emoji: "👨‍🍳" }
   ];
 
-  // ========== DUAL STORAGE BASE (IndexedDB + Cloud Broadcast Sync) ==========
-  const DB_NAME = "HotelMuskanDB";
-  const DB_VERSION = 1;
-  let idb = null;
-
-  function initIndexedDB() {
-    return new Promise((resolve) => {
-      if (!window.indexedDB) {
-        resolve(null);
-        return;
-      }
-      const req = indexedDB.open(DB_NAME, DB_VERSION);
-      req.onupgradeneeded = (e) => {
-        const db = e.target.result;
-        if (!db.objectStoreNames.contains("orders")) {
-          const store = db.createObjectStore("orders", { keyPath: "id" });
-          store.createIndex("phone", "customerPhone", { unique: false });
-          store.createIndex("table", "table", { unique: false });
-        }
-      };
-      req.onsuccess = (e) => {
-        idb = e.target.result;
-        resolve(idb);
-      };
-      req.onerror = () => resolve(null);
-    });
-  }
-
-  function saveOrderToIndexedDB(order) {
-    if (!idb) return;
-    try {
-      const tx = idb.transaction("orders", "readwrite");
-      tx.objectStore("orders").put(order);
-    } catch (e) { console.error("IDB Save Error:", e); }
-  }
-
-  // Cross-device & cross-tab sync channel
-  let syncChannel = null;
-  try {
-    syncChannel = new BroadcastChannel("hotel_muskan_live_orders");
-    syncChannel.onmessage = function(event) {
-      if (event.data && event.data.type === "NEW_ORDER") {
-        triggerAdminNotification("📦 New Order Received!", `Table ${event.data.order.table} placed order ${event.data.order.id}`);
-        if (state.screen === "admin") App.navigate("admin");
-      }
-    };
-  } catch(e) {}
-
-  // Multi-device Cloud Sync Polling Bridge
-  const CLOUD_ROOM_ID = "muskan_bhagwanpur_hq";
-  const CLOUD_SYNC_URL = `https://kvdb.io/4Wk7k8gX7R5mC1Z7qT5z/${CLOUD_ROOM_ID}`;
-
-  async function pushOrderToCloud(order) {
-    try {
-      let orders = loadOrders();
-      await fetch(CLOUD_SYNC_URL, {
-        method: "POST",
-        body: JSON.stringify(orders.slice(0, 50))
-      });
-    } catch (e) {}
-  }
-
-  async function syncFromCloud() {
-    try {
-      const res = await fetch(CLOUD_SYNC_URL);
-      if (res.ok) {
-        const cloudOrders = await res.json();
-        if (Array.isArray(cloudOrders) && cloudOrders.length > 0) {
-          const localOrders = loadOrders();
-          const merged = [...localOrders];
-          let updated = false;
-          cloudOrders.forEach(co => {
-            if (!merged.find(lo => lo.id === co.id)) {
-              merged.push(co);
-              updated = true;
-            }
-          });
-          if (updated) {
-            localStorage.setItem("muskan_orders", JSON.stringify(merged));
-            merged.forEach(o => saveOrderToIndexedDB(o));
-            if (state.screen === "admin") App.navigate("admin");
-          }
-        }
-      }
-    } catch (e) {}
-  }
-
-  // Polling every 5 seconds for cross-customer orders
-  setInterval(syncFromCloud, 5000);
-
   // ========== APP CORE ==========
   (function () {
     "use strict";
@@ -540,30 +487,6 @@
       { label: "Served", icon: "✅" }
     ];
 
-    function playAudioTone(freq = 587.33, type = "sine", duration = 0.25) {
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContext) return;
-        const ctx = new AudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = type;
-        osc.frequency.setValueAtTime(freq, ctx.currentTime);
-        gain.gain.setValueAtTime(0.15, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + duration);
-      } catch (e) {}
-    }
-
-    function playHotelChime() {
-      playAudioTone(523.25, "triangle", 0.15);
-      setTimeout(() => playAudioTone(659.25, "triangle", 0.15), 160);
-      setTimeout(() => playAudioTone(783.99, "triangle", 0.35), 320);
-    }
-
     function loadOrders() {
       try { return JSON.parse(localStorage.getItem("muskan_orders") || "[]"); } 
       catch (e) { return []; }
@@ -574,14 +497,6 @@
       list.unshift(order);
       if (list.length > 500) list = list.slice(0, 500);
       localStorage.setItem("muskan_orders", JSON.stringify(list));
-      
-      // Save permanently to IndexedDB
-      saveOrderToIndexedDB(order);
-
-      // Broadcast to all tabs and push to cloud sync
-      if (syncChannel) syncChannel.postMessage({ type: "NEW_ORDER", order });
-      pushOrderToCloud(order);
-
       return list;
     }
 
@@ -592,11 +507,6 @@
         return o;
       });
       localStorage.setItem("muskan_orders", JSON.stringify(list));
-      const updatedItem = list.find(o => o.id === id);
-      if (updatedItem) {
-        saveOrderToIndexedDB(updatedItem);
-        pushOrderToCloud(updatedItem);
-      }
       return list;
     }
 
@@ -614,7 +524,6 @@
     }
 
     function triggerAdminNotification(title, bodyText) {
-      playHotelChime();
       if ("Notification" in window) {
         if (Notification.permission === "granted") {
           new Notification(title, {
@@ -1610,9 +1519,6 @@
     // ========== EXPOSED API ==========
     window.App = {
       async initAppFlow() {
-        await initIndexedDB();
-        syncFromCloud();
-        
         if ("Notification" in window && Notification.permission !== "granted") {
           Notification.requestPermission();
         }
@@ -2388,6 +2294,12 @@
           status: 0
         };
         saveOrder(state.order);
+
+        // ================= FIREBASE FIRESTORE SYNC CALL =================
+        if (typeof window.pushOrderToFirestore === "function") {
+          window.pushOrderToFirestore(state.order);
+        }
+
         state.cart = [];
         state.cookingNotes = '';
         state.tipAmount = 0;
@@ -2590,12 +2502,6 @@
       adminClearOrders() {
         if (!confirm("Clear all orders?")) return;
         localStorage.setItem("muskan_orders", "[]");
-        if (idb) {
-          try {
-            const tx = idb.transaction("orders", "readwrite");
-            tx.objectStore("orders").clear();
-          } catch(e) {}
-        }
         showToast("Orders cleared");
         App.navigate("admin");
       }
