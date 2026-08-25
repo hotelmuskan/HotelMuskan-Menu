@@ -801,16 +801,17 @@
               sides: "Sides",
               dessert: "Dessert"
             };
-            const isMulti = key === "sides";
+            const isMulti = (key === "sides" || key === "bread" || key === "rice" || key === "dal" || key === "sabzi" || key === "protein" || key === "dessert");
             const optList = Array.isArray(options) ? options : [];
             return `
               <div class="mb-4">
                 <h4 class="text-sm font-semibold mb-2">${labels[key] || key}</h4>
                 <div class="grid grid-cols-2 gap-2">
                   ${optList.map(opt => {
-                    const selItem = isMulti
-                      ? state.thali.sides.find(s => s.id === opt.id)
-                      : (state.thali[key]?.id === opt.id ? state.thali[key] : null);
+                    const selItem = isMulti && key !== "protein" && key !== "bread" && key !== "rice" && key !== "dal" && key !== "sabzi" && key !== "dessert"
+                      ? state.thali[key]?.id === opt.id ? state.thali[key] : null
+                      : (Array.isArray(state.thali[key]) ? state.thali[key].find(s => s.id === opt.id) : (state.thali[key]?.id === opt.id ? state.thali[key] : null));
+                    
                     const selected = !!selItem;
                     const isOut = opt.available === false;
                     const itemQty = selItem ? (selItem.qty || 1) : 1;
@@ -827,14 +828,16 @@
                           </div>
                         </div>
 
-                        <div class="flex items-center justify-between mt-2 pt-1.5 border-t border-black/20" onclick="event.stopPropagation()">
-                          <span class="text-[10px] font-bold ${selected ? 'text-black' : 'text-stone-400'} uppercase">Qty:</span>
-                          <div class="flex items-center gap-1.5">
-                            <button onclick="App.changeThaliItemQty('${key}', '${opt.id}', -1)" class="w-5 h-5 rounded-full ${selected ? 'bg-black text-white' : 'bg-neutral-800 text-white'} flex items-center justify-center text-xs font-bold leading-none active:scale-90">−</button>
-                            <span class="font-bold text-xs ${selected ? 'text-black' : 'text-white'} min-w-[14px] text-center">${itemQty}</span>
-                            <button onclick="App.changeThaliItemQty('${key}', '${opt.id}', 1)" class="w-5 h-5 rounded-full ${selected ? 'bg-black text-white' : 'bg-neutral-800 text-white'} flex items-center justify-center text-xs font-bold leading-none active:scale-90">+</button>
+                        ${selected ? `
+                          <div class="flex items-center justify-between mt-2 pt-1.5 border-t border-black/20" onclick="event.stopPropagation()">
+                            <span class="text-[10px] font-bold text-black uppercase">Qty:</span>
+                            <div class="flex items-center gap-1.5">
+                              <button onclick="App.changeThaliItemQty('${key}', '${opt.id}', -1)" class="w-5 h-5 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold leading-none active:scale-90">−</button>
+                              <span class="font-bold text-xs text-black min-w-[14px] text-center">${itemQty}</span>
+                              <button onclick="App.changeThaliItemQty('${key}', '${opt.id}', 1)" class="w-5 h-5 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold leading-none active:scale-90">+</button>
+                            </div>
                           </div>
-                        </div>
+                        ` : ''}
 
                       </div>
                     `;
@@ -1371,30 +1374,39 @@
         const options = THALI_OPTIONS[category] || [];
         const item = options.find(o => o.id === id);
         if (!item || item.available === false) return;
-        if (category === "sides") {
-          const idx = state.thali.sides.findIndex(s => s.id === id);
-          if (idx >= 0) state.thali.sides.splice(idx, 1);
-          else state.thali.sides.push({ ...item, qty: 1 });
+
+        if (!Array.isArray(state.thali[category])) {
+          state.thali[category] = [];
+        }
+        const list = state.thali[category];
+        const existingIndex = list.findIndex(s => s.id === id);
+
+        if (existingIndex >= 0) {
+          list.splice(existingIndex, 1);
         } else {
-          state.thali[category] = state.thali[category]?.id === id ? null : { ...item, qty: 1 };
+          list.push({ ...item, qty: 1 });
         }
         App.navigate("thali");
       },
 
       changeThaliItemQty(category, id, delta) {
-        if (category === "sides") {
-          const item = state.thali.sides.find(s => s.id === id);
-          if (item) {
-            item.qty = (item.qty || 1) + delta;
-            if (item.qty <= 0) state.thali.sides = state.thali.sides.filter(s => s.id !== id);
+        const options = THALI_OPTIONS[category] || [];
+        const item = options.find(o => o.id === id);
+        if (!item || item.available === false) return;
+
+        if (!Array.isArray(state.thali[category])) {
+          state.thali[category] = [];
+        }
+        const list = state.thali[category];
+        const existing = list.find(s => s.id === id);
+
+        if (existing) {
+          existing.qty += delta;
+          if (existing.qty <= 0) {
+            state.thali[category] = list.filter(s => s.id !== id);
           }
-        } else {
-          if (state.thali[category] && state.thali[category].id === id) {
-            state.thali[category].qty = (state.thali[category].qty || 1) + delta;
-            if (state.thali[category].qty <= 0) {
-              state.thali[category] = null;
-            }
-          }
+        } else if (delta > 0) {
+          list.push({ ...item, qty: 1 });
         }
         App.navigate("thali");
       },
@@ -1405,33 +1417,37 @@
         const parts = [];
         const thaliSubNames = [];
 
-        ["rice", "bread", "dal", "sabzi", "protein", "dessert"].forEach(k => {
-          if (state.thali[k]) {
-            const q = state.thali[k].qty || 1;
-            const subName = q > 1 ? `${state.thali[k].name} (${q}x)` : state.thali[k].name;
+        ["rice", "bread", "dal", "sabzi", "protein", "sides", "dessert"].forEach(k => {
+          const list = Array.isArray(state.thali[k]) ? state.thali[k] : [];
+          list.forEach(s => {
+            const q = s.qty || 1;
+            const subName = q > 1 ? `${s.name} (${q}x)` : s.name;
             parts.push(subName);
             thaliSubNames.push(subName);
-          }
+          });
         });
-        state.thali.sides.forEach(s => {
-          const q = s.qty || 1;
-          const subName = q > 1 ? `${s.name} (${q}x)` : s.name;
-          parts.push(subName);
-          thaliSubNames.push(subName);
-        });
+
+        if (parts.length === 0) {
+          showToast("Please select at least one item");
+          return;
+        }
+
+        const proteinList = Array.isArray(state.thali.protein) ? state.thali.protein : [];
+        const primaryProt = proteinList.length > 0 ? proteinList[0] : null;
 
         state.cart.push({
           id: "custom-thali-" + Date.now(),
           name: "Custom Thali",
           price: total,
           qty: 1,
-          img: state.thali.protein?.img || "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&fit=crop",
+          img: primaryProt?.img || "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&fit=crop",
           custom: parts.join(", "),
           isCustomThali: true,
           thaliItems: thaliSubNames,
-          veg: !state.thali.protein || state.thali.protein.veg !== false
+          veg: proteinList.length === 0 || proteinList.every(p => p.veg !== false)
         });
-        state.thali = { rice: null, bread: null, dal: null, sabzi: null, protein: null, sides: [], dessert: null };
+
+        state.thali = { rice: [], bread: [], dal: [], sabzi: [], protein: [], sides: [], dessert: [] };
         updateCartUI();
         showToast("Thali added to cart!");
         App.navigate("cart");
