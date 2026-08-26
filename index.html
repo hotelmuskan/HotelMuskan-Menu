@@ -484,7 +484,7 @@
       cart: [],
       cookingNotes: '',
       tipAmount: 0,
-      thali: { rice: null, bread: null, dal: null, sabzi: null, protein: null, sides: [], dessert: null },
+      thali: { rice: [], bread: [], dal: [], sabzi: [], protein: [], sides: [], dessert: [] },
       order: null,
       orderStatus: 0,
       paymentMethod: null,
@@ -575,17 +575,13 @@
     function thaliTotal() {
       let total = 0;
       let cal = 0;
-      ["rice", "bread", "dal", "sabzi", "protein", "dessert"].forEach(k => {
-        if (state.thali[k]) {
-          const qty = state.thali[k].qty || 1;
-          total += (state.thali[k].price || 0) * qty;
-          cal += (state.thali[k].cal || 0) * qty;
-        }
-      });
-      state.thali.sides.forEach(s => {
-        const qty = s.qty || 1;
-        total += (s.price || 0) * qty;
-        cal += (s.cal || 0) * qty;
+      ["rice", "bread", "dal", "sabzi", "protein", "sides", "dessert"].forEach(k => {
+        const list = Array.isArray(state.thali[k]) ? state.thali[k] : [];
+        list.forEach(item => {
+          const qty = item.qty || 1;
+          total += (item.price || 0) * qty;
+          cal += (item.cal || 0) * qty;
+        });
       });
       return { total, cal };
     }
@@ -750,9 +746,9 @@
 
           <div class="thali-scene mb-8 mt-2">
             <div class="thali-plate-3d">
-              <div class="thali-center-3d ${state.thali.protein ? 'filled' : ''}">
-                ${state.thali.protein
-                  ? (state.thali.protein.img ? `<img src="${state.thali.protein.img}" class="food-item-enter w-full h-full object-cover" alt=""/>` : `<span style="font-size:24px">${state.thali.protein.emoji || '🧀'}</span>`)
+              <div class="thali-center-3d ${Array.isArray(state.thali.protein) && state.thali.protein.length > 0 ? 'filled' : ''}">
+                ${Array.isArray(state.thali.protein) && state.thali.protein.length > 0
+                  ? (state.thali.protein[0].img ? `<img src="${state.thali.protein[0].img}" class="food-item-enter w-full h-full object-cover" alt=""/>` : `<span style="font-size:20px; font-weight:bold;">${state.thali.protein.reduce((acc,curr)=>acc+curr.qty,0)}x</span>`)
                   : `<span style="font-size:11px;color:#8a6e38;text-align:center;line-height:1.2">Main</span>`}
               </div>
               ${compartments.filter(c => c.key !== "protein").map((c, i) => {
@@ -761,23 +757,20 @@
                 const r = 92;
                 const x = Math.cos(rad) * r;
                 const y = Math.sin(rad) * r;
-                const item = state.thali[c.key];
+                const list = Array.isArray(state.thali[c.key]) ? state.thali[c.key] : [];
+                const isFilled = list.length > 0;
+                const firstImg = isFilled ? list[0].img : '';
+                const totalQ = list.reduce((acc,curr)=>acc+curr.qty, 0);
                 return `
-                  <div class="compartment-3d ${item ? 'filled' : ''}"
+                  <div class="compartment-3d ${isFilled ? 'filled' : ''}"
                        style="left:50%;top:50%;margin-left:-28px;margin-top:-28px;transform:translate(${x}px, ${y}px) translateZ(12px);">
-                    ${item
-                      ? (item.img ? `<img src="${item.img}" class="food-item-enter w-full h-full object-cover" alt=""/>` : `<span style="font-size:18px">${item.emoji || '🍲'}</span>`)
+                    ${isFilled
+                      ? (firstImg ? `<img src="${firstImg}" class="food-item-enter w-full h-full object-cover" alt=""/>` : `<span style="font-size:14px; font-weight:bold; color:#000;">${totalQ}x</span>`)
                       : `<span style="font-size:9px;color:#a88848;text-align:center;padding:2px">${c.label}</span>`}
                   </div>`;
               }).join("")}
-              ${state.thali.sides.length ? `
-              <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%) translateZ(15px);display:flex;gap:4px;z-index:6">
-                ${state.thali.sides.map(s => s.img 
-                  ? `<img src="${s.img}" class="w-6 h-6 rounded-full object-cover shadow border border-gold-500" alt=""/>` 
-                  : `<span style="font-size:14px">${s.emoji}</span>`).join("")}
-              </div>` : ""}
             </div>
-            <p style="text-align:center;font-size:10px;color:#c9a227;margin-top:12px">↻ 3D Thali — tap items below to fill</p>
+            <p style="text-align:center;font-size:10px;color:#c9a227;margin-top:12px">↻ 3D Thali — add variety and quantity below</p>
           </div>
 
           <div class="bg-neutral-900 border border-gold-500/30 rounded-2xl p-4 mb-5 flex justify-between items-center text-white">
@@ -801,43 +794,39 @@
               sides: "Sides",
               dessert: "Dessert"
             };
-            const isMulti = (key === "sides" || key === "bread" || key === "rice" || key === "dal" || key === "sabzi" || key === "protein" || key === "dessert");
             const optList = Array.isArray(options) ? options : [];
+            const selectedList = Array.isArray(state.thali[key]) ? state.thali[key] : [];
+
             return `
               <div class="mb-4">
                 <h4 class="text-sm font-semibold mb-2">${labels[key] || key}</h4>
                 <div class="grid grid-cols-2 gap-2">
                   ${optList.map(opt => {
-                    const selItem = isMulti && key !== "protein" && key !== "bread" && key !== "rice" && key !== "dal" && key !== "sabzi" && key !== "dessert"
-                      ? state.thali[key]?.id === opt.id ? state.thali[key] : null
-                      : (Array.isArray(state.thali[key]) ? state.thali[key].find(s => s.id === opt.id) : (state.thali[key]?.id === opt.id ? state.thali[key] : null));
-                    
-                    const selected = !!selItem;
+                    const selItem = selectedList.find(s => s.id === opt.id);
+                    const itemQty = selItem ? (selItem.qty || 0) : 0;
+                    const isSelected = itemQty > 0;
                     const isOut = opt.available === false;
-                    const itemQty = selItem ? (selItem.qty || 1) : 1;
 
                     return `
                       <div class="p-2 rounded-xl text-xs font-medium border flex flex-col justify-between transition text-left
-                          ${isOut ? 'opacity-40 bg-neutral-900 border-neutral-800' : selected ? "bg-gold-500 text-black border-gold-500" : "bg-neutral-900 border-gold-500/20 text-white"}">
+                          ${isOut ? 'opacity-40 bg-neutral-900 border-neutral-800' : isSelected ? "bg-gold-500 text-black border-gold-500" : "bg-neutral-900 border-gold-500/20 text-white"}">
                         
-                        <div class="flex items-center gap-2 cursor-pointer" onclick="${isOut ? '' : `App.selectThaliItem('${key}', '${opt.id}')`}">
+                        <div class="flex items-center gap-2 cursor-pointer" onclick="${isOut ? '' : `App.toggleThaliItem('${key}', '${opt.id}')`}">
                           ${opt.img ? `<img src="${opt.img}" class="w-8 h-8 rounded-lg object-cover flex-shrink-0" alt=""/>` : `<span class="text-lg">${opt.emoji || '🍲'}</span>`}
                           <div class="min-w-0 flex-1">
-                            <div class="truncate font-semibold ${selected ? 'text-black' : 'text-white'}">${opt.name} ${isOut ? '(Out)' : ''}</div>
-                            <div class="text-[10px] ${selected ? 'text-black/80' : 'text-stone-400'}">${formatPrice(opt.price)}</div>
+                            <div class="truncate font-semibold ${isSelected ? 'text-black' : 'text-white'}">${opt.name} ${isOut ? '(Out)' : ''}</div>
+                            <div class="text-[10px] ${isSelected ? 'text-black/80' : 'text-stone-400'}">${formatPrice(opt.price)}</div>
                           </div>
                         </div>
 
-                        ${selected ? `
-                          <div class="flex items-center justify-between mt-2 pt-1.5 border-t border-black/20" onclick="event.stopPropagation()">
-                            <span class="text-[10px] font-bold text-black uppercase">Qty:</span>
-                            <div class="flex items-center gap-1.5">
-                              <button onclick="App.changeThaliItemQty('${key}', '${opt.id}', -1)" class="w-5 h-5 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold leading-none active:scale-90">−</button>
-                              <span class="font-bold text-xs text-black min-w-[14px] text-center">${itemQty}</span>
-                              <button onclick="App.changeThaliItemQty('${key}', '${opt.id}', 1)" class="w-5 h-5 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold leading-none active:scale-90">+</button>
-                            </div>
+                        <div class="flex items-center justify-between mt-2 pt-1.5 border-t border-black/20" onclick="event.stopPropagation()">
+                          <span class="text-[10px] font-bold ${isSelected ? 'text-black' : 'text-stone-400'} uppercase">Qty:</span>
+                          <div class="flex items-center gap-1.5">
+                            <button onclick="App.changeThaliItemQty('${key}', '${opt.id}', -1)" class="w-5 h-5 rounded-full ${isSelected ? 'bg-black text-white' : 'bg-neutral-800 text-white'} flex items-center justify-center text-xs font-bold leading-none active:scale-90">−</button>
+                            <span class="font-bold text-xs ${isSelected ? 'text-black' : 'text-white'} min-w-[14px] text-center">${itemQty}</span>
+                            <button onclick="App.changeThaliItemQty('${key}', '${opt.id}', 1)" class="w-5 h-5 rounded-full ${isSelected ? 'bg-black text-white' : 'bg-neutral-800 text-white'} flex items-center justify-center text-xs font-bold leading-none active:scale-90">+</button>
                           </div>
-                        ` : ''}
+                        </div>
 
                       </div>
                     `;
@@ -1375,16 +1364,20 @@
         const item = options.find(o => o.id === id);
         if (!item || item.available === false) return;
 
-        if (!Array.isArray(state.thali[category])) {
-          state.thali[category] = [];
-        }
-        const list = state.thali[category];
-        const existingIndex = list.findIndex(s => s.id === id);
-
-        if (existingIndex >= 0) {
-          list.splice(existingIndex, 1);
+        if (category === "sides") {
+          if (!Array.isArray(state.thali.sides)) state.thali.sides = [];
+          const idx = state.thali.sides.findIndex(s => s.id === id);
+          if (idx >= 0) state.thali.sides.splice(idx, 1);
+          else state.thali.sides.push({ ...item, qty: 1 });
         } else {
-          list.push({ ...item, qty: 1 });
+          if (!Array.isArray(state.thali[category])) state.thali[category] = [];
+          const list = state.thali[category];
+          const idx = list.findIndex(s => s.id === id);
+          if (idx >= 0) {
+            list.splice(idx, 1);
+          } else {
+            list.push({ ...item, qty: 1 });
+          }
         }
         App.navigate("thali");
       },
@@ -1394,19 +1387,27 @@
         const item = options.find(o => o.id === id);
         if (!item || item.available === false) return;
 
-        if (!Array.isArray(state.thali[category])) {
-          state.thali[category] = [];
-        }
-        const list = state.thali[category];
-        const existing = list.find(s => s.id === id);
-
-        if (existing) {
-          existing.qty += delta;
-          if (existing.qty <= 0) {
-            state.thali[category] = list.filter(s => s.id !== id);
+        if (category === "sides") {
+          if (!Array.isArray(state.thali.sides)) state.thali.sides = [];
+          const sItem = state.thali.sides.find(s => s.id === id);
+          if (sItem) {
+            sItem.qty += delta;
+            if (sItem.qty <= 0) state.thali.sides = state.thali.sides.filter(s => s.id !== id);
+          } else if (delta > 0) {
+            state.thali.sides.push({ ...item, qty: 1 });
           }
-        } else if (delta > 0) {
-          list.push({ ...item, qty: 1 });
+        } else {
+          if (!Array.isArray(state.thali[category])) state.thali[category] = [];
+          const list = state.thali[category];
+          const sItem = list.find(s => s.id === id);
+          if (sItem) {
+            sItem.qty += delta;
+            if (sItem.qty <= 0) {
+              state.thali[category] = list.filter(s => s.id !== id);
+            }
+          } else if (delta > 0) {
+            list.push({ ...item, qty: 1 });
+          }
         }
         App.navigate("thali");
       },
